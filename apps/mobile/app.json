@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Brainbuilder",
+    "slug": "brainbuilder",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "scheme": "brainbuilder",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#f8f1e5"
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+package brainbuilder.learning.v1;
+
+option go_package = "github.com/benebsworth/brainbuilder/backend/gen/learning/v1;learningv1";
+
+service LearningService {
+  rpc GetLearningHome(GetLearningHomeRequest) returns (LearningHome) {}
+  rpc AnswerQuiz(AnswerQuizRequest) returns (AnswerQuizResponse) {}
+}
+
+message GetLearningHomeRequest {
+  string user_id = 1;
+}
+
+message AnswerQuizRequest {
+  string quiz_id = 1;
+  string selected_option_id = 2;
+}
+
+message AnswerQuizResponse {
+  bool correct = 1;
+  int32 xp_awarded = 2;
+  string feedback = 3;
+  bool streak_safe = 4;
+}
+
+message LearningHome {
+  Learner user = 1;
+  LearnerStats stats = 2;
+  repeated Topic topics = 3;
+  repeated FeedBite feed = 4;
+  repeated Quiz quizzes = 5;
+  repeated LearningPath paths = 6;
+  repeated Playground playgrounds = 7;
+  repeated Quest quests = 8;
+  repeated LeagueEntry league = 9;
+}
+
+message Learner {
+  string id = 1;
+  string name = 2;
+  int32 level = 3;
+  string archetype = 4;
+}
+
+message LearnerStats {
+  int32 streak_days = 1;
+  int32 best_streak_days = 2;
+  int32 xp = 3;
+  int32 daily_goal_completed = 4;
+  int32 daily_goal_target = 5;
+  int32 hearts = 6;
+}
+
+message Topic {
+  string id = 1;
+  string label = 2;
+  bool selected = 3;
+}
+
+message FeedBite {
+  string id = 1;
+  string topic = 2;
+  string title = 3;
+  string prompt = 4;
+  int32 duration_seconds = 5;
+  repeated string modes = 6;
+  bool saved = 7;
+}
+
+message Quiz {
+  string id = 1;
+  string question = 2;
+  repeated QuizOption options = 3;
+  string correct_option_id = 4;
+  string feedback = 5;
+}
+
+message QuizOption {
+  string id = 1;
+  string label = 2;
+}
+
+message LearningPath {
+  string id = 1;
+  string title = 2;
+  string subtitle = 3;
+  string accent = 4;
+  float progress = 5;
+  repeated PathModule modules = 6;
+}
+
+message PathModule {
+  string id = 1;
+  string title = 2;
+  string status = 3;
+  float progress = 4;
+}
+
+message Playground {
+  string id = 1;
+  string title = 2;
+  string concept = 3;
+  string interaction = 4;
+  string description = 5;
+  int32 xp_reward = 6;
+}
+
+message Quest {
+  string id = 1;
+  string label = 2;
+  int32 completed = 3;
+  int32 target = 4;
+}
+
+message LeagueEntry {
+  int32 rank = 1;
+  string name = 2;
+  int32 xp = 3;
+  bool self = 4;
+}

@@ -1,0 +1,50 @@
+{
+  "name": "@brainbuilder/mobile",
+  "private": true,
+  "version": "0.1.0",
+  "main": "expo/AppEntry",
+  "scripts": {
+    "build": "expo export --platform ios --output-dir dist/ios && expo export --platform android --output-dir dist/android",
+    "export:web": "expo export --platform web --output-dir dist/web",
+    "e2e": "playwright test",
+    "start": "expo start",
+    "test": "jest --runInBand",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@brainbuilder/courseware": "^0.1.0",
+    "@brainbuilder/learning-model": "0.1.0",
+    "@expo/vector-icons": "^15.1.1",
+    "expo": "^57.0.1",
+    "expo-status-bar": "^3.0.9",
+    "react": "^19.2.3",
+    "react-native": "0.86.0",
+    "react-native-safe-area-context": "^5.8.0",
+    "react-native-web": "^0.21.2"
+  },
+  "devDependencies": {
+    "@testing-library/react-native": "^14.0.1",
+    "@types/jest": "^30.0.0",
+    "@types/react": "^19.1.1",
+    "jest-expo": "^57.0.0",
+    "react-test-renderer": "^19.2.3",
+    "typescript": "^5.7.2"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "testMatch": [
+      "<rootDir>/src/**/*.test.ts",
+      "<rootDir>/src/**/*.test.tsx"
+    ],
+    "moduleNameMapper": {
+      "^@brainbuilder/courseware$": "<rootDir>/../../packages/courseware/src/index.ts",
+      "^@brainbuilder/learning-model$": "<rootDir>/../../packages/learning-model/src/index.ts"
+    },
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/test/setup.ts"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)"
+    ]
+  }
+}

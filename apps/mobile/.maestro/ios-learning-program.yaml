@@ -1,0 +1,201 @@
+appId: host.exp.Exponent
+---
+- runFlow: expo-go-dismiss-overlay.yaml
+- assertVisible: "Good morning, Alex"
+- assertVisible: "Build your learning plan"
+- tapOn: "Name"
+- inputText: "Mina"
+- hideKeyboard
+- tapOn: "Email"
+- inputText: "mina@example.com"
+- hideKeyboard
+- scrollUntilVisible:
+    element: "Build learning plan"
+    direction: DOWN
+    timeout: 10000
+    visibilityPercentage: 60
+- tapOn: "Build learning plan"
+- assertVisible: "Plan active for Mina"
+- assertVisible: "Algorithms and Data Structures"
+- tapOn: "Browse tab"
+- assertVisible: "Journey map"
+- scrollUntilVisible:
+    element: "Course framework"
+    direction: DOWN
+    timeout: 20000
+    visibilityPercentage: 60
+- assertVisible: "Course framework"
+- assertVisible: "24 micro lessons"
+- scrollUntilVisible:
+    element: "Enroll in course"
+    direction: DOWN
+    timeout: 20000
+    visibilityPercentage: 60
+    centerElement: true
+- tapOn: "Enroll in course"
+- assertVisible: "Enrolled"
+- assertVisible: "0/24 lessons complete"
+- scrollUntilVisible:
+    element: "Name the invariant and preserve it"
+    direction: DOWN
+    timeout: 20000
+    visibilityPercentage: 60
+    centerElement: true
+- tapOn: "Name the invariant and preserve it"
+- assertVisible: "Right. The operation works because the invariant survives each step."
+- scrollUntilVisible:
+    element: "Complete lesson"
+    direction: UP
+    timeout: 20000
+    visibilityPercentage: 60
+    centerElement: true
+- tapOn: "Complete lesson"
+- assertVisible: "Lesson complete. Next lesson 2 is ready."
+- assertVisible: "1/24 lessons complete"
+- tapOn: "Browse tab"
+- scrollUntilVisible:
+    element: "Binary Search Invariants"
+    direction: DOWN
+    timeout: 20000
+    visibilityPercentage: 60
+    centerElement: true
+- tapOn: "Binary Search Invariants"
+- scrollUntilVisible:
+    element: "Native binary search window. Window 1-7; target 20"
+    direction: DOWN
+    timeout: 20000
+    visibilityPercentage: 60
+    centerElement: true
+- assertVisible: "Native binary search window. Window 1-7; target 20"
+- tapOn: "Next search step"
+- assertVisible: "Native binary search window. Window 4-7; target 20"
+- tapOn: "Browse tab"
+- scrollUntilVisible:
+    element: "Tree Rotations"
+    direction: DOWN
+    timeout: 20000
+    visibilityPercentage: 60
+    centerElement: true
+- tapOn: "Tree Rotations"
+- scrollUntilVisible:
+    element: "Native tree rotation surface"
+    direction: DOWN
+    timeout: 20000
+    visibilityPercentage: 60
+    centerElement: true
+- assertVisible: "Native tree rotation surface"
+- tapOn: "Rotate left"
+- assertVisible: "Inorder preserved while height changes."
+- tapOn: "Browse tab"
+- scrollUntilVisible:
+    element: "DP Grid Fill"
+    direction: DOWN
+    timeout: 20000
+    visibilityPercentage: 60
+    centerElement: true
+- tapOn: "DP Grid Fill"
+- scrollUntilVisible:
+    element: "Native DP grid fill"
+    direction: DOWN
+    timeout: 20000
+    visibilityPercentage: 60
+    centerElement: true
+- assertVisible: "Native DP grid fill"
+- tapOn: "Fill next cell"
+- tapOn: "Fill next cell"
+- assertVisible: "Dependencies satisfied for 2 cells."
+- tapOn: "Browse tab"
+- scrollUntilVisible:
+    element: "Capstone Arcade"
+    direction: DOWN
+    timeout: 20000
+    visibilityPercentage: 60
+    centerElement: true
+- tapOn: "Capstone Arcade"
+- scrollUntilVisible:
+    element: "Complete course"
+    direction: DOWN
+    timeout: 20000
+    visibilityPercentage: 60
+    centerElement: true
+- tapOn: "Complete course"
+- assertVisible: "Course complete"
+- tapOn: "Play tab"
+- assertVisible: "Practice arcade"
+- scrollUntilVisible:
+    element: "Select bar 1"
+    direction: DOWN
+    timeout: 20000
+    visibilityPercentage: 60
+    centerElement: true
+- tapOn: "Select bar 1"
+- tapOn: "Select bar 2"
+- assertVisible: "swaps: 1"
+- tapOn: "Play tab"
+- assertVisible: "Practice arcade"
+- scrollUntilVisible:
+    element: "Trace tree height"
+    direction: DOWN
+    timeout: 10000
+    visibilityPercentage: 80
+    centerElement: true
+- tapOn: "Trace tree height"
+- scrollUntilVisible:
+    element: "Tree node 8"
+    direction: DOWN
+    timeout: 20000
+    visibilityPercentage: 60
+    centerElement: true
+- tapOn: "Tree node 8"
+- tapOn: "Tree node 12"
+- tapOn: "Tree node 14"
+- scrollUntilVisible:
+    element: "Check path"
+    direction: DOWN
+    timeout: 10000
+    visibilityPercentage: 90
+    centerElement: true
+- tapOn: "Check path"
+- assertVisible: "That path has height 3."
+- tapOn: "Feed tab"
+- tapOn: "Binary trees in one commute stop"
+- tapOn: "Save bite"
+- scrollUntilVisible:
+    element: "Play audio lesson"
+    direction: DOWN
+    timeout: 10000
+    visibilityPercentage: 80
+    centerElement: true
+- tapOn: "Play audio lesson"
+- assertVisible: "Audio playing.*Saved for later"
+- tapOn: "Library tab"
+- scrollUntilVisible:
+    element: "Multimodal library"
+    direction: DOWN
+    timeout: 10000
+    visibilityPercentage: 70
+    centerElement: true
+- assertVisible: "Multimodal library"
+- scrollUntilVisible:
+    element: "Binary trees in one commute stop"
+    direction: DOWN
+    timeout: 10000
+    visibilityPercentage: 70
+    centerElement: true
+- tapOn: "Binary trees in one commute stop"
+- scrollUntilVisible:
+    element: "What controls the longest tree search path?"
+    direction: DOWN
+    timeout: 10000
+    visibilityPercentage: 60
+    centerElement: true
+- assertVisible: "What controls the longest tree search path?"
+- tapOn: "You tab"
+- scrollUntilVisible:
+    element: "24/24 lessons complete"
+    direction: DOWN
+    timeout: 10000
+    visibilityPercentage: 70
+    centerElement: true
+- assertVisible: "24/24 lessons complete"
+- assertVisible: "Certificate ready"

@@ -1,0 +1,375 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,650;9..144,750&family=Outfit:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: 96% 0.023 86;
+  --paper-deep: 91% 0.035 80;
+  --ink: 22% 0.035 62;
+  --muted: 51% 0.035 68;
+  --line: 72% 0.035 78;
+  --ember: 64% 0.19 38;
+  --teal: 62% 0.13 178;
+  --violet: 58% 0.2 292;
+  --ring: 60% 0.17 38;
+  color-scheme: light;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: oklch(var(--paper));
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100dvh;
+  color: oklch(var(--ink));
+  background:
+    linear-gradient(135deg, oklch(100% 0 0 / 0.42) 0 25%, transparent 25% 50%, oklch(100% 0 0 / 0.42) 50% 75%, transparent 75%) 0 0 / 28px 28px,
+    radial-gradient(circle at top left, oklch(83% 0.08 48 / 0.34), transparent 34rem),
+    oklch(var(--paper));
+  font-family: Outfit, ui-sans-serif, system-ui, sans-serif;
+  font-kerning: normal;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  min-height: 44px;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid oklch(var(--ring));
+  outline-offset: 3px;
+}
+
+::selection {
+  background: oklch(var(--teal) / 0.25);
+}
+
+.app-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow: hidden;
+  gap: 12px;
+  padding: max(16px, env(safe-area-inset-top)) 14px max(12px, env(safe-area-inset-bottom));
+}
+
+.sketch-border {
+  border: 2px solid oklch(var(--ink));
+  box-shadow: 4px 5px 0 oklch(var(--ink) / 0.12);
+}
+
+.soft-panel {
+  border: 1.5px solid oklch(var(--line));
+  background: oklch(98% 0.018 85 / 0.88);
+}
+
+.lesson-visual {
+  background:
+    linear-gradient(135deg, oklch(79% 0.025 82 / 0.28) 25%, transparent 25% 50%, oklch(79% 0.025 82 / 0.28) 50% 75%, transparent 75%) 0 0 / 24px 24px,
+    oklch(94% 0.025 85);
+}
+
+.text-wrap-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+.course-three-scene {
+  display: block;
+  background:
+    radial-gradient(circle at 50% 32%, oklch(var(--violet) / 0.18), transparent 14rem),
+    linear-gradient(180deg, oklch(98% 0.02 85), oklch(91% 0.035 80));
+}
+
+.algorithm-teaching-card {
+  animation: lesson-card-enter 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(min(var(--i, 0), 5) * 65ms);
+}
+
+.lesson-flow-board {
+  border: 2px solid oklch(var(--ink));
+  background:
+    linear-gradient(135deg, oklch(100% 0 0 / 0.5), transparent 44%),
+    oklch(98% 0.018 85 / 0.95);
+  box-shadow: 5px 6px 0 oklch(var(--ink) / 0.1);
+}
+
+.lesson-flow-step {
+  transition:
+    transform 180ms cubic-bezier(0.2, 0, 0, 1),
+    border-color 180ms cubic-bezier(0.2, 0, 0, 1),
+    background-color 180ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (hover: hover) {
+  .lesson-flow-step:hover {
+    border-color: oklch(var(--teal));
+    background: oklch(var(--teal) / 0.08);
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 767px) {
+  .lesson-hero {
+    padding: 14px;
+  }
+
+  .lesson-outcome-strip {
+    gap: 6px;
+    margin-top: 8px;
+    max-width: 100%;
+  }
+
+  .lesson-outcome-strip span {
+    font-size: 0.72rem;
+    line-height: 1.2;
+    padding: 5px 8px;
+    white-space: nowrap;
+  }
+
+  .lesson-progress-card {
+    padding: 10px;
+  }
+
+  .lesson-progress-card p:nth-child(2) {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .lesson-hero h1 {
+    font-size: 2.15rem;
+    line-height: 0.98;
+  }
+
+  .lesson-preview-body {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+
+  .lesson-flow-preview [aria-label="Lesson flow"] {
+    display: none;
+  }
+
+  .lesson-diagram-card {
+    padding: 14px;
+  }
+
+  .lesson-diagram-card h2 {
+    font-size: 2rem;
+    line-height: 0.98;
+  }
+
+  .lesson-diagram-card > p.mt-2 {
+    display: none;
+  }
+
+  .lesson-diagram-card .lesson-visual {
+    margin-top: 10px;
+    min-height: 190px;
+  }
+
+  .lesson-flow-board {
+    padding: 14px;
+  }
+
+  .lesson-flow-board [aria-label="Lesson flow"] {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scroll-snap-type: x proximity;
+  }
+
+  .lesson-flow-step {
+    min-width: 170px;
+    scroll-snap-align: start;
+  }
+
+  .lesson-guide-grid {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scroll-snap-type: x proximity;
+  }
+
+  .lesson-guide-card {
+    min-width: min(270px, 78vw);
+    padding: 12px;
+    scroll-snap-align: start;
+  }
+
+  .lesson-guide-card h3 {
+    font-size: 1.25rem;
+    line-height: 1.05;
+  }
+
+  .lesson-guide-card p:last-child {
+    line-height: 1.42;
+  }
+
+  .lesson-explain-back {
+    margin-top: 10px;
+    padding: 12px;
+  }
+}
+
+.lesson-guide-card {
+  border: 1.5px solid oklch(var(--line));
+  background: oklch(99% 0.014 85 / 0.84);
+  box-shadow: 0 1px 0 oklch(var(--ink) / 0.08);
+}
+
+.lesson-guide-card-teal {
+  box-shadow: inset 4px 0 0 oklch(var(--teal)), 0 1px 0 oklch(var(--ink) / 0.08);
+}
+
+.lesson-guide-card-ember {
+  box-shadow: inset 4px 0 0 oklch(var(--ember)), 0 1px 0 oklch(var(--ink) / 0.08);
+}
+
+.lesson-guide-card-violet {
+  box-shadow: inset 4px 0 0 oklch(var(--violet)), 0 1px 0 oklch(var(--ink) / 0.08);
+}
+
+.animated-lesson-diagram {
+  animation: diagram-breathe 1600ms cubic-bezier(0.25, 1, 0.5, 1) both;
+  transform-origin: center;
+}
+
+.binary-node-active {
+  transition: opacity 220ms cubic-bezier(0.25, 1, 0.5, 1), transform 220ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.binary-node-muted {
+  opacity: 0.45;
+  transition: opacity 220ms cubic-bezier(0.25, 1, 0.5, 1), transform 220ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.search-window-pulse {
+  animation: search-window-pulse 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.dp-wave-cell rect {
+  animation: dp-cell-wave 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(min(var(--i, 0), 4) * 55ms);
+}
+
+.animated-stage-visual {
+  transform-origin: center;
+}
+
+.stage-node-active {
+  animation: stage-node-enter 360ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(min(var(--i, 0), 6) * 45ms);
+}
+
+.stage-node-idle {
+  opacity: 0.58;
+  transition: opacity 220ms cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes lesson-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes diagram-breathe {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes search-window-pulse {
+  0% {
+    opacity: 0.25;
+    transform: scaleX(0.82);
+  }
+  100% {
+    opacity: 0.8;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes dp-cell-wave {
+  0% {
+    opacity: 0.5;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stage-node-enter {
+  0% {
+    opacity: 0.58;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 1040px) {
+  .app-shell {
+    grid-template-columns: 160px minmax(0, 1fr) 220px;
+    grid-template-rows: auto;
+    height: auto;
+    gap: 16px;
+    overflow: visible;
+    padding: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
