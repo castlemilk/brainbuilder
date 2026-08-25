@@ -65,6 +65,7 @@ function dfs(graph: Map<string, string[]>, start: string): string[] {
           "Both use a visited set to avoid cycles"
         ]
       ),
+      simulation("graph-bfs-dfs-sim", "Traversal frontier", "svg", "frontier-graph", ["step", "play", "reset"], "Every node is visited once thanks to the visited set."),
       quiz(
         "graph-bfs-dfs-check",
         "Which traversal finds the shortest path in an unweighted graph?",
@@ -132,6 +133,7 @@ function dfs(graph: Map<string, string[]>, start: string): string[] {
           "Repeat until every node is settled"
         ]
       ),
+      simulation("dijkstra-sim", "Relaxation wave", "svg", "frontier-graph", ["step", "play", "reset"], "Settled nodes never improve once chosen."),
       quiz(
         "dijkstra-check",
         "Why does Dijkstra fail with negative edge weights?",
@@ -187,6 +189,7 @@ function dfs(graph: Map<string, string[]>, start: string): string[] {
           "Reuse the stored answer on later calls"
         ]
       ),
+      simulation("dp-fib-sim", "Memo table fill", "svg", "dp-grid-fill", ["step", "play", "reset"], "Each subproblem is solved once."),
       quiz(
         "dp-fib-check",
         "What does memoization do to naive Fibonacci's time cost?",
@@ -249,6 +252,7 @@ function dfs(graph: Map<string, string[]>, start: string): string[] {
           "Store the max and read dp[n][capacity]"
         ]
       ),
+      simulation("dp-knapsack-sim", "Knapsack table", "svg", "dp-grid-fill", ["step", "play", "reset"], "The last cell holds the optimum value."),
       quiz(
         "dp-knapsack-check",
         "What does dp[i][w] represent?",
@@ -308,6 +312,7 @@ function dfs(graph: Map<string, string[]>, start: string): string[] {
           "Mismatch: take the best of up or left"
         ]
       ),
+      simulation("dp-lcs-sim", "LCS table", "svg", "dp-grid-fill", ["step", "play", "reset"], "The final cell holds the LCS length."),
       quiz(
         "dp-lcs-check",
         "When characters match, what is dp[i][j]?",

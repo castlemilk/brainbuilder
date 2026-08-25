@@ -32,6 +32,7 @@ import {
   scoreCourseCheck,
   type Course,
   type CourseBlock,
+  type CodingLabTestCase,
   type CourseCheckResult,
   type CourseLesson,
   type DiagramBlock,
@@ -1159,6 +1160,10 @@ function CourseLessonPage({
   const primaryBlock = selectedLesson.blocks.find((block) => ["diagram", "simulation", "code-trace", "lab", "project"].includes(block.kind));
   const secondaryBlocks = primaryBlock ? selectedLesson.blocks.filter((block) => block.id !== primaryBlock.id) : selectedLesson.blocks;
 
+  function handleLabSolved() {
+    onCompleteLesson(course.id, lessonId);
+  }
+
   return (
     <section className="lesson-page grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4">
       <header className="lesson-hero min-w-0 rounded-[28px] border-2 border-ink bg-paper/95 p-4 shadow-sketch md:p-5">
@@ -1188,7 +1193,7 @@ function CourseLessonPage({
         ) : null}
         {primaryBlock ? (
           <div className="min-w-0 xl:order-1">
-            <CourseBlockView block={primaryBlock} result={primaryBlock.kind === "quiz" ? results[primaryBlock.id] : undefined} onAnswer={onAnswer} />
+            <CourseBlockView block={primaryBlock} result={primaryBlock.kind === "quiz" ? results[primaryBlock.id] : undefined} onAnswer={onAnswer} onLabSolved={handleLabSolved} />
           </div>
         ) : null}
         <div className="min-w-0 xl:order-2">
@@ -1234,7 +1239,7 @@ function CourseLessonPage({
       </section>
       <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4">
         {secondaryBlocks.map((block) => (
-          <CourseBlockView key={block.id} block={block} result={block.kind === "quiz" ? results[block.id] : undefined} onAnswer={onAnswer} />
+          <CourseBlockView key={block.id} block={block} result={block.kind === "quiz" ? results[block.id] : undefined} onAnswer={onAnswer} onLabSolved={handleLabSolved} />
         ))}
       </div>
       <aside className="course-map-rail soft-panel rounded-[24px] p-4" aria-label="Course map">
@@ -1400,11 +1405,13 @@ function teachingSectionsForGuide(guide: LessonLearningGuide, lessonId: string) 
 function CourseBlockView({
   block,
   result,
-  onAnswer
+  onAnswer,
+  onLabSolved
 }: {
   block: CourseBlock;
   result?: CourseCheckResult;
   onAnswer: (quizId: string, optionId: string) => void;
+  onLabSolved?: (xp: number) => void;
 }) {
   if (block.kind === "text") {
     return (
@@ -1438,7 +1445,7 @@ function CourseBlockView({
     return <CourseQuizBlock block={block} result={result} onAnswer={onAnswer} />;
   }
   if (block.kind === "lab") {
-    return <LabBlockView block={block} />;
+    return <LabBlockView block={block} onSolved={onLabSolved} />;
   }
   if (block.kind === "project") {
     return <ProjectStage block={block} />;
@@ -1778,8 +1785,130 @@ function CourseQuizBlock({ block, result, onAnswer }: { block: QuizBlock; result
   );
 }
 
-function LabBlockView({ block }: { block: Extract<CourseBlock, { kind: "lab" }> }) {
+function LabBlockView({ block, onSolved }: { block: Extract<CourseBlock, { kind: "lab" }>; onSolved?: (xp: number) => void }) {
+  if (block.renderer.component === "coding-lab" && block.starterCode && block.testCases && block.testCases.length > 0) {
+    return <CodingLabView block={block} onSolved={onSolved} />;
+  }
   return <AnimatedLearningStage block={block} />;
+}
+
+ function stripTypeScript(source: string): string {
+  return source
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/([A-Za-z_$][\w$]*)\s*<\s*[A-Za-z_$][\w$]*(?:\s*<\s*[A-Za-z_$][\w$]*\s*>)?(?:\s*\[\s*\])?(?:\s*,\s*[A-Za-z_$][\w$]*(?:\s*<\s*[A-Za-z_$][\w$]*\s*>)?(?:\s*\[\s*\])?)*\s*>/g, "$1")
+    .replace(/:\s*[A-Za-z_$][\w$]*(?:\s*<\s*[A-Za-z_$][\w$]*(?:\s*,\s*[A-Za-z_$][\w$]*)*\s*>)?(?:\s*\[\s*\])?(?=\s*[),])/g, "")
+    .replace(/:\s*[A-Za-z_$][\w$]*(?:\s*\[\s*\])?(?=\s*\{)/g, "")
+    .replace(/\bas\s+[A-Za-z_$][\w$]*/g, "")
+    .replace(/!\s*(?=[).,;}])/g, "")
+    .replace(/<[A-Za-z_$][\w$]*>(?=\s*\()/g, "");
+}
+
+function formatValue(value: unknown): string {
+  try {
+    return JSON.stringify(value);
+  } catch {
+    return String(value);
+  }
+}
+
+function CodingLabView({ block, onSolved }: { block: Extract<CourseBlock, { kind: "lab" }>; onSolved?: (xp: number) => void }) {
+  const starter = block.starterCode ?? "";
+  const testCases = block.testCases ?? [];
+  const [code, setCode] = useState(starter);
+  const [results, setResults] = useState<{ pass: boolean; args: unknown[]; expected: unknown; actual?: unknown; error?: string }[] | null>(null);
+  const [solved, setSolved] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  function runCode() {
+    setError(null);
+    try {
+      const stripped = stripTypeScript(code);
+      const match = stripped.match(/function\s+([A-Za-z_$][\w$]*)\s*\(/);
+      if (!match) {
+        setError("Define a function in the editor so it can be run against the test cases.");
+        setResults(null);
+        return;
+      }
+      const factory = new Function(`${stripped}\nreturn ${match[1]};`);
+      const fn = factory() as (...args: unknown[]) => unknown;
+      const outcomes = testCases.map((testCase: CodingLabTestCase) => {
+        try {
+          const actual = fn(...testCase.args);
+          return { pass: JSON.stringify(actual) === JSON.stringify(testCase.expected), args: testCase.args, expected: testCase.expected, actual };
+        } catch (err) {
+          return { pass: false, args: testCase.args, expected: testCase.expected, actual: undefined, error: err instanceof Error ? err.message : String(err) };
+        }
+      });
+      setResults(outcomes);
+      const allPass = outcomes.every((outcome) => outcome.pass);
+      setSolved(allPass);
+      if (allPass) {
+        onSolved?.(block.xp);
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+      setResults(null);
+    }
+  }
+
+  function resetCode() {
+    setCode(starter);
+    setResults(null);
+    setSolved(false);
+    setError(null);
+  }
+
+  return (
+    <article id={block.id} className="scroll-mt-5 rounded-[24px] border-2 border-ember bg-paper/95 p-4 shadow-sketch">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <p className="text-sm font-bold uppercase text-ember">Coding lab</p>
+          <h2 className="font-display text-3xl font-bold">{block.title}</h2>
+        </div>
+        <span className="rounded-full border border-line bg-white/55 px-3 py-1 text-sm font-bold">{block.xp} XP</span>
+      </div>
+      <p className="mt-2 text-sm leading-6 text-muted">{block.task}</p>
+      <label className="mt-3 block">
+        <span className="sr-only">Code editor for {block.title ? block.title : block.id}</span>
+        <textarea
+          value={code}
+          onChange={(event) => setCode(event.target.value)}
+          spellCheck={false}
+          aria-label={`Code editor for ${block.title}`}
+          className="code-editor code-surface min-h-[240px] w-full rounded-2xl border-2 border-ink p-3 font-mono outline-none"
+        />
+      </label>
+      <div className="mt-3 flex flex-wrap gap-2">
+        <button type="button" onClick={runCode} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-ink bg-ember px-5 text-sm font-bold text-white transition-transform active:scale-[0.96]">
+          Run tests
+        </button>
+        <button type="button" onClick={resetCode} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-ink bg-paper px-5 text-sm font-bold">
+          Reset code
+        </button>
+      </div>
+      {error ? (
+        <p className="mt-3 rounded-2xl border border-ember bg-ember/10 px-3 py-2 text-sm font-bold text-ember">{error}</p>
+      ) : null}
+      {results ? (
+        <div className="mt-3 grid gap-2">
+          {results.map((outcome, index) => (
+            <div key={index} className={`rounded-2xl border px-3 py-2 text-sm font-bold ${outcome.pass ? "border-teal bg-teal/10 text-teal" : "border-ember bg-ember/10 text-ember"}`}>
+              <div className="flex items-center justify-between gap-3">
+                <span>Test case {index + 1}</span>
+                <span>{outcome.pass ? "Pass" : "Fail"}</span>
+              </div>
+              <p className="mt-1 font-normal text-muted">args: {formatValue(outcome.args)}</p>
+              <p className="font-normal text-muted">expected: {formatValue(outcome.expected)}</p>
+              <p className="font-normal text-muted">got: {outcome.error ? outcome.error : formatValue(outcome.actual)}</p>
+            </div>
+          ))}
+        </div>
+      ) : null}
+      {solved ? (
+        <p className="mt-3 rounded-2xl border-2 border-teal bg-teal/10 px-3 py-2 text-sm font-bold text-teal">Solved — you earned {block.xp} XP for this lab.</p>
+      ) : null}
+    </article>
+  );
 }
 
 type AnimatedStageBlock =
@@ -1912,6 +2041,45 @@ function AnimatedLearningStage({ block }: { block: AnimatedStageBlock }) {
   );
 }
 
+function escapeHtml(value: string): string {
+  return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+const TS_KEYWORDS = new Set([
+  "const", "let", "var", "function", "return", "if", "else", "for", "while", "do",
+  "switch", "case", "break", "continue", "new", "class", "extends", "implements",
+  "interface", "type", "enum", "of", "in", "typeof", "instanceof", "await", "async",
+  "yield", "throw", "try", "catch", "finally", "import", "export", "from", "default",
+  "this", "super", "null", "undefined", "true", "false", "void", "as", "public",
+  "private", "readonly", "static", "get", "set", "number", "string", "boolean"
+]);
+
+function tokenizeTsLine(line: string): string {
+  const pattern = /(\/\/.*)|("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`(?:[^`\\]|\\.)*`)|(\b\d+(?:\.\d+)?\b)|([A-Za-z_$][\w$]*)|(\s+)|([^\s\w$])/g;
+  let output = "";
+  let match: RegExpExecArray | null;
+  while ((match = pattern.exec(line)) !== null) {
+    const [, comment, string, number, ident, space, punct] = match;
+    if (comment) {
+      output += `<span class="tok-comment">${escapeHtml(comment)}</span>`;
+    } else if (string) {
+      output += `<span class="tok-string">${escapeHtml(string)}</span>`;
+    } else if (number) {
+      output += `<span class="tok-number">${number}</span>`;
+    } else if (ident) {
+      output += TS_KEYWORDS.has(ident) ? `<span class="tok-keyword">${ident}</span>` : escapeHtml(ident);
+    } else if (space) {
+      output += space;
+    } else if (punct) {
+      output += escapeHtml(punct);
+    }
+    if (pattern.lastIndex === match.index) {
+      pattern.lastIndex++;
+    }
+  }
+  return output;
+}
+
 function CodeTraceStage({ block }: { block: Extract<CourseBlock, { kind: "code-trace" }> }) {
   const [step, setStep] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -1970,15 +2138,22 @@ function CodeTraceStage({ block }: { block: Extract<CourseBlock, { kind: "code-t
         </div>
         <span className="rounded-full border border-line bg-white/70 px-3 py-1 text-sm font-bold">Trace step {clampedStep + 1} of {block.tracePoints.length}</span>
       </div>
-      <pre
+      <div
         data-animated-stage={block.id}
         data-stage-step={clampedStep}
         data-playing={playing || autoPlaying}
         data-invariant="trace each state transition before the next line"
-        className="mt-3 overflow-x-auto rounded-2xl border border-line bg-white/55 p-3 text-sm"
+        className="code-surface mt-3 overflow-hidden rounded-2xl border-2 border-ink"
       >
-        <code>{block.code}</code>
-      </pre>
+        <div className="code-gutter">
+          {block.code.split("\n").map((line, lineIndex) => (
+            <div key={lineIndex} className="gutter-line">
+              <span className="gutter-no">{lineIndex + 1}</span>
+              <code dangerouslySetInnerHTML={{ __html: tokenizeTsLine(line) }} />
+            </div>
+          ))}
+        </div>
+      </div>
       <ol className="mt-3 grid gap-2">
         {block.tracePoints.map((point, index) => (
           <li key={point} className={`rounded-xl border px-3 py-2 text-sm font-bold transition ${index === clampedStep ? "border-violet bg-violet/10 text-violet" : "border-line bg-white/45"}`}>

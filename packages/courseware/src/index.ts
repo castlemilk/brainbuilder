@@ -68,12 +68,19 @@ export type QuizBlock = BaseBlock & {
   nextBlockId?: string;
 };
 
+export type CodingLabTestCase = {
+  args: unknown[];
+  expected: unknown;
+};
+
 export type LabBlock = BaseBlock & {
   kind: "lab";
   renderer: RendererSpec;
   task: string;
   successCriteria: string;
   xp: number;
+  starterCode?: string;
+  testCases?: CodingLabTestCase[];
 };
 
 export type ReflectionBlock = BaseBlock & {
@@ -292,7 +299,17 @@ function codeTrace(id: string, title: string, code: string, tracePoints: string[
   };
 }
 
-function lab(id: string, title: string, family: RendererFamily, component: string, task: string, successCriteria: string, xp = 16): LabBlock {
+function lab(
+  id: string,
+  title: string,
+  family: RendererFamily,
+  component: string,
+  task: string,
+  successCriteria: string,
+  xp = 16,
+  starterCode?: string,
+  testCases?: CodingLabTestCase[]
+): LabBlock {
   return {
     id,
     title,
@@ -306,7 +323,9 @@ function lab(id: string, title: string, family: RendererFamily, component: strin
     },
     task,
     successCriteria,
-    xp
+    xp,
+    starterCode,
+    testCases
   };
 }
 
@@ -1071,22 +1090,6 @@ export function buildAlgorithmsDataStructuresCourse(): Course {
         ]
       },
       {
-        id: "capstone-interview-arcade",
-        title: "Capstone Interview Arcade",
-        summary: "Bring the course together with problem reading, structure choice, and timed practice.",
-        lessons: [
-          conceptLesson("problem-reading", "Problem Reading", "Extract inputs, outputs, constraints, and hidden invariants before coding.", "name-invariant"),
-          conceptLesson("choose-data-structure", "Choose the Data Structure", "Map desired operations to the structure that makes them natural.", "name-invariant"),
-          lesson("capstone-arcade", "Capstone Arcade", "Solve a mixed set of algorithm challenges with hints, checks, and reflections.", ["Pick an approach", "Justify complexity", "Practice under timed feedback"], [
-            text("capstone-read", "Capstone loop", ["Read the problem.", "Name the invariant.", "Pick the structure.", "Trace one example.", "Only then code."]),
-            lab("capstone-sort-lab", "Sorting arcade", "svg", "sorting-bars", "Sort a noisy input by choosing comparisons and swaps.", "Array is sorted with minimal unnecessary swaps.", 24),
-            lab("capstone-graph-lab", "Graph route arcade", "d3", "frontier-graph", "Find the shortest unweighted route while avoiding revisits.", "Route reaches the goal with BFS frontier discipline.", 24),
-            project("capstone-project", "Build an algorithm explainer", "Create a tiny explainer for one unseen problem using at least one diagram, one check, and one complexity claim.", ["Problem summary", "Invariant", "Diagram", "Quiz", "Complexity note"], 40),
-            reflection("capstone-reflection", "What signal told you which data structure to choose?")
-          ])
-        ]
-      },
-      {
         id: "sorting-algorithms-deep",
         title: "Sorting Algorithms in Practice",
         summary: "Read, trace, and choose between bubble, quick, and merge sort with real code.",
@@ -1115,6 +1118,22 @@ export function buildAlgorithmsDataStructuresCourse(): Course {
         title: "Coding Challenges",
         summary: "Apply the algorithms in interview-style challenges with checks and labs.",
         lessons: challengeLessons
+      },
+      {
+        id: "capstone-interview-arcade",
+        title: "Capstone Interview Arcade",
+        summary: "Bring the course together with problem reading, structure choice, and timed practice.",
+        lessons: [
+          conceptLesson("problem-reading", "Problem Reading", "Extract inputs, outputs, constraints, and hidden invariants before coding.", "name-invariant"),
+          conceptLesson("choose-data-structure", "Choose the Data Structure", "Map desired operations to the structure that makes them natural.", "name-invariant"),
+          lesson("capstone-arcade", "Capstone Arcade", "Solve a mixed set of algorithm challenges with hints, checks, and reflections.", ["Pick an approach", "Justify complexity", "Practice under timed feedback"], [
+            text("capstone-read", "Capstone loop", ["Read the problem.", "Name the invariant.", "Pick the structure.", "Trace one example.", "Only then code."]),
+            lab("capstone-sort-lab", "Sorting arcade", "svg", "sorting-bars", "Sort a noisy input by choosing comparisons and swaps.", "Array is sorted with minimal unnecessary swaps.", 24),
+            lab("capstone-graph-lab", "Graph route arcade", "d3", "frontier-graph", "Find the shortest unweighted route while avoiding revisits.", "Route reaches the goal with BFS frontier discipline.", 24),
+            project("capstone-project", "Build an algorithm explainer", "Create a tiny explainer for one unseen problem using at least one diagram, one check, and one complexity claim.", ["Problem summary", "Invariant", "Diagram", "Quiz", "Complexity note"], 40),
+            reflection("capstone-reflection", "What signal told you which data structure to choose?")
+          ])
+        ]
       }
     ]
   };

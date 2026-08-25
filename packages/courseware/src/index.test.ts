@@ -30,12 +30,12 @@ describe("courseware framework", () => {
       "Graphs",
       "Sorting, Searching & Selection",
       "Dynamic Programming & Greedy Strategy",
-      "Capstone Interview Arcade",
       "Sorting Algorithms in Practice",
       "Searching Algorithms in Practice",
       "Binary Search Trees",
       "Graphs & Dynamic Programming",
-      "Coding Challenges"
+      "Coding Challenges",
+      "Capstone Interview Arcade"
     ]);
     expect(coverage.lessonCount).toBeGreaterThanOrEqual(24);
     expect(coverage.blockKinds).toEqual(expect.arrayContaining(["text", "audio", "diagram", "simulation", "code-trace", "quiz", "lab", "reflection", "project"]));

@@ -35,6 +35,7 @@ export const searchingLessons: CourseLesson[] = [
       "Move to the next element if not found",
       "Return -1 after checking every element"
     ]),
+    simulation("linear-search-sim", "Linear scan", "svg", "search-scan", ["step", "play", "reset"], "Scans every element from the start."),
     quiz("linear-search-check", "What is the key advantage of linear search?", "opt-unsorted", undefined, {
       question: "What is the key advantage of linear search?",
       options: [
@@ -74,6 +75,7 @@ export const searchingLessons: CourseLesson[] = [
       "If target is larger, discard the left half",
       "If target is smaller, discard the right half"
     ]),
+    simulation("binary-search-sim", "Binary search window", "svg", "binary-search-window", ["step", "play", "reset"], "Discarding half is always safe on sorted data."),
     quiz("binary-search-code-check", "Why must the array be sorted for binary search?", "opt-discard", undefined, {
       question: "Why must the array be sorted for binary search?",
       options: [
@@ -118,6 +120,7 @@ export const searchingLessons: CourseLesson[] = [
       "Linear-scan within that block",
       "Return the index or -1"
     ]),
+    simulation("jump-search-sim", "Jump blocks", "svg", "search-jump", ["step", "play", "reset"], "Jumps ahead, then linear-scans one block."),
     quiz("jump-search-check", "What is jump search's time complexity?", "opt-sqrt", undefined, {
       question: "What is jump search's time complexity?",
       options: [

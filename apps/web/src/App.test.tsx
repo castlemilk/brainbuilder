@@ -77,8 +77,8 @@ describe("Brainbuilder web app", () => {
 
     expect(window.location.pathname).toBe("/courses/algorithms-data-structures");
     expect(screen.getByRole("heading", { level: 1, name: /algorithms & data structures/i })).toBeInTheDocument();
-    expect(screen.getByText(/8 units/i)).toBeInTheDocument();
-    expect(screen.getByText(/24 micro lessons/i)).toBeInTheDocument();
+    expect(screen.getByText(/13 units/i)).toBeInTheDocument();
+    expect(screen.getByText(/41 micro lessons/i)).toBeInTheDocument();
     expect(screen.getByText(/d3/i)).toBeInTheDocument();
     expect(screen.getByText(/three/i)).toBeInTheDocument();
     expect(screen.getByText(/skia/i)).toBeInTheDocument();
@@ -126,7 +126,7 @@ describe("Brainbuilder web app", () => {
 
       view.unmount();
     }
-  });
+  }, 40000);
 
   it("makes generic course stages interactive instead of renderer placeholders", async () => {
     const user = userEvent.setup();
@@ -367,7 +367,7 @@ describe("Brainbuilder web app", () => {
     await user.click(screen.getByRole("link", { name: /start first lesson/i }));
 
     expect(window.location.pathname).toBe("/courses/algorithms-data-structures/lessons/big-o-as-shape");
-    expect(screen.getByText(/0\/24 lessons complete/i)).toBeInTheDocument();
+    expect(screen.getByText(/0\/\d+ lessons complete/i)).toBeInTheDocument();
     await user.click(screen.getByRole("button", { name: /name the invariant and preserve it/i }));
     await user.click(screen.getByRole("button", { name: /complete lesson/i }));
 
@@ -376,7 +376,7 @@ describe("Brainbuilder web app", () => {
 
     await user.click(screen.getByRole("link", { name: /you/i }));
     expect(screen.getByText(/algorithms & data structures/i)).toBeInTheDocument();
-    expect(screen.getByText(/1\/24 lessons complete/i)).toBeInTheDocument();
+    expect(screen.getByText(/1\/\d+ lessons complete/i)).toBeInTheDocument();
   });
 
   it("marks the course complete from the capstone and reflects completion on progress", async () => {

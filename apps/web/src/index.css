@@ -300,6 +300,71 @@ input:focus-visible {
   transition: opacity 220ms cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+.code-surface {
+  background: oklch(22% 0.035 62);
+  color: oklch(96% 0.023 86);
+}
+
+.code-gutter {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.code-gutter .gutter-line {
+  display: flex;
+  align-items: flex-start;
+}
+
+.code-gutter .gutter-no {
+  flex: none;
+  width: 2.4rem;
+  padding: 0 0.6rem 0 0.4rem;
+  text-align: right;
+  color: oklch(62% 0.03 68);
+  user-select: none;
+  border-right: 1px solid oklch(40% 0.035 62);
+}
+
+.code-gutter code {
+  flex: 1;
+  padding: 0 0.75rem;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.tok-keyword {
+  color: oklch(74% 0.16 350);
+  font-weight: 700;
+}
+
+.tok-string {
+  color: oklch(82% 0.15 150);
+}
+
+.tok-comment {
+  color: oklch(62% 0.03 70);
+  font-style: italic;
+}
+
+.tok-number {
+  color: oklch(80% 0.14 75);
+}
+
+.tok-fn {
+  color: oklch(82% 0.12 230);
+}
+
+.code-editor {
+  tab-size: 2;
+  resize: vertical;
+}
+
+.code-editor:focus-visible {
+  outline: 3px solid oklch(var(--ring));
+  outline-offset: 2px;
+}
+
 @keyframes lesson-card-enter {
   from {
     opacity: 0;

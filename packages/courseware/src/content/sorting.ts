@@ -51,6 +51,7 @@ export const sortingLessons: CourseLesson[] = [
           "Stop early when a pass makes no swaps"
         ]
       ),
+      simulation("bubble-sort-sim", "Bubble sort bars", "svg", "sorting-bars", ["step", "play", "reset"], "The largest value reaches the end each pass."),
       quiz(
         "bubble-sort-check",
         "What is bubble sort's worst-case time complexity?",
@@ -112,6 +113,7 @@ function partition(arr: number[], low: number, high: number): number {
           "Recurse on the two sides"
         ]
       ),
+      simulation("quick-sort-sim", "Quick sort partitioning", "svg", "partition-bars", ["step", "play", "reset"], "The pivot lands in its final sorted position."),
       quiz(
         "quick-sort-check",
         "What is quick sort's average-case time complexity?",
@@ -169,6 +171,7 @@ function merge(left: number[], right: number[]): number[] {
           "Append any remaining elements"
         ]
       ),
+      simulation("merge-sort-sim", "Merge walkthrough", "svg", "sorting-bars", ["step", "play", "reset"], "Sorted halves merge in O(n)."),
       quiz(
         "merge-sort-check",
         "What extra space does merge sort require?",
@@ -199,6 +202,7 @@ function merge(left: number[], right: number[]): number[] {
         "Merge sort is stable with guaranteed O(n log n) but needs O(n) extra space.",
         "When memory is tight and average speed matters, quick sort; when stability or guaranteed worst case matters, merge sort."
       ]),
+      simulation("choose-sort-sim", "Pick the right sort", "svg", "sorting-bars", ["step", "play", "reset"], "Match the sort to stability, space, and speed."),
       quiz(
         "choose-sort-check",
         "You need a stable sort with guaranteed O(n log n) worst case but can spare O(n) memory. Which do you pick?",

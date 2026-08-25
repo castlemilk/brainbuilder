@@ -70,6 +70,7 @@ class BST {
           "Stop at the empty child and attach the node"
         ]
       ),
+      simulation("bst-insert-sim", "BST insert walk", "svg", "heap-bst-tree", ["step", "play", "reset"], "Insert and search cost follow the tree height."),
       quiz(
         "bst-insert-check",
         "What is the time complexity of BST search in a balanced tree?",
@@ -146,6 +147,7 @@ function levelOrder(root: TreeNode | null): number[][] {
           "Each order answers a different question"
         ]
       ),
+      simulation("tree-traversals-sim", "Traversal orders", "svg", "heap-tree-walk", ["step", "play", "reset"], "Inorder yields sorted order for a BST."),
       quiz(
         "tree-traversals-check",
         "Which traversal prints a BST's values in sorted order?",

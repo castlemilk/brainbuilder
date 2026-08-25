@@ -35,7 +35,25 @@ export const challengeLessons: CourseLesson[] = [
       "Otherwise record this number and its index",
       "One pass gives O(n) time, O(n) space"
     ]),
-    lab("challenge-two-sum-lab", "Implement Two Sum", "anime", "coding-lab", "Implement twoSum so it returns the two indices whose values sum to target, using a hash map in a single pass.", "Returns [0, 1] for [2, 7, 11, 15] with target 9, and [1, 2] for [3, 2, 4] with target 6.", 18),
+    lab(
+      "challenge-two-sum-lab",
+      "Implement Two Sum",
+      "anime",
+      "coding-lab",
+      "Implement twoSum so it returns the two indices whose values sum to target, using a hash map in a single pass.",
+      "Returns [0, 1] for [2, 7, 11, 15] with target 9, and [1, 2] for [3, 2, 4] with target 6.",
+      18,
+      `function twoSum(nums, target) {
+  // Build a hash map from value to index as you scan.
+  // Return [indexA, indexB] whose values sum to target.
+  return [];
+}`,
+      [
+        { args: [[2, 7, 11, 15], 9], expected: [0, 1] },
+        { args: [[3, 2, 4], 6], expected: [1, 2] },
+        { args: [[3, 3], 6], expected: [0, 1] }
+      ]
+    ),
     quiz("challenge-two-sum-check", "What is the time complexity of the hash-map one-pass solution?", "opt-on", undefined, {
       question: "What is the time complexity of the hash-map one-pass solution?",
       options: [
@@ -72,7 +90,24 @@ export const challengeLessons: CourseLesson[] = [
       "Drain whichever array still has elements",
       "Result is sorted in O(m + n)"
     ]),
-    lab("challenge-merge-arrays-lab", "Implement Merge", "anime", "coding-lab", "Implement mergeSortedArrays using two pointers to produce one sorted array.", "Returns [1, 2, 3, 4, 5, 6] for [1, 3, 5] and [2, 4, 6].", 18),
+    lab(
+      "challenge-merge-arrays-lab",
+      "Implement Merge",
+      "anime",
+      "coding-lab",
+      "Implement mergeSortedArrays using two pointers to produce one sorted array.",
+      "Returns [1, 2, 3, 4, 5, 6] for [1, 3, 5] and [2, 4, 6].",
+      18,
+      `function mergeSortedArrays(a, b) {
+  // Use two pointers to walk both sorted arrays and build one sorted result.
+  return [];
+}`,
+      [
+        { args: [[1, 3, 5], [2, 4, 6]], expected: [1, 2, 3, 4, 5, 6] },
+        { args: [[], [1, 2]], expected: [1, 2] },
+        { args: [[1, 2], [3, 4]], expected: [1, 2, 3, 4] }
+      ]
+    ),
     quiz("challenge-merge-arrays-check", "What is the time complexity of the two-pointer merge?", "opt-mn", undefined, {
       question: "What is the time complexity of the two-pointer merge?",
       options: [
@@ -110,7 +145,25 @@ export const challengeLessons: CourseLesson[] = [
       "Swap when left is greater than right",
       "Break early if a pass made no swaps"
     ]),
-    lab("challenge-bubble-impl-lab", "Implement Bubble Sort", "anime", "coding-lab", "Implement bubbleSort that returns a new sorted array using adjacent swaps and an early-exit flag.", "Returns [11, 12, 22, 25, 34, 64, 90] for [64, 34, 25, 12, 22, 11, 90].", 16),
+    lab(
+      "challenge-bubble-impl-lab",
+      "Implement Bubble Sort",
+      "anime",
+      "coding-lab",
+      "Implement bubbleSort that returns a new sorted array using adjacent swaps and an early-exit flag.",
+      "Returns [11, 12, 22, 25, 34, 64, 90] for [64, 34, 25, 12, 22, 11, 90].",
+      16,
+      `function bubbleSort(arr) {
+  // Repeatedly compare adjacent pairs and swap when out of order.
+  // Return a new sorted array without mutating the input.
+  return arr;
+}`,
+      [
+        { args: [[64, 34, 25, 12, 22, 11, 90]], expected: [11, 12, 22, 25, 34, 64, 90] },
+        { args: [[5, 1, 4, 2, 8]], expected: [1, 2, 4, 5, 8] },
+        { args: [[1]], expected: [1] }
+      ]
+    ),
     quiz("challenge-bubble-impl-check", "What is bubble sort's space complexity?", "opt-o1", undefined, {
       question: "What is bubble sort's space complexity?",
       options: [
