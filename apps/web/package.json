@@ -13,9 +13,7 @@
   "dependencies": {
     "@brainbuilder/courseware": "^0.1.0",
     "@brainbuilder/learning-model": "0.1.0",
-    "@types/d3-scale": "^4.0.9",
     "clsx": "^2.1.1",
-    "d3-scale": "^4.0.2",
     "lucide-react": "^0.468.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",

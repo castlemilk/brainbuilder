@@ -7,8 +7,10 @@
 :root {
   --paper: 96% 0.023 86;
   --paper-deep: 91% 0.035 80;
+  --surface: 98% 0.018 85;
+  --surface-strong: 99% 0.014 85;
   --ink: 22% 0.035 62;
-  --muted: 51% 0.035 68;
+  --muted: 43% 0.035 68;
   --line: 72% 0.035 78;
   --ember: 64% 0.19 38;
   --teal: 62% 0.13 178;
@@ -52,13 +54,34 @@ button {
   min-height: 44px;
 }
 
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 100;
+  transform: translateY(-150%);
+  border: 2px solid oklch(var(--ink));
+  background: oklch(var(--paper));
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 14px;
+  transition: transform 160ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
 button:focus {
   outline: none;
 }
 
 button:focus-visible,
 a:focus-visible,
-input:focus-visible {
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
   outline: 3px solid oklch(var(--ring));
   outline-offset: 3px;
 }
@@ -85,7 +108,15 @@ input:focus-visible {
 
 .soft-panel {
   border: 1.5px solid oklch(var(--line));
-  background: oklch(98% 0.018 85 / 0.88);
+  background: oklch(var(--surface) / 0.88);
+}
+
+.surface {
+  background: oklch(var(--surface));
+}
+
+.surface-strong {
+  background: oklch(var(--surface-strong));
 }
 
 .lesson-visual {
@@ -135,6 +166,48 @@ input:focus-visible {
     background: oklch(var(--teal) / 0.08);
     transform: translateY(-2px);
   }
+}
+
+.course-unit {
+  display: grid;
+  gap: 12px;
+  border: 1.5px solid oklch(var(--line));
+  background: oklch(var(--surface-strong) / 0.94);
+  border-radius: 24px;
+  padding: 16px;
+  transition: border-color 180ms, transform 180ms;
+}
+
+.course-unit:hover {
+  border-color: oklch(var(--ink) / 0.18);
+}
+
+.course-unit-index {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 2px solid oklch(var(--ink));
+  background: oklch(var(--paper));
+  font-weight: 800;
+  font-size: 14px;
+  flex: none;
+}
+
+.celebrate {
+  animation: celebrate-pop 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes celebrate-pop {
+  0% { transform: scale(0.96); opacity: 0.85; }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.lesson-visual:focus-visible {
+  outline: 3px solid oklch(var(--ring));
+  outline-offset: 3px;
 }
 
 @media (max-width: 767px) {
@@ -247,20 +320,28 @@ input:focus-visible {
 
 .lesson-guide-card {
   border: 1.5px solid oklch(var(--line));
-  background: oklch(99% 0.014 85 / 0.84);
+  background: oklch(var(--surface-strong) / 0.86);
   box-shadow: 0 1px 0 oklch(var(--ink) / 0.08);
+  transition: transform 180ms cubic-bezier(0.2, 0, 0, 1), border-color 180ms;
 }
 
 .lesson-guide-card-teal {
-  box-shadow: inset 4px 0 0 oklch(var(--teal)), 0 1px 0 oklch(var(--ink) / 0.08);
+  border-left: 3px solid oklch(var(--teal));
 }
 
 .lesson-guide-card-ember {
-  box-shadow: inset 4px 0 0 oklch(var(--ember)), 0 1px 0 oklch(var(--ink) / 0.08);
+  border-left: 3px solid oklch(var(--ember));
 }
 
 .lesson-guide-card-violet {
-  box-shadow: inset 4px 0 0 oklch(var(--violet)), 0 1px 0 oklch(var(--ink) / 0.08);
+  border-left: 3px solid oklch(var(--violet));
+}
+
+@media (hover: hover) {
+  .lesson-guide-card:hover {
+    transform: translateY(-2px);
+    border-color: oklch(var(--line) / 0.9);
+  }
 }
 
 .animated-lesson-diagram {

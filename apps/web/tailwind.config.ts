@@ -11,6 +11,8 @@ const config: Config = {
       colors: {
         paper: "oklch(var(--paper) / <alpha-value>)",
         "paper-deep": "oklch(var(--paper-deep) / <alpha-value>)",
+        surface: "oklch(var(--surface) / <alpha-value>)",
+        "surface-strong": "oklch(var(--surface-strong) / <alpha-value>)",
         ink: "oklch(var(--ink) / <alpha-value>)",
         muted: "oklch(var(--muted) / <alpha-value>)",
         line: "oklch(var(--line) / <alpha-value>)",

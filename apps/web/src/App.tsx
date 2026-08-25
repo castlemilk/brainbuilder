@@ -21,9 +21,7 @@ import {
   Trophy,
   UserPlus,
 } from "lucide-react";
-import { scaleLinear } from "d3-scale";
-import { Children, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type MouseEvent, type ReactNode } from "react";
-import * as THREE from "three";
+import { Children, Suspense, lazy, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type MouseEvent, type ReactNode } from "react";
 import {
   buildAlgorithmsDataStructuresCourse,
   computeCourseCoverage,
@@ -453,8 +451,9 @@ function App() {
 
   return (
     <div className="app-shell">
+      <a href="#main-content" className="skip-link">Skip to content</a>
       <SideNav active={activeNav} onNavigate={navigate} apiState={apiState} />
-      <main id="main-content" className="mx-auto flex min-h-0 w-full max-w-[1240px] flex-col gap-5 overflow-y-auto pb-2 lg:overflow-visible lg:pb-0">
+      <main id="main-content" tabIndex={-1} className="mx-auto flex min-h-0 w-full max-w-[1240px] flex-col gap-5 overflow-y-auto pb-2 focus-visible:outline-none lg:overflow-visible lg:pb-0">
         {routeContent}
       </main>
       <RightRail home={home} onNavigate={navigate} />
@@ -680,7 +679,7 @@ function SignInPage({ session, onComplete }: { session: LearnerSession | null; o
 
 function SideNav({ active, onNavigate, apiState }: { active: NavId; onNavigate: Navigate; apiState: ApiState }) {
   return (
-    <aside className="sticky top-5 hidden h-[calc(100dvh-40px)] flex-col justify-between rounded-[22px] border-2 border-ink bg-paper/80 p-4 shadow-sketch lg:flex">
+    <aside className="sticky top-5 hidden h-[calc(100dvh-40px)] flex-col justify-between rounded-[22px] border-2 border-ink bg-paper/80 p-4 shadow-sketch lg:flex" aria-label="Primary">
       <div>
         <RouteLink to="/" onNavigate={onNavigate} className="block whitespace-nowrap font-display text-lg font-bold leading-none text-teal">
           brainbuilder
@@ -890,13 +889,15 @@ function BrowsePage({
         </section>
       ) : null}
       <div className="soft-panel rounded-[24px] p-4 md:p-5">
-        <label className="flex min-h-12 items-center gap-2 rounded-2xl border-2 border-teal bg-paper px-3 text-muted focus-within:outline focus-within:outline-[3px] focus-within:outline-offset-[3px] focus-within:outline-[oklch(var(--ring))]">
+        <label htmlFor="browse-search" className="flex min-h-12 items-center gap-2 rounded-2xl border-2 border-teal bg-paper px-3 text-muted focus-within:outline focus-within:outline-[3px] focus-within:outline-offset-[3px] focus-within:outline-[oklch(var(--ring))]">
           <Search aria-hidden="true" size={20} />
           <span className="sr-only">Search all learning</span>
           <input
+            id="browse-search"
             type="search"
             value={query}
             onChange={(event) => onQueryChange(event.target.value)}
+            aria-label="Search all learning"
             className="min-h-11 min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-muted focus-visible:outline-none"
             placeholder='Search "trees", "finance", "Atomic Habits"...'
           />
@@ -1033,22 +1034,25 @@ function CoursePage({
   return (
     <section className="grid gap-5">
       <header className="rounded-[28px] border-2 border-ink bg-paper/95 p-5 shadow-sketch md:p-6">
-        <p className="text-sm font-bold uppercase text-teal">Course framework</p>
-        <h1 className="mt-1 font-display text-4xl font-bold leading-none md:text-6xl">{course.title}</h1>
-        <p className="mt-3 max-w-[72ch] text-sm leading-6 text-muted md:text-base">{course.subtitle}</p>
+        <p className="text-xs font-bold uppercase tracking-widest text-teal">Course framework</p>
+        <h1 className="mt-2 text-balance font-display text-4xl font-bold leading-[0.9] tracking-tight md:text-6xl">{course.title}</h1>
+        <p className="mt-3 max-w-[72ch] text-pretty text-sm leading-6 text-muted md:text-base">{course.subtitle}</p>
         <div className="mt-5 flex flex-wrap gap-2 text-sm font-bold">
           <span className="rounded-full border-2 border-teal bg-teal/10 px-3 py-1">{coverage.unitCount} units</span>
           <span className="rounded-full border-2 border-ember bg-ember/10 px-3 py-1">{coverage.lessonCount} micro lessons</span>
           <span className="rounded-full border-2 border-violet bg-violet/10 px-3 py-1">{coverage.blockCount} content blocks</span>
-          <span className="rounded-full border-2 border-ink bg-white/45 px-3 py-1">{coverage.assessmentCount} checks and labs</span>
+          <span className="rounded-full border-2 border-ink bg-[oklch(var(--surface))]/90 px-3 py-1">{coverage.assessmentCount} checks and labs</span>
         </div>
       </header>
-      <section className={`rounded-[24px] border-2 bg-paper/95 p-4 shadow-sketch md:p-5 ${complete ? "border-violet" : enrollment ? "border-teal" : "border-ember"}`}>
+      <section className={`rounded-[24px] border-2 bg-paper/95 p-4 shadow-sketch md:p-5 ${complete ? "border-violet" : enrollment ? "border-teal" : "border-ember"}`} aria-live="polite">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="min-w-0">
-            <p className={`text-sm font-bold uppercase ${complete ? "text-violet" : enrollment ? "text-teal" : "text-ember"}`}>Enrollment</p>
-            <h2 className="mt-1 font-display text-3xl font-bold">{complete ? "Course complete" : enrollment ? "Enrolled" : "Choose this learning path"}</h2>
+            <p className={`text-xs font-bold uppercase tracking-widest ${complete ? "text-violet" : enrollment ? "text-teal" : "text-ember"}`}>Enrollment</p>
+            <h2 className="mt-1 font-display text-3xl font-bold tracking-tight">{complete ? "Course complete" : enrollment ? "Enrolled" : "Choose this learning path"}</h2>
             <p className="mt-2 text-sm font-bold text-muted">{completedCount}/{lessons.length} lessons complete</p>
+            <div className="mt-3 h-2 w-full max-w-[280px] rounded-full bg-line/60" aria-hidden="true">
+              <div className="h-full rounded-full bg-teal transition-all duration-500" style={{ width: `${lessons.length ? (completedCount / lessons.length) * 100 : 0}%` }} />
+            </div>
           </div>
           <div className="flex flex-wrap gap-2">
             {!enrollment ? (
@@ -1063,48 +1067,52 @@ function CoursePage({
             ) : null}
           </div>
         </div>
-        {complete ? <p className="mt-3 rounded-2xl border border-violet bg-violet/10 px-3 py-2 text-sm font-bold text-violet">Certificate ready</p> : null}
+        {complete ? <p className="celebrate mt-3 rounded-2xl border border-violet bg-violet/10 px-3 py-2 text-sm font-bold text-violet">Certificate ready — nice work. 🎉</p> : null}
       </section>
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(290px,360px)]">
-        <section className="grid gap-4">
+        <section className="grid gap-3" aria-label="Course units">
           {course.units.map((unit, unitIndex) => (
-            <article key={unit.id} className="rounded-[26px] border-2 border-ink bg-paper/95 p-4 shadow-sketch">
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div>
-                  <p className="text-sm font-bold uppercase text-violet">Unit {unitIndex + 1}</p>
-                  <h2 className="font-display text-3xl font-bold">{unit.title}</h2>
-                  <p className="mt-1 text-sm leading-6 text-muted">{unit.summary}</p>
+            <article key={unit.id} className="course-unit">
+              <div className="flex gap-3">
+                <span className="course-unit-index" aria-hidden="true">{unitIndex + 1}</span>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs font-bold uppercase tracking-widest text-violet">Unit {unitIndex + 1} · {unit.lessons.length} lessons</p>
+                  <h2 className="mt-1 text-balance font-display text-2xl font-bold leading-tight md:text-[1.7rem]">{unit.title}</h2>
+                  <p className="mt-1 max-w-[60ch] text-pretty text-sm leading-5 text-muted">{unit.summary}</p>
+                  <div className="mt-3 grid gap-2 md:grid-cols-2">
+                    {unit.lessons.map((lessonItem) => {
+                      const done = Boolean(enrollment?.completedLessons[lessonItem.id]);
+                      return (
+                        <RouteLink key={lessonItem.id} to={`/courses/${course.id}/lessons/${lessonItem.id}`} onNavigate={onNavigate} className={`group flex items-center gap-2 rounded-2xl border px-3 py-2.5 text-sm font-bold transition ${done ? "border-teal/30 bg-teal/10 text-teal" : "border-line bg-[oklch(var(--surface))]/80 hover:border-teal hover:bg-teal/10"}`}>
+                          <span className={`grid size-6 place-items-center rounded-full border text-xs ${done ? "border-teal bg-teal text-white" : "border-line bg-white text-muted group-hover:border-teal/40"}`}>{done ? <Check size={12} aria-hidden="true" /> : unitIndex + 1}</span>
+                          <span className="min-w-0 truncate">{lessonItem.title}</span>
+                        </RouteLink>
+                      );
+                    })}
+                  </div>
                 </div>
-                <span className="rounded-full border border-line bg-white/50 px-3 py-1 text-sm font-bold">{unit.lessons.length} lessons</span>
-              </div>
-              <div className="mt-4 grid gap-2 md:grid-cols-3">
-                {unit.lessons.map((lessonItem) => (
-                  <RouteLink key={lessonItem.id} to={`/courses/${course.id}/lessons/${lessonItem.id}`} onNavigate={onNavigate} className="rounded-2xl border border-line bg-white/45 p-3 text-sm font-bold hover:border-teal hover:bg-teal/10">
-                    {lessonItem.title}
-                  </RouteLink>
-                ))}
               </div>
             </article>
           ))}
         </section>
         <aside className="grid content-start gap-4">
-          <section className="rounded-[24px] border-2 border-teal bg-paper/95 p-4 shadow-sketch">
-            <h2 className="font-display text-3xl font-bold">Renderer kit</h2>
-            <p className="mt-1 text-sm text-muted">Course blocks declare renderer families with fallbacks for web, native, and reduced-motion surfaces.</p>
+          <section className="soft-panel rounded-[24px] p-4">
+            <h2 className="font-display text-xl font-bold tracking-tight">Renderer kit</h2>
+            <p className="mt-1 text-sm leading-5 text-muted">Blocks declare families with fallbacks for web, native & reduced-motion.</p>
             <div className="mt-4 grid gap-2">
               {course.rendererCapabilities.map((renderer) => (
-                <div key={renderer.family} className="rounded-2xl border border-line bg-white/45 p-3">
-                  <p className="font-bold">{renderer.family}</p>
-                  <p className="text-sm text-muted">{renderer.component}</p>
+                <div key={renderer.family} className="rounded-2xl border border-line bg-[oklch(var(--surface))]/80 px-3 py-2.5">
+                  <p className="text-sm font-bold">{renderer.family}</p>
+                  <p className="text-xs text-muted">{renderer.component}</p>
                 </div>
               ))}
             </div>
           </section>
-          <section className="rounded-[24px] border-2 border-ember bg-paper/95 p-4 shadow-sketch">
-            <h2 className="font-display text-3xl font-bold">Coverage</h2>
-            <div className="mt-3 flex flex-wrap gap-2">
+          <section className="soft-panel rounded-[24px] p-4">
+            <h2 className="font-display text-xl font-bold tracking-tight">Coverage</h2>
+            <div className="mt-3 flex flex-wrap gap-1.5">
               {coverage.blockKinds.map((kind) => (
-                <span key={kind} className="rounded-full border border-line bg-white/50 px-3 py-1 text-sm font-bold">{kind}</span>
+                <span key={kind} className="rounded-full border border-line bg-white/60 px-2.5 py-1 text-xs font-bold">{kind}</span>
               ))}
             </div>
           </section>
@@ -1169,19 +1177,19 @@ function CourseLessonPage({
       <header className="lesson-hero min-w-0 rounded-[28px] border-2 border-ink bg-paper/95 p-4 shadow-sketch md:p-5">
         <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_auto] xl:items-end">
           <div>
-            <p className="text-sm font-bold uppercase text-teal">Course lesson</p>
-            <h1 className="mt-1 text-wrap break-words font-display text-4xl font-bold leading-none md:text-5xl">{selectedLesson.title}</h1>
-            <p className="mt-2 max-w-[72ch] text-sm leading-6 text-muted md:text-base">{selectedLesson.summary}</p>
-            <div className="lesson-outcome-strip mt-3 flex flex-wrap gap-2">
+            <p className="text-xs font-bold uppercase tracking-widest text-teal">Course lesson · {lessonIndex + 1} of {lessons.length}</p>
+            <h1 className="mt-2 text-balance break-words font-display text-4xl font-bold leading-[0.95] tracking-tight md:text-5xl">{selectedLesson.title}</h1>
+            <p className="mt-3 max-w-[68ch] text-pretty text-sm leading-6 text-muted md:text-[15px]">{selectedLesson.summary}</p>
+            <div className="lesson-outcome-strip mt-3 flex flex-wrap gap-1.5">
               {selectedLesson.outcomes.map((outcome) => (
-                <span key={outcome} className="rounded-full border border-line bg-white/50 px-3 py-1 text-sm font-bold">{outcome}</span>
+                <span key={outcome} className="rounded-full border border-line bg-[oklch(var(--surface))]/90 px-2.5 py-1 text-xs font-bold">{outcome}</span>
               ))}
             </div>
           </div>
-          <div className="lesson-progress-card min-w-0 rounded-[20px] border-2 border-ink bg-white/55 p-3 text-sm font-bold shadow-[3px_4px_0_oklch(var(--ink)/0.1)]">
-            <p className={`uppercase ${courseComplete ? "text-violet" : enrollment ? "text-teal" : "text-ember"}`}>{courseComplete ? "Completed" : enrollment ? "Enrolled" : "Track to save progress"}</p>
-            <p className="mt-1 text-2xl font-black">{completedCount}/{lessons.length}</p>
-            <p className="text-muted">{completedCount}/{lessons.length} lessons complete</p>
+          <div className="lesson-progress-card min-w-0 rounded-[20px] border-2 border-ink bg-[oklch(var(--surface))]/90 p-3 text-sm font-bold shadow-[3px_4px_0_oklch(var(--ink)/0.1)]">
+            <p className={`text-xs uppercase tracking-widest ${courseComplete ? "text-violet" : enrollment ? "text-teal" : "text-ember"}`}>{courseComplete ? "Completed" : enrollment ? "Enrolled" : "Track to save progress"}</p>
+            <p className="mt-1 text-2xl font-black tracking-tight">{completedCount}/{lessons.length}</p>
+            <p className="text-xs text-muted">{Math.round(lessons.length ? (completedCount / lessons.length) * 100 : 0)}% · {completedCount}/{lessons.length} lessons complete</p>
           </div>
         </div>
       </header>
@@ -1332,30 +1340,30 @@ function LessonTeachingContent({ lesson, ariaLabel = "Lesson teaching notes" }: 
     <section className="lesson-flow-board min-w-0 rounded-[26px] p-4 md:p-5" aria-label={ariaLabel}>
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-sm font-bold uppercase text-teal">Predict, watch, try, explain</p>
-          <h2 className="mt-1 text-wrap-balance font-display text-3xl font-bold">Learning loop</h2>
+          <p className="text-xs font-bold uppercase tracking-widest text-teal">Predict, watch, try, explain</p>
+          <h2 className="mt-1 text-balance font-display text-3xl font-bold tracking-tight">Learning loop</h2>
         </div>
-        <span className="rounded-full border border-line bg-white/70 px-3 py-1 text-sm font-bold text-muted">{lesson.estimatedMinutes} min</span>
+        <span className="rounded-full border border-line bg-[oklch(var(--surface))]/80 px-3 py-1 text-xs font-bold text-muted">{lesson.estimatedMinutes} min · {lesson.blocks.length} steps</span>
       </div>
-      <div className="mt-4 grid gap-2 md:grid-cols-2 xl:grid-cols-3" aria-label="Lesson flow">
+      <div className="mt-4 grid gap-2 md:grid-cols-2 xl:grid-cols-4" aria-label="Lesson flow">
         {blockFlow.map((step) => (
-          <a key={step.id} href={`#${step.id}`} className="lesson-flow-step rounded-2xl border border-line bg-white/60 px-3 py-2 text-sm font-bold text-ink">
-            <span className="block text-xs uppercase text-muted">Step {step.index} · {step.label}</span>
-            <span className="block truncate">{step.title}</span>
+          <a key={step.id} href={`#${step.id}`} className="lesson-flow-step rounded-2xl border border-line bg-[oklch(var(--surface))]/70 px-3 py-2 text-sm font-bold text-ink hover:border-teal/30">
+            <span className="block text-[11px] uppercase tracking-wide text-muted">Step {step.index} · {step.label}</span>
+            <span className="block truncate text-[13px]">{step.title}</span>
           </a>
         ))}
       </div>
       <div className="lesson-guide-grid mt-4 grid min-w-0 grid-cols-[minmax(0,1fr)] gap-3 md:grid-cols-2">
         {sections.map((section, index) => (
-          <article key={section.title} className={`algorithm-teaching-card lesson-guide-card min-w-0 rounded-[22px] p-4 ${section.tone === "ember" ? "lesson-guide-card-ember" : section.tone === "violet" ? "lesson-guide-card-violet" : "lesson-guide-card-teal"}`} style={{ "--i": index } as CSSProperties}>
-            <p className={`text-xs font-bold uppercase ${section.tone === "ember" ? "text-ember" : section.tone === "violet" ? "text-violet" : "text-teal"}`}>{section.kicker}</p>
-            <h3 className="mt-1 text-wrap-balance font-display text-2xl font-bold">{section.title}</h3>
-            <p className="mt-2 text-pretty text-sm leading-6 text-muted">{section.body}</p>
+          <article key={section.title} className={`algorithm-teaching-card lesson-guide-card min-w-0 rounded-[22px] p-4 ${section.tone === "ember" ? "lesson-guide-card-ember" : section.tone === "violet" ? "lesson-guide-card-violet" : "lesson-guide-card-teal"} ${index === 0 ? "md:col-span-2" : ""}`} style={{ "--i": index } as CSSProperties}>
+            <p className={`text-[11px] font-bold uppercase tracking-widest ${section.tone === "ember" ? "text-ember" : section.tone === "violet" ? "text-violet" : "text-teal"}`}>{section.kicker}</p>
+            <h3 className="mt-1 text-balance font-display text-xl font-bold leading-tight">{section.title}</h3>
+            <p className="mt-2 text-pretty text-[13px] leading-5 text-muted">{section.body}</p>
           </article>
         ))}
       </div>
-      <div className="lesson-explain-back mt-4 rounded-[20px] border-2 border-ink bg-white/65 p-4 shadow-[3px_4px_0_oklch(var(--ink)/0.1)]">
-        <p className="text-xs font-bold uppercase text-violet">Explain it back</p>
+      <div className="lesson-explain-back mt-4 rounded-[20px] border-2 border-ink bg-[oklch(var(--surface))]/80 p-4 shadow-[3px_4px_0_oklch(var(--ink)/0.1)]">
+        <p className="text-[11px] font-bold uppercase tracking-widest text-violet">Explain it back</p>
         <p className="mt-1 text-pretty text-sm font-bold leading-6 text-ink">{guide.explainBack}</p>
       </div>
     </section>
@@ -1415,20 +1423,20 @@ function CourseBlockView({
 }) {
   if (block.kind === "text") {
     return (
-      <article id={block.id} className="scroll-mt-5 rounded-[24px] border-2 border-ink bg-paper/95 p-4 shadow-sketch">
-        <p className="text-sm font-bold uppercase text-teal">Read</p>
-        <h2 className="font-display text-3xl font-bold">{block.title}</h2>
-        {block.body.map((paragraph) => <p key={paragraph} className="mt-2 text-sm leading-6 text-muted">{paragraph}</p>)}
+      <article id={block.id} className="scroll-mt-5 rounded-[24px] border border-line bg-[oklch(var(--surface-strong))]/90 p-4">
+        <p className="text-xs font-bold uppercase tracking-widest text-teal">Read</p>
+        <h2 className="mt-1 font-display text-xl font-bold tracking-tight">{block.title}</h2>
+        {block.body.map((paragraph) => <p key={paragraph} className="mt-2 text-pretty text-sm leading-6 text-muted">{paragraph}</p>)}
       </article>
     );
   }
   if (block.kind === "audio") {
     return (
-      <article id={block.id} className="scroll-mt-5 rounded-[24px] border-2 border-ember bg-paper/95 p-4 shadow-sketch">
-        <p className="text-sm font-bold uppercase text-ember">Listen</p>
-        <h2 className="font-display text-3xl font-bold">{block.title}</h2>
-        <p className="mt-2 text-sm text-muted">{block.durationSeconds}s brief</p>
-        <p className="mt-3 text-sm leading-6 text-muted">{block.script}</p>
+      <article id={block.id} className="scroll-mt-5 rounded-[24px] border border-line bg-[oklch(var(--surface-strong))]/90 p-4">
+        <p className="text-xs font-bold uppercase tracking-widest text-ember">Listen</p>
+        <h2 className="mt-1 font-display text-xl font-bold tracking-tight">{block.title}</h2>
+        <p className="mt-2 text-xs font-bold text-muted">{block.durationSeconds}s brief</p>
+        <p className="mt-3 text-pretty text-sm leading-6 text-muted">{block.script}</p>
       </article>
     );
   }
@@ -1451,10 +1459,10 @@ function CourseBlockView({
     return <ProjectStage block={block} />;
   }
   return (
-    <article id={block.id} className="scroll-mt-5 rounded-[24px] border-2 border-ink bg-paper/95 p-4 shadow-sketch">
-      <p className="text-sm font-bold uppercase text-teal">Reflect</p>
-      <h2 className="font-display text-3xl font-bold">{block.title}</h2>
-      <p className="mt-2 text-sm leading-6 text-muted">{block.prompt}</p>
+    <article id={block.id} className="scroll-mt-5 rounded-[24px] border border-line bg-[oklch(var(--surface-strong))]/90 p-4">
+      <p className="text-xs font-bold uppercase tracking-widest text-teal">Reflect</p>
+      <h2 className="mt-1 font-display text-xl font-bold tracking-tight">{block.title}</h2>
+      <p className="mt-2 text-pretty text-sm leading-6 text-muted">{block.prompt}</p>
     </article>
   );
 }
@@ -1484,7 +1492,10 @@ function D3BinarySearchWindow({ block }: { block: DiagramBlock }) {
   ];
   const clampedStep = Math.min(step, windows.length - 1);
   const [lo, hi] = windows[clampedStep] ?? [0, values.length - 1];
-  const x = scaleLinear().domain([0, values.length - 1]).range([54, 366]);
+  const x = useMemo(() => {
+    const span = Math.max(values.length - 1, 1);
+    return (index: number) => 54 + (index / span) * (366 - 54);
+  }, [values.length]);
   const traceSteps = [
     { label: "Predict", note: "Start with all seven values in the active window." },
     { label: "Compare", note: "Compare mid value 16. Since 20 is larger, everything left of 16 can be discarded." },
@@ -1681,42 +1692,57 @@ function SimulationBlockView({ block }: { block: SimulationBlock }) {
 function ThreeTreeRotation({ block }: { block: SimulationBlock }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [rotationStep, setRotationStep] = useState(0);
+  const [threeReady, setThreeReady] = useState(false);
 
   useEffect(() => {
+    let cancelled = false;
+    let renderer: import("three").WebGLRenderer | null = null;
     const canvas = canvasRef.current;
     if (!canvas || typeof window.WebGLRenderingContext === "undefined") {
       return;
     }
 
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    const width = Math.max(canvas.clientWidth, 320);
-    const height = Math.max(canvas.clientHeight, 260);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(width, height, false);
+    import("three")
+      .then((THREE) => {
+        if (cancelled || !canvas) return;
+        renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        const width = Math.max(canvas.clientWidth, 320);
+        const height = Math.max(canvas.clientHeight, 260);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(width, height, false);
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 100);
-    camera.position.set(0, 1.2, 6);
-    scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 100);
+        camera.position.set(0, 1.2, 6);
+        scene.add(new THREE.AmbientLight(0xffffff, 1.2));
 
-    const group = new THREE.Group();
-    const material = new THREE.MeshNormalMaterial();
-    const nodes = [
-      [-1.6, 0.2, 0],
-      [0, 1.2, 0],
-      [1.6, 0.2, 0],
-      [0.8, -1, 0]
-    ];
-    for (const [xPos, yPos, zPos] of nodes) {
-      const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.34, 24, 16), material);
-      sphere.position.set(xPos, yPos, zPos);
-      group.add(sphere);
-    }
-    group.rotation.z = rotationStep * 0.32;
-    scene.add(group);
+        const group = new THREE.Group();
+        const material = new THREE.MeshNormalMaterial();
+        const nodes = [
+          [-1.6, 0.2, 0],
+          [0, 1.2, 0],
+          [1.6, 0.2, 0],
+          [0.8, -1, 0]
+        ];
+        for (const [xPos, yPos, zPos] of nodes) {
+          const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.34, 24, 16), material);
+          sphere.position.set(xPos, yPos, zPos);
+          group.add(sphere);
+        }
+        group.rotation.z = rotationStep * 0.32;
+        scene.add(group);
 
-    renderer.render(scene, camera);
-    return () => renderer.dispose();
+        renderer.render(scene, camera);
+        setThreeReady(true);
+      })
+      .catch(() => {
+        if (!cancelled) setThreeReady(false);
+      });
+
+    return () => {
+      cancelled = true;
+      renderer?.dispose();
+    };
   }, [rotationStep]);
 
   return (
@@ -1760,8 +1786,8 @@ function CourseQuizBlock({ block, result, onAnswer }: { block: QuizBlock; result
 
   return (
     <article id={block.id} className="scroll-mt-5 rounded-[24px] border-2 border-ember bg-paper/95 p-4 shadow-sketch">
-      <p className="text-sm font-bold uppercase text-ember">Check</p>
-      <h2 className="font-display text-3xl font-bold">{block.question}</h2>
+      <p className="text-xs font-bold uppercase tracking-widest text-ember">Check · {block.xp} XP</p>
+      <h2 className="mt-1 font-display text-2xl font-bold leading-tight tracking-tight">{block.question}</h2>
       <div className="mt-4 grid gap-2 md:grid-cols-3">
         {block.options.map((option) => (
           <button
@@ -1772,14 +1798,14 @@ function CourseQuizBlock({ block, result, onAnswer }: { block: QuizBlock; result
               setSelectedOptionId(option.id);
               onAnswer(block.id, option.id);
             }}
-            className={`rounded-2xl border-2 border-ink px-3 py-2 text-left text-sm font-bold hover:bg-ember hover:text-white ${selectedOptionId === option.id ? "bg-ember text-white" : "bg-paper"}`}
+            className={`min-h-11 rounded-2xl border-2 border-ink px-3 py-2 text-left text-sm font-bold transition hover:-translate-y-0.5 hover:bg-ember hover:text-white ${selectedOptionId === option.id ? "bg-ember text-white" : "bg-paper"}`}
           >
             {option.label}
           </button>
         ))}
       </div>
-      <p className={`mt-3 rounded-2xl border-2 p-3 text-sm font-bold ${result?.correct ? "border-teal bg-teal/10 text-teal" : "border-line bg-white/45 text-muted"}`}>
-        {result ? result.feedback : `Worth ${block.xp} XP`}
+      <p aria-live="polite" className={`mt-3 rounded-2xl border-2 p-3 text-sm font-bold ${result?.correct ? "celebrate border-teal bg-teal/10 text-teal" : result ? "border-ember/30 bg-ember/10 text-ember" : "border-line bg-[oklch(var(--surface))]/80 text-muted"}`}>
+        {result ? result.feedback : `Worth ${block.xp} XP — pick the strongest answer.`}
       </p>
     </article>
   );
@@ -1862,22 +1888,26 @@ function CodingLabView({ block, onSolved }: { block: Extract<CourseBlock, { kind
     <article id={block.id} className="scroll-mt-5 rounded-[24px] border-2 border-ember bg-paper/95 p-4 shadow-sketch">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-sm font-bold uppercase text-ember">Coding lab</p>
-          <h2 className="font-display text-3xl font-bold">{block.title}</h2>
+          <p className="text-xs font-bold uppercase tracking-widest text-ember">Coding lab · {testCases.length} tests</p>
+          <h2 className="mt-1 font-display text-2xl font-bold leading-tight tracking-tight">{block.title}</h2>
         </div>
-        <span className="rounded-full border border-line bg-white/55 px-3 py-1 text-sm font-bold">{block.xp} XP</span>
+        <span className="rounded-full border border-line bg-[oklch(var(--surface))]/80 px-3 py-1 text-xs font-bold">{block.xp} XP</span>
       </div>
-      <p className="mt-2 text-sm leading-6 text-muted">{block.task}</p>
+      <p className="mt-2 text-pretty text-sm leading-6 text-muted">{block.task}</p>
       <label className="mt-3 block">
         <span className="sr-only">Code editor for {block.title ? block.title : block.id}</span>
         <textarea
+          id={`${block.id}-editor`}
           value={code}
           onChange={(event) => setCode(event.target.value)}
           spellCheck={false}
           aria-label={`Code editor for ${block.title}`}
-          className="code-editor code-surface min-h-[240px] w-full rounded-2xl border-2 border-ink p-3 font-mono outline-none"
+          aria-describedby={`${block.id}-hint`}
+          rows={10}
+          className="code-editor code-surface min-h-[240px] w-full rounded-2xl border-2 border-ink p-3 font-mono text-[13px] leading-5 outline-none"
         />
       </label>
+      <p id={`${block.id}-hint`} className="mt-1 text-xs text-muted">Edit the function, then run the tests. Tests compare JSON.stringify output.</p>
       <div className="mt-3 flex flex-wrap gap-2">
         <button type="button" onClick={runCode} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-ink bg-ember px-5 text-sm font-bold text-white transition-transform active:scale-[0.96]">
           Run tests
@@ -1887,25 +1917,25 @@ function CodingLabView({ block, onSolved }: { block: Extract<CourseBlock, { kind
         </button>
       </div>
       {error ? (
-        <p className="mt-3 rounded-2xl border border-ember bg-ember/10 px-3 py-2 text-sm font-bold text-ember">{error}</p>
+        <p role="alert" className="mt-3 rounded-2xl border border-ember bg-ember/10 px-3 py-2 text-sm font-bold text-ember">{error}</p>
       ) : null}
       {results ? (
-        <div className="mt-3 grid gap-2">
+        <div className="mt-3 grid gap-2" aria-live="polite">
           {results.map((outcome, index) => (
             <div key={index} className={`rounded-2xl border px-3 py-2 text-sm font-bold ${outcome.pass ? "border-teal bg-teal/10 text-teal" : "border-ember bg-ember/10 text-ember"}`}>
               <div className="flex items-center justify-between gap-3">
                 <span>Test case {index + 1}</span>
-                <span>{outcome.pass ? "Pass" : "Fail"}</span>
+                <span>{outcome.pass ? "Pass ✓" : "Fail"}</span>
               </div>
-              <p className="mt-1 font-normal text-muted">args: {formatValue(outcome.args)}</p>
-              <p className="font-normal text-muted">expected: {formatValue(outcome.expected)}</p>
-              <p className="font-normal text-muted">got: {outcome.error ? outcome.error : formatValue(outcome.actual)}</p>
+              <p className="mt-1 font-mono text-xs font-normal text-muted">args: {formatValue(outcome.args)}</p>
+              <p className="font-mono text-xs font-normal text-muted">expected: {formatValue(outcome.expected)}</p>
+              <p className="font-mono text-xs font-normal text-muted">got: {outcome.error ? outcome.error : formatValue(outcome.actual)}</p>
             </div>
           ))}
         </div>
       ) : null}
       {solved ? (
-        <p className="mt-3 rounded-2xl border-2 border-teal bg-teal/10 px-3 py-2 text-sm font-bold text-teal">Solved — you earned {block.xp} XP for this lab.</p>
+        <p aria-live="polite" className="celebrate mt-3 rounded-2xl border-2 border-teal bg-teal/10 px-3 py-2 text-sm font-bold text-teal">Solved ✓ — you earned {block.xp} XP for this lab. 🎉</p>
       ) : null}
     </article>
   );
@@ -3322,9 +3352,9 @@ function BottomNav({ active, onNavigate }: { active: NavId; onNavigate: Navigate
         const Icon = item.icon;
         const selected = active === item.id;
         return (
-          <button key={item.id} type="button" onClick={() => onNavigate(item.path)} className={`grid min-h-14 min-w-0 place-items-center rounded-2xl px-1 text-[0.68rem] font-bold sm:text-xs ${selected ? "bg-teal text-white" : "text-muted"}`} aria-label={`${item.label} tab`} aria-pressed={selected}>
+          <button key={item.id} type="button" onClick={() => onNavigate(item.path)} className={`grid min-h-14 min-w-0 place-items-center gap-0.5 rounded-2xl px-1 text-xs font-bold leading-none ${selected ? "bg-teal text-white" : "text-muted hover:text-ink"}`} aria-label={`${item.label} tab`} aria-current={selected ? "page" : undefined}>
             <Icon aria-hidden="true" size={20} />
-            {item.label}
+            <span className="truncate">{item.label}</span>
           </button>
         );
       })}
@@ -3335,9 +3365,9 @@ function BottomNav({ active, onNavigate }: { active: NavId; onNavigate: Navigate
 function PageIntro({ eyebrow, title, copy }: { eyebrow: string; title: string; copy: string }) {
   return (
     <header className="rounded-[28px] border-2 border-ink bg-paper/95 p-5 shadow-sketch md:p-6">
-      <p className="text-sm font-bold uppercase text-teal">{eyebrow}</p>
-      <h1 className="mt-1 font-display text-4xl font-bold leading-none md:text-5xl">{title}</h1>
-      <p className="mt-3 max-w-[68ch] text-sm leading-6 text-muted md:text-base">{copy}</p>
+      <p className="text-xs font-bold uppercase tracking-widest text-teal">{eyebrow}</p>
+      <h1 className="mt-2 text-balance font-display text-4xl font-bold leading-[0.9] tracking-tight md:text-5xl">{title}</h1>
+      <p className="mt-3 max-w-[66ch] text-pretty text-sm leading-6 text-muted md:text-[15px]">{copy}</p>
     </header>
   );
 }
