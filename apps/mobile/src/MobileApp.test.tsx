@@ -231,13 +231,15 @@ describe("Brainbuilder mobile app", () => {
   });
 
   it("renders the shared algorithms course on the native browse surface", async () => {
+    const course = buildAlgorithmsDataStructuresCourse();
+    const lessonCount = course.units.flatMap((unit) => unit.lessons).length;
     const app = await render(<MobileApp />);
 
     await fireEvent.press(app.getByLabelText("Browse tab"));
 
     expect(app.getByText(/algorithms & data structures/i)).toBeTruthy();
-    expect(app.getByText(/8 units/i)).toBeTruthy();
-    expect(app.getByText(/24 micro lessons/i)).toBeTruthy();
+    expect(app.getByText(`${course.units.length} units`)).toBeTruthy();
+    expect(app.getByText(`${lessonCount} micro lessons`)).toBeTruthy();
     expect(app.getByText(/^skia$/i)).toBeTruthy();
     expect(app.getByText(/^three$/i)).toBeTruthy();
 
@@ -376,6 +378,7 @@ describe("Brainbuilder mobile app", () => {
   });
 
   it("supports the native new learner, enrollment, lesson progress, and completion flow", async () => {
+    const lessonCount = buildAlgorithmsDataStructuresCourse().units.flatMap((unit) => unit.lessons).length;
     const app = await render(<MobileApp />);
 
     expect(app.getByText(/build your learning plan/i)).toBeTruthy();
@@ -392,12 +395,12 @@ describe("Brainbuilder mobile app", () => {
     await waitFor(() => expect(app.getByText(/course framework/i)).toBeTruthy());
     await fireEvent.press(app.getByText("Enroll in course"));
     await waitFor(() => expect(app.getByText(/enrolled/i)).toBeTruthy());
-    expect(app.getByText(/0\/24 lessons complete/i)).toBeTruthy();
+    expect(app.getByText(`0/${lessonCount} lessons complete`)).toBeTruthy();
 
     await fireEvent.press(app.getAllByText("Name the invariant and preserve it")[0]);
     await fireEvent.press(app.getByText("Complete lesson"));
     await waitFor(() => expect(app.getByText(/lesson complete/i)).toBeTruthy());
-    expect(app.getByText(/1\/24 lessons complete/i)).toBeTruthy();
+    expect(app.getByText(`1/${lessonCount} lessons complete`)).toBeTruthy();
 
     await fireEvent.press(app.getByText("Capstone Arcade"));
     await fireEvent.press(app.getAllByText("Next native stage")[0]);
@@ -406,7 +409,7 @@ describe("Brainbuilder mobile app", () => {
     await waitFor(() => expect(app.getByText(/course complete/i)).toBeTruthy());
 
     await fireEvent.press(app.getByLabelText("You tab"));
-    expect(app.getByText(/24\/24 lessons complete/i)).toBeTruthy();
+    expect(app.getByText(`${lessonCount}/${lessonCount} lessons complete`)).toBeTruthy();
     expect(app.getByText(/certificate ready/i)).toBeTruthy();
   });
 });
