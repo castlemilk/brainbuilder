@@ -1,0 +1,55 @@
+name: Application CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: application-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  application-checks:
+    name: Application checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      CI: "true"
+      GOMAXPROCS: "2"
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: npm
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: backend/go.mod
+          cache-dependency-path: backend/go.sum
+
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-audit --fund=false
+
+      # Omit --if-present: every workspace must keep its regression/type gates.
+      - name: Web, mobile and shared-library regressions
+        run: npm run test --workspaces
+
+      - name: Typecheck every workspace
+        run: npm run typecheck --workspaces
+
+      - name: Build shared libraries and production web app
+        run: npm run build --workspace packages/learning-model --workspace packages/courseware --workspace apps/web
+
+      - name: Go backend vet and tests
+        working-directory: backend
+        run: |
+          go vet ./...
+          go test -count=1 ./...
