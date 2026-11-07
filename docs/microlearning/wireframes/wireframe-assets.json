@@ -1,0 +1,25 @@
+{
+  "as_of": "2026-11-07",
+  "gallery_url": "https://chatgpt.com/space/page_3d75c8071e8c8191852a5f5d33d75c1b",
+  "repository_binary_status": "Not included in this publication; original images saved as Space attachments.",
+  "images": [
+    {
+      "filename": "01-learn-in-the-gaps.png",
+      "bytes": 1830331,
+      "git_blob_sha": "74924a402d8e6b02a9dd00bcdbfa0095fa149f72",
+      "sha256": "89bdf1d7be1eedfcec3b7d65c66031a09011d2775493fc4614d21af6b3fd0f80"
+    },
+    {
+      "filename": "02-a-lesson-that-travels.png",
+      "bytes": 2084797,
+      "git_blob_sha": "26d19fc8ce08fce0a02a5b66fff2854a866e4c0a",
+      "sha256": "a1ce25fca770adfa031b86ca069b9ae1eb151a2ea004c6d6d6984f793259e8fb"
+    },
+    {
+      "filename": "03-build-knowledge-that-stays.png",
+      "bytes": 2159884,
+      "git_blob_sha": "bb26e69eb3792b1158559d73d16785cf7d2a772f",
+      "sha256": "997e56d03bd2f03ef32f57dd9f88e745522d493fde8ac0768204cb5931d23003"
+    }
+  ]
+}

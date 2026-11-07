@@ -1,0 +1,204 @@
+{
+  "scan_date": "2026-11-07",
+  "purpose": "Exploratory demand discovery for continuous on-the-go learning in Brainbuilder",
+  "query_count": 16,
+  "query_batches": 5,
+  "query_results_total": null,
+  "query_results_total_note": "Search result totals were not exposed consistently or counted; no universe/completeness claim.",
+  "selected_records": 12,
+  "distinct_source_threads_or_pages": 12,
+  "source_type_counts": {
+    "reddit": 9,
+    "product_forum": 2,
+    "app_store_review": 1
+  },
+  "full_text_records": 10,
+  "snippet_only_records": 2,
+  "selection": "Prefer first-person needs, attempted workarounds, reported purchase behavior and disconfirmation. Exclude maker pitches, duplicated cross-posts and product recommendations as independent demand evidence.",
+  "limits": [
+    "Convenience sample, not a representative survey or an exhaustive crawl.",
+    "Primary testimony is self-reported; author identity, purchases and learning outcomes are not independently verified.",
+    "Two sources could only be inspected through search extracts; retained as unreviewed low-quality leads.",
+    "Search content may be stale and relative dates can disagree with explicit indexed dates.",
+    "Most evidence is from English-language Reddit; bias toward active online learners.",
+    "No outreach, posting, private-profile access, authenticated scraping or paid study was performed.",
+    "No market-size, prevalence, conversion-rate or optimal-price estimate can be inferred from this seed."
+  ],
+  "queries": [
+    {
+      "sequence": 1,
+      "engine": "system2",
+      "query": "site:reddit.com microlearning app remember learning scrolling Headway Imprint"
+    },
+    {
+      "sequence": 2,
+      "engine": "system2",
+      "query": "site:reddit.com learning commute audio podcast remember learn"
+    },
+    {
+      "sequence": 3,
+      "engine": "system2",
+      "query": "site:reddit.com microlearning app own content spaced repetition"
+    },
+    {
+      "sequence": 4,
+      "engine": "system1",
+      "query": "site:reddit.com \"Imprint\" \"worth\" \"learn\"",
+      "recency_days": 730
+    },
+    {
+      "sequence": 5,
+      "engine": "system1",
+      "query": "site:reddit.com \"podcasts\" \"remember\" \"commute\"",
+      "recency_days": 730
+    },
+    {
+      "sequence": 6,
+      "engine": "system1",
+      "query": "site:reddit.com \"microlearning\" \"scrolling\" -site:reddit.com/r/SideProject -site:reddit.com/r/promoteMyApp -site:reddit.com/r/SaaS",
+      "recency_days": 730
+    },
+    {
+      "sequence": 7,
+      "engine": "system2",
+      "query": "site:reddit.com/r/Anki \"commute\" \"audio\""
+    },
+    {
+      "sequence": 8,
+      "engine": "system2",
+      "query": "site:reddit.com \"remember\" \"Blinkist\" \"actually\""
+    },
+    {
+      "sequence": 9,
+      "engine": "system2",
+      "query": "site:reddit.com \"spaced repetition\" \"own notes\" \"looking\""
+    },
+    {
+      "sequence": 10,
+      "engine": "system2",
+      "query": "site:reddit.com \"Duolingo\" \"streak\" \"quit\" \"learning\""
+    },
+    {
+      "sequence": 11,
+      "engine": "system1",
+      "query": "site:reddit.com \"Blinkist\" \"remember\" \"summaries\""
+    },
+    {
+      "sequence": 12,
+      "engine": "system1",
+      "query": "site:reddit.com \"own notes\" \"spaced repetition\" \"app\" -site:reddit.com/r/SideProject -site:reddit.com/r/SaaS"
+    },
+    {
+      "sequence": 13,
+      "engine": "system1",
+      "query": "site:reddit.com \"doomscrolling\" \"learning app\" -site:reddit.com/r/SideProject -site:reddit.com/r/SaaS"
+    },
+    {
+      "sequence": 14,
+      "engine": "system1",
+      "query": "site:forums.ankiweb.net hands free audio walking"
+    },
+    {
+      "sequence": 15,
+      "engine": "system1",
+      "query": "site:reddit.com/r/podcasts \"Podcasts for a 20 minute commute?\""
+    },
+    {
+      "sequence": 16,
+      "engine": "system1",
+      "query": "site:reddit.com/r/studytips \"I’m looking for an app that uses spaced repetition\""
+    }
+  ],
+  "source_ref_map": [
+    {
+      "record_number": 1,
+      "refs": [
+        "turn5reddit0",
+        "turn7view0"
+      ]
+    },
+    {
+      "record_number": 2,
+      "refs": [
+        "turn1reddit8"
+      ],
+      "open_failed_refs": [
+        "turn7view1",
+        "turn11view0"
+      ]
+    },
+    {
+      "record_number": 3,
+      "refs": [
+        "turn12search2",
+        "turn13view0"
+      ]
+    },
+    {
+      "record_number": 4,
+      "refs": [
+        "turn12search6",
+        "turn13view1"
+      ]
+    },
+    {
+      "record_number": 5,
+      "refs": [
+        "turn5reddit8",
+        "turn7view4"
+      ]
+    },
+    {
+      "record_number": 6,
+      "refs": [
+        "turn3reddit17",
+        "turn13view2"
+      ]
+    },
+    {
+      "record_number": 7,
+      "refs": [
+        "turn1reddit3",
+        "turn10view0"
+      ]
+    },
+    {
+      "record_number": 8,
+      "refs": [
+        "turn5reddit9",
+        "turn10view1"
+      ]
+    },
+    {
+      "record_number": 9,
+      "refs": [
+        "turn1reddit7"
+      ],
+      "open_failed_refs": [
+        "turn10view2",
+        "turn11view4"
+      ]
+    },
+    {
+      "record_number": 10,
+      "refs": [
+        "turn3search3",
+        "turn10view3"
+      ]
+    },
+    {
+      "record_number": 11,
+      "refs": [
+        "turn0reddit47",
+        "turn10view4"
+      ]
+    },
+    {
+      "record_number": 12,
+      "refs": [
+        "turn1search0",
+        "turn10view5"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "as_of": "2026-11-07",
+  "stale_days": 90,
+  "total_observations": 21,
+  "by_kind": {
+    "customer_signal": 12,
+    "competitor_claim": 6,
+    "learning_research": 3,
+    "founder_hypothesis": 0
+  },
+  "distinct_customer_threads": 12,
+  "source_checked_customer_threads": 10,
+  "human_checked_customer_threads": 0,
+  "rejected_observations": 0,
+  "stale_observations": 0,
+  "future_capture_dates": 0,
+  "problems": [
+    {
+      "problem": "Remember and apply",
+      "distinct_customer_threads": 3,
+      "source_checked_threads": 3,
+      "human_checked_threads": 0,
+      "full_text_threads": 3,
+      "observations": 3
+    },
+    {
+      "problem": "Low-friction audio",
+      "distinct_customer_threads": 2,
+      "source_checked_threads": 2,
+      "human_checked_threads": 0,
+      "full_text_threads": 2,
+      "observations": 2
+    },
+    {
+      "problem": "A concrete learning outcome",
+      "distinct_customer_threads": 1,
+      "source_checked_threads": 1,
+      "human_checked_threads": 0,
+      "full_text_threads": 1,
+      "observations": 1
+    },
+    {
+      "problem": "A useful alternative to scrolling",
+      "distinct_customer_threads": 1,
+      "source_checked_threads": 1,
+      "human_checked_threads": 0,
+      "full_text_threads": 1,
+      "observations": 1
+    },
+    {
+      "problem": "Clear subscription value",
+      "distinct_customer_threads": 1,
+      "source_checked_threads": 1,
+      "human_checked_threads": 0,
+      "full_text_threads": 1,
+      "observations": 1
+    },
+    {
+      "problem": "Finish within available time",
+      "distinct_customer_threads": 1,
+      "source_checked_threads": 0,
+      "human_checked_threads": 0,
+      "full_text_threads": 0,
+      "observations": 1
+    },
+    {
+      "problem": "Motivation without pressure",
+      "distinct_customer_threads": 1,
+      "source_checked_threads": 1,
+      "human_checked_threads": 0,
+      "full_text_threads": 1,
+      "observations": 1
+    },
+    {
+      "problem": "Respect limited attention",
+      "distinct_customer_threads": 1,
+      "source_checked_threads": 0,
+      "human_checked_threads": 0,
+      "full_text_threads": 0,
+      "observations": 1
+    },
+    {
+      "problem": "Resume after missed days",
+      "distinct_customer_threads": 1,
+      "source_checked_threads": 1,
+      "human_checked_threads": 0,
+      "full_text_threads": 1,
+      "observations": 1
+    }
+  ],
+  "interpretation": "Counts describe this deliberately collected corpus only. They are not market prevalence or independent people. Several observations in one thread count once per problem; problem rows can overlap."
+}

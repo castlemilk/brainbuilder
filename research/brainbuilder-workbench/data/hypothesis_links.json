@@ -1,0 +1,167 @@
+[
+  {
+    "evidence_id": "VOC-011",
+    "hypothesis_id": "H01",
+    "relationship": "supports"
+  },
+  {
+    "evidence_id": "VOC-002",
+    "hypothesis_id": "H01",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "VOC-008",
+    "hypothesis_id": "H01",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "COMP-004",
+    "hypothesis_id": "H01",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "VOC-005",
+    "hypothesis_id": "H02",
+    "relationship": "supports"
+  },
+  {
+    "evidence_id": "VOC-006",
+    "hypothesis_id": "H02",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "VOC-010",
+    "hypothesis_id": "H02",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "VOC-001",
+    "hypothesis_id": "H03",
+    "relationship": "supports"
+  },
+  {
+    "evidence_id": "VOC-011",
+    "hypothesis_id": "H03",
+    "relationship": "supports"
+  },
+  {
+    "evidence_id": "VOC-012",
+    "hypothesis_id": "H03",
+    "relationship": "supports"
+  },
+  {
+    "evidence_id": "LEARN-001",
+    "hypothesis_id": "H03",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "LEARN-002",
+    "hypothesis_id": "H03",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "LEARN-003",
+    "hypothesis_id": "H03",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "COMP-006",
+    "hypothesis_id": "H03",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "VOC-003",
+    "hypothesis_id": "H04",
+    "relationship": "supports"
+  },
+  {
+    "evidence_id": "VOC-004",
+    "hypothesis_id": "H04",
+    "relationship": "supports"
+  },
+  {
+    "evidence_id": "VOC-002",
+    "hypothesis_id": "H04",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "VOC-009",
+    "hypothesis_id": "H04",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "COMP-002",
+    "hypothesis_id": "H04",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "COMP-005",
+    "hypothesis_id": "H04",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "VOC-010",
+    "hypothesis_id": "H05",
+    "relationship": "supports"
+  },
+  {
+    "evidence_id": "VOC-011",
+    "hypothesis_id": "H05",
+    "relationship": "supports"
+  },
+  {
+    "evidence_id": "VOC-007",
+    "hypothesis_id": "H05",
+    "relationship": "contradicts"
+  },
+  {
+    "evidence_id": "COMP-001",
+    "hypothesis_id": "H05",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "COMP-002",
+    "hypothesis_id": "H05",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "COMP-003",
+    "hypothesis_id": "H05",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "COMP-004",
+    "hypothesis_id": "H05",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "COMP-005",
+    "hypothesis_id": "H05",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "COMP-006",
+    "hypothesis_id": "H05",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "VOC-005",
+    "hypothesis_id": "H06",
+    "relationship": "supports"
+  },
+  {
+    "evidence_id": "VOC-011",
+    "hypothesis_id": "H06",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "COMP-005",
+    "hypothesis_id": "H06",
+    "relationship": "context"
+  },
+  {
+    "evidence_id": "COMP-006",
+    "hypothesis_id": "H06",
+    "relationship": "context"
+  }
+]

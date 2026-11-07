@@ -1,0 +1,19 @@
+query_id,segment,research_question,channel,query,counterevidence_to_seek
+Q01,Nonfiction learners,Do short summaries leave a retention gap?,Reddit,"site:reddit.com/r/nonfictionbookclub Blinkist remember",Summaries used successfully for book discovery rather than mastery
+Q02,Summary app subscribers,What makes a paid summary app useful or disposable?,Reddit,"site:reddit.com Headway subscription cancelled",Satisfied renewals and concrete value from current tools
+Q03,Public transport commuters,What makes a learning session feasible during transit?,Reddit,"site:reddit.com learning commute audio",Noise interruptions motion and preference for entertainment
+Q04,People learning while walking,Which learning tasks work without looking at a screen?,Reddit,"site:reddit.com learn walking podcast remember",Preference for passive listening or no desire for voice responses
+Q05,Existing flashcard users,Why do review queues become difficult to sustain?,Product forum,"site:forums.ankiweb.net reviews overwhelmed",Effective existing scheduling and workload controls
+Q06,People returning after a break,What happens when a habit or streak is interrupted?,Reddit,"site:reddit.com Duolingo streak quit",Streaks that motivate without creating guilt
+Q07,People replacing social scrolling,Does microlearning solve a real habitual need?,Reddit,"site:reddit.com microlearning doomscrolling",Low-value novelty or another compulsive feed
+Q08,People learning their own material,Is source-based content preparation a bottleneck?,Reddit,"site:reddit.com NotebookLM remember learning",Current tools already meeting the need
+Q09,Price-sensitive learners,What spending behavior is visible?,Reddit,"site:reddit.com Blinkist subscription worth cancelled",Free alternatives that are good enough
+Q10,Nonusers and former users,Why would someone reject microlearning?,Reddit,"site:reddit.com microlearning waste time",A real need for longer uninterrupted practice
+Q11,Learners in public spaces,When is voice interaction socially impractical?,Reddit,"site:reddit.com audio learning public speaking",Silent recall or normal audio already sufficient
+Q12,Busy adults with caregiving duties,Which interruptions break learning continuity?,Reddit,"site:reddit.com/r/Parenting learning time course",No desire to optimize spare moments or add another routine
+Q13,Professionals learning for a concrete task,Which learning goals have urgency?,Reddit,"site:reddit.com learn course work meeting preparation",Ad hoc search or a colleague solves the job faster
+Q14,Mobile app reviewers,What usability and payment complaints recur?,App Store,"site:apps.apple.com Headway Ratings Reviews",Positive detailed reviews and reviewer-selection bias
+Q15,Source-based learning competitors,Which capabilities are already table stakes?,Official product,"site:remnote.com learning summaries quizzes flashcards",Documented capabilities challenge differentiation claims
+Q16,Audio learning competitors,What does mobile source-grounded audio already support?,Official product,"site:support.google.com/notebooklm mobile audio offline",Existing support for the same proposed workflow
+Q17,Learning evidence,What supports delayed retrieval rather than consumption?,Primary research,"retrieval practice delayed retention primary experiment",Context limits and outcomes not applicable to the proposed learners
+Q18,Learning evidence,What is known about distributed practice and transfer?,Primary research,"distributed practice spacing transfer experiment",Spacing parameters and transfer limits that resist a universal claim
