@@ -1,0 +1,2509 @@
+{
+  "schema_version": 1,
+  "inventory_version": "0.1.0",
+  "task": "BB-LRN-001",
+  "issue_url": "https://github.com/castlemilk/brainbuilder/issues/9",
+  "baseline": {
+    "repository": "castlemilk/brainbuilder",
+    "commit": "abf70fa012356038ffa5a2c4092584d452724e5e",
+    "inspection_date": "2026-11-07"
+  },
+  "provenance": {
+    "mapping_author": "assistant",
+    "educational_accuracy_approved": false,
+    "prerequisites_approved": false,
+    "candidate_jobs_validated": false,
+    "pilot_cohort_selected": false
+  },
+  "identity_policy": {
+    "concept_pattern": "bb.concept.<area>.<semantic-slug>",
+    "version_rule": "Keep the identity for the same observable construct; store a separate integer version. Materially different outcomes receive a new ID, with a documented migration rather than silent reuse.",
+    "namespace_note": "These are proposed documentation-level concept identities. No runtime schema, lesson IDs or event storage are changed by this deliverable."
+  },
+  "coverage_status_meanings": {
+    "existing_material": "Identifiable existing explanation or activity content addresses the proposed construct. This does not mean accurate, sufficient, accessible or assessed.",
+    "partial": "Some relevant material exists, but the stated prerequisite/outcome or its application/check needs explicit additional authoring.",
+    "missing": "No dedicated introductory material and prerequisite check for this construct were found in the inspected course. Any linked lesson is an assumption context, not proof of coverage."
+  },
+  "dependency_policy": "prerequisite_ids lists proposed instructional prerequisites for the stated outcome. Edges are not learned-user state, enforced runtime locks or a claim that this is the only valid teaching order.",
+  "candidate_jobs": [
+    {
+      "id": "bb.job.technical-work-fluency",
+      "status": "unvalidated_candidate",
+      "label": "Refresh technical fundamentals for current work",
+      "trigger": "A person needs to discuss or choose an algorithm or structure in an actual work decision after time away from the topic.",
+      "desired_observable_outcome": "Explain a relevant tradeoff and apply it to a real bounded work example with stated assumptions.",
+      "content_fit_hypothesis": [
+        "bb.concept.algorithms.search-strategy-choice",
+        "bb.concept.algorithms.data-structure-selection",
+        "bb.concept.algorithms.time-space-tradeoffs"
+      ],
+      "evidence_needed": "Recent work example, current workaround, recurrence and a feasible learning moment; later behavior and delayed/application observations.",
+      "exclusions": "Does not presume interview pressure, a broad credential goal or willingness to pay."
+    },
+    {
+      "id": "bb.job.technical-interview-preparation",
+      "status": "unvalidated_candidate",
+      "label": "Prepare for a technical interview",
+      "trigger": "A person has an upcoming technical interview and needs to explain and implement relevant patterns.",
+      "desired_observable_outcome": "Read a bounded problem, justify an approach, trace an edge case and implement a suitable solution under an explicitly chosen practice format.",
+      "content_fit_hypothesis": [
+        "bb.concept.algorithms.problem-constraints-and-contracts",
+        "bb.concept.algorithms.two-sum-complement-map",
+        "bb.concept.algorithms.algorithm-explanation-and-justification"
+      ],
+      "evidence_needed": "A recent interview-preparation attempt, target assessment format, knowledge gaps, time pressure and actual study or purchase behavior.",
+      "exclusions": "Does not claim the course matches a particular employer assessment or guarantee hiring outcomes."
+    },
+    {
+      "id": "bb.job.algorithms-curiosity",
+      "status": "unvalidated_candidate",
+      "label": "Understand algorithms out of curiosity",
+      "trigger": "A person wants an intelligible explanation of a technical idea without a current work or interview deadline.",
+      "desired_observable_outcome": "Explain one interesting idea in their own words and choose whether to explore a related example later.",
+      "content_fit_hypothesis": [
+        "bb.concept.algorithms.growth-rates",
+        "bb.concept.algorithms.binary-search-interval-invariant",
+        "bb.concept.algorithms.tree-traversal-order"
+      ],
+      "evidence_needed": "A recent voluntary learning episode, reasons to return or stop, acceptable effort and alternatives already used.",
+      "exclusions": "Does not assume professional urgency, need for timed coding or the same payment rationale as the other jobs."
+    }
+  ],
+  "concepts": [
+    {
+      "id": "bb.concept.foundations.program-state",
+      "version": 1,
+      "label": "Program state and control flow",
+      "area": "foundations",
+      "observable_outcome": "Given a short assignment, conditional and loop, record the variable values after each step and state when the loop stops.",
+      "source_lesson_ids": [
+        "loops-and-growth",
+        "linear-search",
+        "linked-list-pointers"
+      ],
+      "coverage_status": "missing",
+      "coverage_note": "The course uses variables, functions, conditionals, references and loops throughout but has no dedicated introduction or prerequisite check for these basics. Linked lessons are contexts that assume this knowledge, not substitute prerequisite lessons.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "What minimum code-reading check distinguishes a learner who can trace assignments and branches from one who needs an introductory route?"
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [],
+      "source_context_refs": [
+        "source.lesson.loops-and-growth",
+        "source.lesson.linear-search",
+        "source.lesson.linked-list-pointers"
+      ],
+      "dedicated_prerequisite_check_present": false,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.foundations.index-bounds",
+      "version": 1,
+      "label": "Indices and interval boundaries",
+      "area": "foundations",
+      "observable_outcome": "For an array and inclusive low/high bounds, identify valid indices, the current candidate interval and the empty-interval condition.",
+      "source_lesson_ids": [
+        "array-indexing",
+        "binary-search-code",
+        "linear-search"
+      ],
+      "coverage_status": "partial",
+      "coverage_note": "Direct indexing and low/high are shown, but boundary conventions and empty-input checks are not taught or assessed systematically.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Which boundary conventions, empty inputs and duplicate-value contracts must be stated before a trace is scored?"
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.program-state"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [],
+      "source_context_refs": [
+        "source.lesson.array-indexing",
+        "source.lesson.binary-search-code",
+        "source.lesson.linear-search"
+      ],
+      "dedicated_prerequisite_check_present": false,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.foundations.sorted-order",
+      "version": 1,
+      "label": "Sorted order and comparator meaning",
+      "area": "foundations",
+      "observable_outcome": "Given values and a comparator, identify whether they are in nondecreasing order and justify which values can be excluded by a comparison.",
+      "source_lesson_ids": [
+        "binary-search-code",
+        "challenge-merge-arrays",
+        "sorting-invariants"
+      ],
+      "coverage_status": "partial",
+      "coverage_note": "Sorted/nondecreasing input is stated as a requirement in search and merge material, but no standalone prerequisite explanation and check establish this knowledge.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "How will an author establish ordering, equality and the comparator contract before using safe elimination or merging?"
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [],
+      "source_context_refs": [
+        "source.lesson.binary-search-code",
+        "source.lesson.challenge-merge-arrays",
+        "source.lesson.sorting-invariants"
+      ],
+      "dedicated_prerequisite_check_present": false,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.foundations.recursion-call-state",
+      "version": 1,
+      "label": "Recursion state and base cases",
+      "area": "foundations",
+      "observable_outcome": "Trace a small recursive call tree, name each call state and show how a base case and decreasing subproblem prevent further calls.",
+      "source_lesson_ids": [
+        "recursion-to-memo",
+        "quick-sort",
+        "merge-sort",
+        "dp-fib",
+        "tree-traversals"
+      ],
+      "coverage_status": "missing",
+      "coverage_note": "Recursive examples and base cases are present, but there is no dedicated introductory recursion lesson or prerequisite assessment; the learning-home recursion module is only a catalogue item.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Which call-stack and termination foundations need an authored bridge before recursive sorting, traversal and memoization?"
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.program-state"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [],
+      "source_context_refs": [
+        "source.lesson.recursion-to-memo",
+        "source.lesson.quick-sort",
+        "source.lesson.merge-sort",
+        "source.lesson.dp-fib",
+        "source.lesson.tree-traversals"
+      ],
+      "dedicated_prerequisite_check_present": false,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.foundations.complexity-model",
+      "version": 1,
+      "label": "Input size, operation model and cases",
+      "area": "foundations",
+      "observable_outcome": "For a stated implementation, name the input-size variable, counted operation, case being discussed and whether extra copies or call-stack space are included.",
+      "source_lesson_ids": [
+        "big-o-as-shape",
+        "complexity-tradeoffs",
+        "choose-sort"
+      ],
+      "coverage_status": "partial",
+      "coverage_note": "Growth and tradeoffs are introduced, but the cost model, average-case assumptions and memory-accounting conventions are not consistently explicit.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Can learners distinguish an algorithm family, the shown implementation, an average-case assumption and an auxiliary-space convention?"
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.program-state"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [],
+      "source_context_refs": [
+        "source.lesson.big-o-as-shape",
+        "source.lesson.complexity-tradeoffs",
+        "source.lesson.choose-sort"
+      ],
+      "dedicated_prerequisite_check_present": false,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.foundations.halving-and-growth",
+      "version": 1,
+      "label": "Halving and logarithmic decisions",
+      "area": "foundations",
+      "observable_outcome": "For candidate sets of 8 and 32 items, count successive halvings to a singleton and explain why doubling the size adds one halving step in this example.",
+      "source_lesson_ids": [
+        "big-o-as-shape",
+        "binary-search-code"
+      ],
+      "coverage_status": "partial",
+      "coverage_note": "Halving and logarithmic growth are described, but the mathematical bridge and its limits need a specific checked example.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "What numerical example explains the logarithmic claim without requiring unintroduced logarithm notation?"
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.sorted-order"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [],
+      "source_context_refs": [
+        "source.lesson.big-o-as-shape",
+        "source.lesson.binary-search-code"
+      ],
+      "dedicated_prerequisite_check_present": false,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.foundations.tree-structure",
+      "version": 1,
+      "label": "Tree vocabulary and height",
+      "area": "foundations",
+      "observable_outcome": "On a labelled rooted tree, identify root, child, subtree and leaf, and compute the stated edge-count height convention.",
+      "source_lesson_ids": [
+        "bst-insert",
+        "tree-traversal",
+        "tree-rotations"
+      ],
+      "coverage_status": "partial",
+      "coverage_note": "Nodes and children appear in BST explanations, while root/subtree/height are used across lessons without a dedicated vocabulary and convention check.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Which height convention and empty-tree treatment will the content use consistently?"
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [],
+      "source_context_refs": [
+        "source.lesson.bst-insert",
+        "source.lesson.tree-traversal",
+        "source.lesson.tree-rotations"
+      ],
+      "dedicated_prerequisite_check_present": false,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.foundations.graph-structure",
+      "version": 1,
+      "label": "Graph edges, direction and weight",
+      "area": "foundations",
+      "observable_outcome": "Given a small graph, list vertices and edges, state whether edges are directed and compare hop count with the sum of edge weights.",
+      "source_lesson_ids": [
+        "graph-representations",
+        "shortest-paths",
+        "dijkstra"
+      ],
+      "coverage_status": "partial",
+      "coverage_note": "Lists, matrices and weighted paths are described, but foundational graph assumptions differ across examples and need explicit checks.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Do examples state directedness, unreachable vertices, edge weights and whether every vertex appears in the representation?"
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [],
+      "source_context_refs": [
+        "source.lesson.graph-representations",
+        "source.lesson.shortest-paths",
+        "source.lesson.dijkstra"
+      ],
+      "dedicated_prerequisite_check_present": false,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.foundations.map-set-operations",
+      "version": 1,
+      "label": "Map and set operation contracts",
+      "area": "foundations",
+      "observable_outcome": "Trace insert, membership lookup and value retrieval on a small map or set, keeping key identity distinct from the stored value.",
+      "source_lesson_ids": [
+        "hash-table-load",
+        "challenge-two-sum",
+        "graph-bfs-dfs"
+      ],
+      "coverage_status": "partial",
+      "coverage_note": "Map and Set APIs are used in code and hash buckets are discussed, but an introductory API/identity contract and prerequisite check are absent.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "What is assumed about equality, key/value access and average lookup cost before maps and visited sets are used?"
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.program-state"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [],
+      "source_context_refs": [
+        "source.lesson.hash-table-load",
+        "source.lesson.challenge-two-sum",
+        "source.lesson.graph-bfs-dfs"
+      ],
+      "dedicated_prerequisite_check_present": false,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.foundations.prefix-and-subsequence",
+      "version": 1,
+      "label": "Prefixes and subsequences",
+      "area": "foundations",
+      "observable_outcome": "For two short strings, distinguish a prefix by length, a contiguous substring and an order-preserving subsequence using explicit character positions.",
+      "source_lesson_ids": [
+        "dp-lcs",
+        "sliding-window"
+      ],
+      "coverage_status": "missing",
+      "coverage_note": "LCS uses prefixes and subsequences without a dedicated explanation or check distinguishing them from substrings; the linked material is an assumption context.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "How will prefix length and half-open indexing be distinguished from inclusive endpoints before the LCS recurrence?"
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.index-bounds"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [],
+      "source_context_refs": [
+        "source.lesson.dp-lcs",
+        "source.lesson.sliding-window"
+      ],
+      "dedicated_prerequisite_check_present": false,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.foundations.sort-stability",
+      "version": 1,
+      "label": "Stable ordering of equal keys",
+      "area": "foundations",
+      "observable_outcome": "Given records with equal sort keys and distinct identities, show whether a proposed sorted result preserves their original relative order.",
+      "source_lesson_ids": [
+        "merge-sort",
+        "choose-sort"
+      ],
+      "coverage_status": "missing",
+      "coverage_note": "Stability is asserted and used in choices, but no dedicated definition, equal-key example or prerequisite check is authored.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Will a record-with-equal-keys example make stability observable rather than a memorized algorithm label?"
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.sorted-order"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [],
+      "source_context_refs": [
+        "source.lesson.merge-sort",
+        "source.lesson.choose-sort"
+      ],
+      "dedicated_prerequisite_check_present": false,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.foundations.loop-invariant",
+      "version": 1,
+      "label": "A state property preserved by a loop",
+      "area": "foundations",
+      "observable_outcome": "Given an initial state and one loop step, state a candidate property, check it before and after the step and identify what the stopping state permits concluding.",
+      "source_lesson_ids": [
+        "sorting-invariants",
+        "binary-search-invariants",
+        "two-pointers"
+      ],
+      "coverage_status": "partial",
+      "coverage_note": "Many lessons name a local invariant, but the shared idea of initialization, preservation and a bounded conclusion is not taught as a prerequisite unit.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "What small worked proof establishes preservation and termination without assuming learners already understand the word invariant?"
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.program-state"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [],
+      "source_context_refs": [
+        "source.lesson.sorting-invariants",
+        "source.lesson.binary-search-invariants",
+        "source.lesson.two-pointers"
+      ],
+      "dedicated_prerequisite_check_present": false,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.growth-rates",
+      "version": 1,
+      "label": "Compare growth rates",
+      "area": "algorithms",
+      "observable_outcome": "For stated linear, quadratic and logarithmic operation counts, predict how the work changes when input size doubles and distinguish this from measured wall-clock time.",
+      "source_lesson_ids": [
+        "big-o-as-shape"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Correct the unrelated labelled answer in big-o-as-shape-check and verify the numerical examples and case assumptions."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.complexity-model",
+        "bb.concept.foundations.halving-and-growth"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "big-o-as-shape-read",
+        "big-o-as-shape-audio",
+        "big-o-as-shape-map",
+        "big-o-as-shape-check",
+        "big-o-as-shape-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.big-o-as-shape"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.loop-operation-counts",
+      "version": 1,
+      "label": "Count loop operations",
+      "area": "algorithms",
+      "observable_outcome": "For a single loop, a fixed-bound inner loop and a full pairwise loop, count body executions on a tiny input before assigning a growth class.",
+      "source_lesson_ids": [
+        "loops-and-growth"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Do examples include dependent loop bounds so nesting is not mistaken for an automatic quadratic guarantee?"
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.program-state",
+        "bb.concept.algorithms.growth-rates"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "loops-and-growth-read",
+        "loops-and-growth-audio",
+        "loops-and-growth-map",
+        "loops-and-growth-check",
+        "loops-and-growth-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.loops-and-growth"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.time-space-tradeoffs",
+      "version": 1,
+      "label": "Time and space tradeoffs",
+      "area": "algorithms",
+      "observable_outcome": "For a repeated-lookup task, compare rescanning with storing seen values, naming the saved work, extra state and conditions that justify the exchange.",
+      "source_lesson_ids": [
+        "complexity-tradeoffs",
+        "challenge-two-sum"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Specify average hash-lookup assumptions and memory accounting; a general tradeoff is not proof that a cache is always worthwhile."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.growth-rates",
+        "bb.concept.foundations.complexity-model"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "complexity-tradeoffs-read",
+        "complexity-tradeoffs-audio",
+        "complexity-tradeoffs-map",
+        "complexity-tradeoffs-check",
+        "complexity-tradeoffs-reflection",
+        "challenge-two-sum-read",
+        "challenge-two-sum-trace",
+        "challenge-two-sum-lab",
+        "challenge-two-sum-check",
+        "challenge-two-sum-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.complexity-tradeoffs",
+        "source.lesson.challenge-two-sum"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.array-access-and-insertion",
+      "version": 1,
+      "label": "Array access and ordered insertion",
+      "area": "algorithms",
+      "observable_outcome": "Trace an indexed read and a middle insertion on a small fixed-width array, distinguishing direct access from the elements that must move to preserve order.",
+      "source_lesson_ids": [
+        "array-indexing"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "State the abstract array model rather than implying every language sequence or memory representation has identical costs."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.index-bounds",
+        "bb.concept.foundations.complexity-model"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "array-indexing-read",
+        "array-indexing-audio",
+        "array-indexing-map",
+        "array-indexing-check",
+        "array-indexing-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.array-indexing"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.two-pointer-elimination",
+      "version": 1,
+      "label": "Two-pointer candidate elimination",
+      "area": "algorithms",
+      "observable_outcome": "On a sorted two-sum example, state both cursor roles and justify which move removes impossible pairs without skipping a candidate.",
+      "source_lesson_ids": [
+        "two-pointers"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "The movement proof depends on the problem and ordering; include a counterexample to an unjustified move."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.array-access-and-insertion",
+        "bb.concept.foundations.sorted-order",
+        "bb.concept.foundations.loop-invariant"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "two-pointers-read",
+        "two-pointers-audio",
+        "two-pointers-map",
+        "two-pointers-check",
+        "two-pointers-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.two-pointers"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.linked-list-reachability",
+      "version": 1,
+      "label": "Linked-list reachability during rewiring",
+      "area": "algorithms",
+      "observable_outcome": "Given head, current and next references, insert a node while preserving reachability and identify the update order that would lose the remaining chain.",
+      "source_lesson_ids": [
+        "linked-list-pointers"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Separate constant local rewiring from the time required to find the insertion point, and check the generic quiz answer label."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.program-state",
+        "bb.concept.foundations.loop-invariant"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "linked-list-read",
+        "linked-list-pointer-skia",
+        "linked-list-trace",
+        "linked-list-check",
+        "linked-list-lab"
+      ],
+      "source_context_refs": [
+        "source.lesson.linked-list-pointers"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.stack-queue-discipline",
+      "version": 1,
+      "label": "Stack and queue access discipline",
+      "area": "algorithms",
+      "observable_outcome": "Given the same sequence of arrivals, produce the next-item order for a stack and a queue and match each contract to an undo or waiting-line scenario.",
+      "source_lesson_ids": [
+        "stack-queue-contracts"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Distinguish an abstract queue contract from the cost of a particular array shift implementation."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.program-state"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "stack-queue-contracts-read",
+        "stack-queue-contracts-audio",
+        "stack-queue-contracts-map",
+        "stack-queue-contracts-check",
+        "stack-queue-contracts-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.stack-queue-contracts"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.hash-table-load-and-resize",
+      "version": 1,
+      "label": "Hash-table load and resizing",
+      "area": "algorithms",
+      "observable_outcome": "Trace inserts into labelled buckets, compute the stated load factor and explain what a resize changes and what it cannot guarantee about collisions.",
+      "source_lesson_ids": [
+        "hash-table-load"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Review hash/load assumptions, resizing guarantees and the generic hash-table-check answer before teaching them as a scored claim."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.map-set-operations",
+        "bb.concept.algorithms.time-space-tradeoffs"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "hash-load-read",
+        "hash-collision-motion",
+        "hash-bucket-map",
+        "hash-table-check",
+        "hash-table-lab"
+      ],
+      "source_context_refs": [
+        "source.lesson.hash-table-load"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.sliding-window-summary",
+      "version": 1,
+      "label": "Maintain a sliding-window summary",
+      "area": "algorithms",
+      "observable_outcome": "On a fixed-size window, update a sum by removing the leaving value and adding the entering value, and detect a summary that no longer matches the active region.",
+      "source_lesson_ids": [
+        "sliding-window"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Separate fixed-window arithmetic from variable-window feasibility rules and map/set-based substring examples."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.array-access-and-insertion",
+        "bb.concept.foundations.loop-invariant"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "sliding-window-read",
+        "sliding-window-audio",
+        "sliding-window-map",
+        "sliding-window-check",
+        "sliding-window-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.sliding-window"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.bst-ordering-and-search",
+      "version": 1,
+      "label": "BST ordering, insertion and search",
+      "area": "algorithms",
+      "observable_outcome": "Trace insertion and lookup in a small BST under an explicit duplicate policy, showing why each chosen branch preserves its ordering contract.",
+      "source_lesson_ids": [
+        "bst-insert"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "The code sends equal values right while the initial prose says larger; make duplicate handling and all-subtree bounds explicit."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.sorted-order",
+        "bb.concept.foundations.tree-structure",
+        "bb.concept.foundations.loop-invariant"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "bst-insert-read",
+        "bst-insert-trace",
+        "bst-insert-sim",
+        "bst-insert-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.bst-insert"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.tree-height-and-balance",
+      "version": 1,
+      "label": "Tree height and operation cost",
+      "area": "algorithms",
+      "observable_outcome": "Compare root-to-target path lengths in a skewed and a shorter-height tree, explaining why lookup cost follows height and why balance is a separate guarantee.",
+      "source_lesson_ids": [
+        "bst-insert",
+        "tree-rotations"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Avoid inferring balance from the BST property alone, and use a consistent height convention."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.tree-structure",
+        "bb.concept.algorithms.growth-rates"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "tree-rotation-read",
+        "tree-rotation-3d",
+        "tree-rotation-fallback",
+        "tree-rotation-lab",
+        "bst-insert-read",
+        "bst-insert-trace",
+        "bst-insert-sim",
+        "bst-insert-check",
+        "bst-insert-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.bst-insert",
+        "source.lesson.tree-rotations"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.tree-traversal-order",
+      "version": 1,
+      "label": "Choose a tree visit order",
+      "area": "algorithms",
+      "observable_outcome": "Produce preorder, inorder, postorder and level-order sequences for a labelled tree and select an order based on whether parents, children or distance layers are needed first.",
+      "source_lesson_ids": [
+        "tree-traversal",
+        "tree-traversals"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Check that the chosen example does not conflate ordinary binary trees with ordered BSTs; serialization needs structural markers or an additional contract."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.tree-structure",
+        "bb.concept.foundations.recursion-call-state",
+        "bb.concept.algorithms.stack-queue-discipline"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "tree-traversal-read",
+        "tree-traversal-audio",
+        "tree-traversal-map",
+        "tree-traversal-reflection",
+        "tree-traversals-read",
+        "tree-traversals-trace",
+        "tree-traversals-sim",
+        "tree-traversals-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.tree-traversal",
+        "source.lesson.tree-traversals"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.bst-inorder-property",
+      "version": 1,
+      "label": "BST inorder ordering",
+      "area": "algorithms",
+      "observable_outcome": "Given a BST and its ordering contract, trace left-root-right visits and explain why the resulting value sequence is ordered.",
+      "source_lesson_ids": [
+        "tree-traversal",
+        "tree-traversals"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Verify the duplicate policy and demonstrate why the claim does not hold for arbitrary binary trees."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.bst-ordering-and-search",
+        "bb.concept.algorithms.tree-traversal-order"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "tree-traversal-read",
+        "tree-traversal-audio",
+        "tree-traversal-map",
+        "tree-traversal-check",
+        "tree-traversal-reflection",
+        "tree-traversals-read",
+        "tree-traversals-trace",
+        "tree-traversals-sim",
+        "tree-traversals-check",
+        "tree-traversals-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.tree-traversal",
+        "source.lesson.tree-traversals"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.heap-parent-child-priority",
+      "version": 1,
+      "label": "Heap parent-child priority",
+      "area": "algorithms",
+      "observable_outcome": "Identify a violated heap parent-child relation after an insert or removal and choose a local repair while distinguishing root priority from global sorted order.",
+      "source_lesson_ids": [
+        "heap-invariants"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Specify min versus max heap and the shape condition; the overview should not imply that arbitrary value lookup is constant time."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.tree-structure",
+        "bb.concept.foundations.loop-invariant"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "heap-invariants-read",
+        "heap-invariants-audio",
+        "heap-invariants-map",
+        "heap-invariants-check",
+        "heap-invariants-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.heap-invariants"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.tree-rotations-preserve-order",
+      "version": 1,
+      "label": "Tree rotations preserve ordered search",
+      "area": "algorithms",
+      "observable_outcome": "For one left or right rotation, identify the moving nodes and middle subtree, then compare the before/after inorder sequence and local height.",
+      "source_lesson_ids": [
+        "tree-rotations"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Clarify the meaning of the fallback diagram arrays and ensure all reconnected pointers preserve the same inorder sequence."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.bst-inorder-property",
+        "bb.concept.algorithms.tree-height-and-balance",
+        "bb.concept.foundations.program-state"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "tree-rotation-read",
+        "tree-rotation-3d",
+        "tree-rotation-fallback",
+        "tree-rotation-check",
+        "tree-rotation-lab"
+      ],
+      "source_context_refs": [
+        "source.lesson.tree-rotations"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.graph-representation-tradeoffs",
+      "version": 1,
+      "label": "Graph representation tradeoffs",
+      "area": "algorithms",
+      "observable_outcome": "Represent the same stated graph as a list and matrix, count the stored entries under its directedness contract and choose a representation for a specified neighbor or edge query.",
+      "source_lesson_ids": [
+        "graph-representations"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "The four-edge versus twenty-five-cell example needs directed/undirected assumptions; do not count an undirected edge as one neighbor entry without explanation."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.graph-structure",
+        "bb.concept.algorithms.growth-rates"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "graph-representations-read",
+        "graph-representations-audio",
+        "graph-representations-map",
+        "graph-representations-check",
+        "graph-representations-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.graph-representations"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.bfs-frontier-and-visited",
+      "version": 1,
+      "label": "BFS queue and visited discipline",
+      "area": "algorithms",
+      "observable_outcome": "Trace a BFS queue from a start node, mark vertices when first scheduled and show that each reachable vertex is scheduled once under the given graph contract.",
+      "source_lesson_ids": [
+        "bfs-dfs-frontiers",
+        "graph-bfs-dfs"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Align mark-on-enqueue code with the trace wording and distinguish all reachable vertices from every vertex in a disconnected graph."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.graph-structure",
+        "bb.concept.algorithms.stack-queue-discipline",
+        "bb.concept.foundations.map-set-operations"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "frontier-read",
+        "frontier-d3",
+        "frontier-trace",
+        "frontier-check",
+        "frontier-lab",
+        "graph-bfs-dfs-read",
+        "graph-bfs-dfs-trace",
+        "graph-bfs-dfs-sim",
+        "graph-bfs-dfs-reflection",
+        "capstone-graph-lab"
+      ],
+      "source_context_refs": [
+        "source.lesson.bfs-dfs-frontiers",
+        "source.lesson.graph-bfs-dfs"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.dfs-frontier-and-visited",
+      "version": 1,
+      "label": "DFS depth and visited discipline",
+      "area": "algorithms",
+      "observable_outcome": "Trace a depth-first walk and backtrack on a small cyclic graph, showing the visited set and identifying why depth-first order need not minimize hops.",
+      "source_lesson_ids": [
+        "bfs-dfs-frontiers",
+        "graph-bfs-dfs"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Record neighbor order and recursion assumptions so multiple valid traces are not incorrectly rejected."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.graph-structure",
+        "bb.concept.algorithms.stack-queue-discipline",
+        "bb.concept.foundations.map-set-operations",
+        "bb.concept.foundations.recursion-call-state"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "frontier-read",
+        "frontier-d3",
+        "frontier-trace",
+        "frontier-lab",
+        "graph-bfs-dfs-read",
+        "graph-bfs-dfs-trace",
+        "graph-bfs-dfs-sim",
+        "graph-bfs-dfs-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.bfs-dfs-frontiers",
+        "source.lesson.graph-bfs-dfs"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.unweighted-shortest-path",
+      "version": 1,
+      "label": "Fewest-edge paths with BFS",
+      "area": "algorithms",
+      "observable_outcome": "For equal-cost edges, explain how BFS distance layers establish a fewest-edge route and give a weighted example where hop count would answer a different question.",
+      "source_lesson_ids": [
+        "bfs-dfs-frontiers",
+        "graph-bfs-dfs",
+        "shortest-paths"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "The code returns a visitation order, not a reconstructed route; specify the additional predecessor evidence required for route tasks."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.bfs-frontier-and-visited",
+        "bb.concept.foundations.graph-structure"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "frontier-read",
+        "frontier-d3",
+        "frontier-trace",
+        "frontier-check",
+        "frontier-lab",
+        "shortest-paths-read",
+        "shortest-paths-audio",
+        "shortest-paths-map",
+        "shortest-paths-check",
+        "shortest-paths-reflection",
+        "graph-bfs-dfs-read",
+        "graph-bfs-dfs-trace",
+        "graph-bfs-dfs-sim",
+        "graph-bfs-dfs-check",
+        "graph-bfs-dfs-reflection",
+        "capstone-graph-lab"
+      ],
+      "source_context_refs": [
+        "source.lesson.bfs-dfs-frontiers",
+        "source.lesson.graph-bfs-dfs",
+        "source.lesson.shortest-paths"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.weighted-relaxation",
+      "version": 1,
+      "label": "Relax a weighted path estimate",
+      "area": "algorithms",
+      "observable_outcome": "Given a current distance and an outgoing edge weight, compute a candidate neighbor distance and decide whether it improves the stored estimate.",
+      "source_lesson_ids": [
+        "shortest-paths",
+        "dijkstra"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Distinguish an estimate update from a proof that a distance is final, and state how unknown or unreachable distances are represented."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.graph-structure",
+        "bb.concept.foundations.map-set-operations"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "shortest-paths-read",
+        "shortest-paths-audio",
+        "shortest-paths-map",
+        "shortest-paths-reflection",
+        "dijkstra-read",
+        "dijkstra-trace",
+        "dijkstra-sim",
+        "dijkstra-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.shortest-paths",
+        "source.lesson.dijkstra"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.dijkstra-settled-distance",
+      "version": 1,
+      "label": "Dijkstra settled-distance condition",
+      "area": "algorithms",
+      "observable_outcome": "On a nonnegative-weight example, choose the smallest unvisited distance, perform relaxations and explain which assumption a negative edge would break.",
+      "source_lesson_ids": [
+        "dijkstra"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Review the complete vertex-set contract and the scan-based implementation cost; do not attribute heap-based complexity to this code."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.weighted-relaxation",
+        "bb.concept.algorithms.growth-rates"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "dijkstra-read",
+        "dijkstra-trace",
+        "dijkstra-sim",
+        "dijkstra-check",
+        "dijkstra-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.dijkstra"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.sorting-region-invariants",
+      "version": 1,
+      "label": "Sorting regions and guarantees",
+      "area": "algorithms",
+      "observable_outcome": "After a pass of a stated sort, identify the region with an ordering guarantee and distinguish it from a merely partitioned or still-unknown region.",
+      "source_lesson_ids": [
+        "sorting-invariants",
+        "capstone-arcade"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Use an algorithm-specific guarantee; a partition is not a fully sorted half, and the source only mentions insertion sort without supplying a dedicated lesson."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.sorted-order",
+        "bb.concept.foundations.loop-invariant"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "sorting-invariants-read",
+        "sorting-invariants-audio",
+        "sorting-invariants-map",
+        "sorting-invariants-check",
+        "sorting-invariants-reflection",
+        "capstone-sort-lab"
+      ],
+      "source_context_refs": [
+        "source.lesson.sorting-invariants",
+        "source.lesson.capstone-arcade"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.bubble-sort-pass-and-stop",
+      "version": 1,
+      "label": "Bubble-sort pass and early exit",
+      "area": "algorithms",
+      "observable_outcome": "Trace one adjacent-swap pass, identify the settled suffix and justify a no-swap early stop, while accounting for whether this implementation copies the input.",
+      "source_lesson_ids": [
+        "bubble-sort",
+        "challenge-bubble-impl",
+        "capstone-arcade"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Resolve the source mismatch between a copied output array and the O(1) in-place quiz answer before using the affected assessment."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.sorting-region-invariants",
+        "bb.concept.algorithms.loop-operation-counts",
+        "bb.concept.algorithms.array-access-and-insertion"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "bubble-sort-read",
+        "bubble-sort-trace",
+        "bubble-sort-sim",
+        "bubble-sort-check",
+        "bubble-sort-reflection",
+        "challenge-bubble-impl-read",
+        "challenge-bubble-impl-trace",
+        "challenge-bubble-impl-lab",
+        "challenge-bubble-impl-check",
+        "challenge-bubble-impl-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.bubble-sort",
+        "source.lesson.challenge-bubble-impl",
+        "source.lesson.capstone-arcade"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.partition-pivot-rank",
+      "version": 1,
+      "label": "Partition around a pivot",
+      "area": "algorithms",
+      "observable_outcome": "For the displayed partition scheme, trace the boundary and pivot placement, stating which values lie on each side and why this does not sort those sides.",
+      "source_lesson_ids": [
+        "selection-partition",
+        "quick-sort"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Make equality handling, pivot scheme and rank convention explicit rather than generalizing one partition guarantee to all variants."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.sorted-order",
+        "bb.concept.algorithms.array-access-and-insertion",
+        "bb.concept.foundations.loop-invariant"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "selection-partition-read",
+        "selection-partition-audio",
+        "selection-partition-map",
+        "selection-partition-reflection",
+        "quick-sort-read",
+        "quick-sort-trace",
+        "quick-sort-sim",
+        "quick-sort-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.selection-partition",
+        "source.lesson.quick-sort"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.selection-by-rank",
+      "version": 1,
+      "label": "Selection without sorting both sides",
+      "area": "algorithms",
+      "observable_outcome": "Given a pivot rank and a requested rank under one indexing convention, choose the remaining side or pivot and justify discarding the other side.",
+      "source_lesson_ids": [
+        "selection-partition"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "This is conceptual selection material; no complete quickselect implementation or assessment of a full execution is present."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.partition-pivot-rank"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "selection-partition-read",
+        "selection-partition-audio",
+        "selection-partition-map",
+        "selection-partition-check",
+        "selection-partition-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.selection-partition"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.quicksort-recursive-partition",
+      "version": 1,
+      "label": "Quicksort recursive partitions",
+      "area": "algorithms",
+      "observable_outcome": "Trace the displayed quicksort calls around a pivot, compare balanced and skewed partitions and state the implementation and probability assumptions behind cost claims.",
+      "source_lesson_ids": [
+        "quick-sort"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Replace the unqualified pivot-choice prevention claim and account for recursion-stack space separately from in-place partitioning."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.partition-pivot-rank",
+        "bb.concept.foundations.recursion-call-state",
+        "bb.concept.algorithms.loop-operation-counts"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "quick-sort-read",
+        "quick-sort-trace",
+        "quick-sort-sim",
+        "quick-sort-check",
+        "quick-sort-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.quick-sort"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.merge-sorted-sequences",
+      "version": 1,
+      "label": "Merge two sorted sequences",
+      "area": "algorithms",
+      "observable_outcome": "Merge two nondecreasing sequences with two cursors, preserving the output-prefix invariant, draining leftovers and accounting for every emitted element.",
+      "source_lesson_ids": [
+        "merge-sort",
+        "challenge-merge-arrays"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Specify tie handling and output allocation; repair the asymptotically equivalent complexity distractor before grading this check."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.sorted-order",
+        "bb.concept.algorithms.array-access-and-insertion",
+        "bb.concept.foundations.loop-invariant"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "merge-sort-read",
+        "merge-sort-trace",
+        "merge-sort-sim",
+        "merge-sort-reflection",
+        "challenge-merge-arrays-read",
+        "challenge-merge-arrays-trace",
+        "challenge-merge-arrays-lab",
+        "challenge-merge-arrays-check",
+        "challenge-merge-arrays-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.merge-sort",
+        "source.lesson.challenge-merge-arrays"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.merge-sort-divide-and-merge",
+      "version": 1,
+      "label": "Merge-sort split and combine",
+      "area": "algorithms",
+      "observable_outcome": "Trace a small recursive split-and-merge tree, connect each level to total merge work and distinguish output storage, temporary copies and call-stack requirements.",
+      "source_lesson_ids": [
+        "merge-sort"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Qualify complexity with the stated comparison/data model and demonstrate stability using labelled equal-key records."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.merge-sorted-sequences",
+        "bb.concept.foundations.recursion-call-state",
+        "bb.concept.algorithms.growth-rates"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "merge-sort-read",
+        "merge-sort-trace",
+        "merge-sort-sim",
+        "merge-sort-check",
+        "merge-sort-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.merge-sort"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.sort-choice-under-constraints",
+      "version": 1,
+      "label": "Choose a sort under explicit constraints",
+      "area": "algorithms",
+      "observable_outcome": "For a scenario with stability, mutation, memory and worst-case requirements, compare the presented sort variants and justify a choice or identify missing information.",
+      "source_lesson_ids": [
+        "choose-sort"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Treat the choice as conditional among the shown variants, not a universal fastest-sort recommendation; code and space descriptions must agree."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.bubble-sort-pass-and-stop",
+        "bb.concept.algorithms.quicksort-recursive-partition",
+        "bb.concept.algorithms.merge-sort-divide-and-merge",
+        "bb.concept.foundations.sort-stability",
+        "bb.concept.algorithms.time-space-tradeoffs"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "choose-sort-read",
+        "choose-sort-sim",
+        "choose-sort-check",
+        "choose-sort-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.choose-sort"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.linear-search-first-match",
+      "version": 1,
+      "label": "Linear search and first-match contract",
+      "area": "algorithms",
+      "observable_outcome": "Trace a linear scan on an unsorted array, return the first matching index or not-found result, and distinguish best-case from full-scan work.",
+      "source_lesson_ids": [
+        "linear-search"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "State duplicate behavior and what average-case cost assumes; a small-input comparison should not promise binary search is always faster in elapsed time."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.array-access-and-insertion",
+        "bb.concept.algorithms.loop-operation-counts"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "linear-search-read",
+        "linear-search-trace",
+        "linear-search-sim",
+        "linear-search-check",
+        "linear-search-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.linear-search"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "version": 1,
+      "label": "Binary-search candidate interval",
+      "area": "algorithms",
+      "observable_outcome": "Given an ordered array, target and inclusive bounds, justify each discarded interval and preserve the claim that any matching target still under consideration lies inside the bounds.",
+      "source_lesson_ids": [
+        "binary-search-invariants",
+        "binary-search-code"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Distinguish any-match from first-match behavior, include absent targets, and verify the bounds convention rather than relying on a familiar animation."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.sorted-order",
+        "bb.concept.foundations.index-bounds",
+        "bb.concept.foundations.loop-invariant"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "binary-search-read",
+        "binary-search-audio",
+        "binary-search-window",
+        "binary-search-trace",
+        "binary-search-check",
+        "binary-search-lab",
+        "binary-search-code-read",
+        "binary-search-code-trace",
+        "binary-search-sim",
+        "binary-search-code-check",
+        "binary-search-code-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.binary-search-invariants",
+        "source.lesson.binary-search-code"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.binary-search-progress-and-log-cost",
+      "version": 1,
+      "label": "Binary-search progress and logarithmic cost",
+      "area": "algorithms",
+      "observable_outcome": "Trace bound updates on found and absent targets, show that the candidate interval shrinks and connect repeated halving with the number of comparisons.",
+      "source_lesson_ids": [
+        "binary-search-invariants",
+        "binary-search-code"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Use the complete deep implementation for executable tracing; the overview trace only computes mid and does not contain a progressing loop."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.binary-search-interval-invariant",
+        "bb.concept.foundations.halving-and-growth",
+        "bb.concept.algorithms.growth-rates",
+        "bb.concept.foundations.program-state"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "binary-search-read",
+        "binary-search-audio",
+        "binary-search-window",
+        "binary-search-trace",
+        "binary-search-check",
+        "binary-search-lab",
+        "binary-search-code-read",
+        "binary-search-code-trace",
+        "binary-search-sim",
+        "binary-search-code-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.binary-search-invariants",
+        "source.lesson.binary-search-code"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.jump-search-block-selection",
+      "version": 1,
+      "label": "Jump-search block selection",
+      "area": "algorithms",
+      "observable_outcome": "On a sorted array and stated block size, identify the possible target block, scan it in the direction the implementation uses and account for jumps plus in-block comparisons.",
+      "source_lesson_ids": [
+        "jump-search"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Reconcile backward-scan prose with forward-incrementing code and explain the square-root step-size assumption and edge cases."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.sorted-order",
+        "bb.concept.algorithms.linear-search-first-match",
+        "bb.concept.foundations.index-bounds",
+        "bb.concept.algorithms.growth-rates"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "jump-search-read",
+        "jump-search-trace",
+        "jump-search-sim",
+        "jump-search-check",
+        "jump-search-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.jump-search"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.search-strategy-choice",
+      "version": 1,
+      "label": "Choose between scanning and ordered search",
+      "area": "algorithms",
+      "observable_outcome": "For a lookup scenario, ask about ordering, updates, number of queries and preprocessing before choosing a linear scan or binary search under the stated representation.",
+      "source_lesson_ids": [
+        "linear-search",
+        "binary-search-code"
+      ],
+      "coverage_status": "partial",
+      "coverage_note": "Existing search explanations provide ingredients for the choice, but the application activity and scored reasoning rubric are proposed, not implemented.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "The cross-lesson comparison needs a new scenario, source-supported rubric and subject review; it is not already a validated application assessment."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.linear-search-first-match",
+        "bb.concept.algorithms.binary-search-interval-invariant",
+        "bb.concept.algorithms.binary-search-progress-and-log-cost",
+        "bb.concept.algorithms.time-space-tradeoffs"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "linear-search-read",
+        "linear-search-reflection",
+        "binary-search-code-read",
+        "binary-search-code-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.linear-search",
+        "source.lesson.binary-search-code"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.memoized-subproblem-state",
+      "version": 1,
+      "label": "Memoization key and reuse",
+      "area": "algorithms",
+      "observable_outcome": "For a recursive example, identify which state defines one subproblem, detect a repeated state and explain when a stored answer can be reused safely.",
+      "source_lesson_ids": [
+        "recursion-to-memo",
+        "dp-fib"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Show an incomplete-key counterexample and make purity/input-context assumptions explicit before reusing answers."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.recursion-call-state",
+        "bb.concept.foundations.map-set-operations",
+        "bb.concept.algorithms.time-space-tradeoffs"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "recursion-to-memo-read",
+        "recursion-to-memo-audio",
+        "recursion-to-memo-map",
+        "recursion-to-memo-check",
+        "recursion-to-memo-reflection",
+        "dp-fib-read",
+        "dp-fib-trace",
+        "dp-fib-sim",
+        "dp-fib-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.recursion-to-memo",
+        "source.lesson.dp-fib"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.dp-state-and-dependency-order",
+      "version": 1,
+      "label": "DP state and dependency order",
+      "area": "algorithms",
+      "observable_outcome": "Define what one DP cell means, identify its base cases and prerequisite cells, and choose an order that reads only already justified values.",
+      "source_lesson_ids": [
+        "dp-table-fill",
+        "dp-knapsack",
+        "dp-lcs"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Memoization is a proposed teaching bridge, not a logical requirement for every DP treatment; each grid needs an explicit recurrence and state meaning."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.index-bounds",
+        "bb.concept.foundations.loop-invariant",
+        "bb.concept.algorithms.memoized-subproblem-state"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "dp-grid-read",
+        "dp-grid-fill",
+        "dp-grid-motion",
+        "dp-grid-check",
+        "dp-grid-lab",
+        "dp-knapsack-read",
+        "dp-knapsack-trace",
+        "dp-knapsack-sim",
+        "dp-knapsack-reflection",
+        "dp-lcs-read",
+        "dp-lcs-trace",
+        "dp-lcs-sim",
+        "dp-lcs-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.dp-table-fill",
+        "source.lesson.dp-knapsack",
+        "source.lesson.dp-lcs"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.fibonacci-memoization",
+      "version": 1,
+      "label": "Memoized Fibonacci",
+      "area": "algorithms",
+      "observable_outcome": "Trace fib on a small nonnegative integer, identify reused subproblems and count solved states under a declared arithmetic model.",
+      "source_lesson_ids": [
+        "dp-fib"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "State the input domain, numeric precision limits and unit-cost arithmetic convention rather than generalizing O(n) to unlimited exact integers."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.memoized-subproblem-state",
+        "bb.concept.foundations.recursion-call-state",
+        "bb.concept.algorithms.growth-rates"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "dp-fib-read",
+        "dp-fib-trace",
+        "dp-fib-sim",
+        "dp-fib-check",
+        "dp-fib-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.dp-fib"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.knapsack-choice-recurrence",
+      "version": 1,
+      "label": "Zero-one knapsack choices",
+      "area": "algorithms",
+      "observable_outcome": "For a small integer-capacity instance, define dp by item prefix and capacity, compare skip/take choices and explain why an item is used at most once.",
+      "source_lesson_ids": [
+        "dp-knapsack"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "State weight/capacity and value assumptions, distinguish a value result from item reconstruction, and qualify pseudo-polynomial cost if introduced."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.dp-state-and-dependency-order",
+        "bb.concept.foundations.index-bounds",
+        "bb.concept.foundations.program-state"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "dp-knapsack-read",
+        "dp-knapsack-trace",
+        "dp-knapsack-sim",
+        "dp-knapsack-check",
+        "dp-knapsack-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.dp-knapsack"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.lcs-prefix-recurrence",
+      "version": 1,
+      "label": "Longest-common-subsequence recurrence",
+      "area": "algorithms",
+      "observable_outcome": "For two short strings, define DP cells by prefix lengths and use match or mismatch cases to fill a small table without confusing subsequences with substrings.",
+      "source_lesson_ids": [
+        "dp-lcs"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Resolve the inclusive-prefix wording versus i-1/j-1 code convention, and keep length calculation separate from reconstructing a sequence."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.dp-state-and-dependency-order",
+        "bb.concept.foundations.prefix-and-subsequence",
+        "bb.concept.foundations.index-bounds"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "dp-lcs-read",
+        "dp-lcs-trace",
+        "dp-lcs-sim",
+        "dp-lcs-check",
+        "dp-lcs-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.dp-lcs"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.greedy-choice-safety",
+      "version": 1,
+      "label": "Greedy choice and counterexamples",
+      "area": "algorithms",
+      "observable_outcome": "For a proposed local choice, articulate the global safety claim and either sketch an appropriate exchange argument or produce a counterexample to the rule.",
+      "source_lesson_ids": [
+        "greedy-choice"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "The source supplies an informal interval-scheduling example; a full worked exchange proof and a scored counterexample task still need authoring."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.loop-invariant",
+        "bb.concept.foundations.complexity-model"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "greedy-choice-read",
+        "greedy-choice-audio",
+        "greedy-choice-map",
+        "greedy-choice-check",
+        "greedy-choice-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.greedy-choice"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.problem-constraints-and-contracts",
+      "version": 1,
+      "label": "Read a problem as a contract",
+      "area": "algorithms",
+      "observable_outcome": "From a small problem statement, list inputs, output obligations, constraints and one edge case before naming candidate algorithms.",
+      "source_lesson_ids": [
+        "problem-reading",
+        "capstone-arcade",
+        "challenge-two-sum"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Avoid keyword-to-algorithm shortcuts; ask what assumptions would make a familiar algorithm inapplicable."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "problem-reading-read",
+        "problem-reading-audio",
+        "problem-reading-map",
+        "problem-reading-check",
+        "problem-reading-reflection",
+        "capstone-read"
+      ],
+      "source_context_refs": [
+        "source.lesson.problem-reading",
+        "source.lesson.capstone-arcade",
+        "source.lesson.challenge-two-sum"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.data-structure-selection",
+      "version": 1,
+      "label": "Match repeated operations to a structure",
+      "area": "algorithms",
+      "observable_outcome": "For a stated workload, name its repeated operation and compare the relevant structure contracts, including one reason a tempting alternative may not fit.",
+      "source_lesson_ids": [
+        "choose-data-structure",
+        "capstone-arcade"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "A smaller pilot should narrow this broad comparison to the structures it actually teaches and assess a concrete scenario rather than name recognition."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.array-access-and-insertion",
+        "bb.concept.algorithms.stack-queue-discipline",
+        "bb.concept.algorithms.hash-table-load-and-resize",
+        "bb.concept.algorithms.heap-parent-child-priority",
+        "bb.concept.algorithms.time-space-tradeoffs"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "choose-data-structure-read",
+        "choose-data-structure-audio",
+        "choose-data-structure-map",
+        "choose-data-structure-check",
+        "choose-data-structure-reflection",
+        "capstone-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.choose-data-structure",
+        "source.lesson.capstone-arcade"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.two-sum-complement-map",
+      "version": 1,
+      "label": "One-pass complement lookup",
+      "area": "algorithms",
+      "observable_outcome": "Trace a value-to-index map for two-sum, look up the complement before inserting the current item and justify why the same array position is not reused.",
+      "source_lesson_ids": [
+        "challenge-two-sum"
+      ],
+      "coverage_status": "existing_material",
+      "coverage_note": "Existing source material addresses this proposed outcome; its accuracy, sufficiency and assessment alignment still need subject review.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "Use duplicate values and absence/uniqueness contracts deliberately; finite test cases and output equality alone do not prove a one-pass algorithm or understanding."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.foundations.map-set-operations",
+        "bb.concept.algorithms.array-access-and-insertion",
+        "bb.concept.algorithms.time-space-tradeoffs",
+        "bb.concept.algorithms.problem-constraints-and-contracts"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "challenge-two-sum-read",
+        "challenge-two-sum-trace",
+        "challenge-two-sum-lab",
+        "challenge-two-sum-check",
+        "challenge-two-sum-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.challenge-two-sum"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    },
+    {
+      "id": "bb.concept.algorithms.algorithm-explanation-and-justification",
+      "version": 1,
+      "label": "Explain and justify an algorithm choice",
+      "area": "algorithms",
+      "observable_outcome": "For a new bounded problem, produce a problem contract, chosen invariant, small trace and qualified complexity claim, and state an assumption that would change the choice.",
+      "source_lesson_ids": [
+        "capstone-arcade"
+      ],
+      "coverage_status": "partial",
+      "coverage_note": "The capstone project and reflection specify deliverables, but a source-supported scoring rubric and calibrated fresh task are not present.",
+      "subject_review": {
+        "status": "pending",
+        "approved_by": null,
+        "approved_at": null,
+        "questions": [
+          "The project requests an explainer but has no validated reasoning rubric; claims must remain limited to the produced task and assistance context."
+        ]
+      },
+      "mapping_status": "assistant_authored_candidate",
+      "prerequisite_ids": [
+        "bb.concept.algorithms.problem-constraints-and-contracts",
+        "bb.concept.algorithms.data-structure-selection",
+        "bb.concept.algorithms.growth-rates",
+        "bb.concept.foundations.loop-invariant"
+      ],
+      "prerequisite_status": "proposed_instructional_dependencies_pending_subject_review",
+      "source_activity_ids": [
+        "capstone-read",
+        "capstone-project",
+        "capstone-reflection"
+      ],
+      "source_context_refs": [
+        "source.lesson.capstone-arcade"
+      ],
+      "dedicated_prerequisite_check_present": null,
+      "eligible_for_unreviewed_mastery_claim": false
+    }
+  ],
+  "prerequisite_topological_order": [
+    "bb.concept.foundations.program-state",
+    "bb.concept.foundations.index-bounds",
+    "bb.concept.foundations.sorted-order",
+    "bb.concept.foundations.recursion-call-state",
+    "bb.concept.foundations.complexity-model",
+    "bb.concept.foundations.halving-and-growth",
+    "bb.concept.foundations.tree-structure",
+    "bb.concept.foundations.graph-structure",
+    "bb.concept.foundations.map-set-operations",
+    "bb.concept.foundations.prefix-and-subsequence",
+    "bb.concept.foundations.sort-stability",
+    "bb.concept.foundations.loop-invariant",
+    "bb.concept.algorithms.growth-rates",
+    "bb.concept.algorithms.loop-operation-counts",
+    "bb.concept.algorithms.time-space-tradeoffs",
+    "bb.concept.algorithms.array-access-and-insertion",
+    "bb.concept.algorithms.two-pointer-elimination",
+    "bb.concept.algorithms.linked-list-reachability",
+    "bb.concept.algorithms.stack-queue-discipline",
+    "bb.concept.algorithms.hash-table-load-and-resize",
+    "bb.concept.algorithms.sliding-window-summary",
+    "bb.concept.algorithms.bst-ordering-and-search",
+    "bb.concept.algorithms.tree-height-and-balance",
+    "bb.concept.algorithms.tree-traversal-order",
+    "bb.concept.algorithms.bst-inorder-property",
+    "bb.concept.algorithms.heap-parent-child-priority",
+    "bb.concept.algorithms.tree-rotations-preserve-order",
+    "bb.concept.algorithms.graph-representation-tradeoffs",
+    "bb.concept.algorithms.bfs-frontier-and-visited",
+    "bb.concept.algorithms.dfs-frontier-and-visited",
+    "bb.concept.algorithms.unweighted-shortest-path",
+    "bb.concept.algorithms.weighted-relaxation",
+    "bb.concept.algorithms.dijkstra-settled-distance",
+    "bb.concept.algorithms.sorting-region-invariants",
+    "bb.concept.algorithms.bubble-sort-pass-and-stop",
+    "bb.concept.algorithms.partition-pivot-rank",
+    "bb.concept.algorithms.selection-by-rank",
+    "bb.concept.algorithms.quicksort-recursive-partition",
+    "bb.concept.algorithms.merge-sorted-sequences",
+    "bb.concept.algorithms.merge-sort-divide-and-merge",
+    "bb.concept.algorithms.sort-choice-under-constraints",
+    "bb.concept.algorithms.linear-search-first-match",
+    "bb.concept.algorithms.binary-search-interval-invariant",
+    "bb.concept.algorithms.binary-search-progress-and-log-cost",
+    "bb.concept.algorithms.jump-search-block-selection",
+    "bb.concept.algorithms.search-strategy-choice",
+    "bb.concept.algorithms.memoized-subproblem-state",
+    "bb.concept.algorithms.dp-state-and-dependency-order",
+    "bb.concept.algorithms.fibonacci-memoization",
+    "bb.concept.algorithms.knapsack-choice-recurrence",
+    "bb.concept.algorithms.lcs-prefix-recurrence",
+    "bb.concept.algorithms.greedy-choice-safety",
+    "bb.concept.algorithms.problem-constraints-and-contracts",
+    "bb.concept.algorithms.data-structure-selection",
+    "bb.concept.algorithms.two-sum-complement-map",
+    "bb.concept.algorithms.algorithm-explanation-and-justification"
+  ],
+  "missing_prerequisite_ids": [
+    "bb.concept.foundations.program-state",
+    "bb.concept.foundations.recursion-call-state",
+    "bb.concept.foundations.prefix-and-subsequence",
+    "bb.concept.foundations.sort-stability"
+  ],
+  "partial_prerequisite_ids": [
+    "bb.concept.foundations.index-bounds",
+    "bb.concept.foundations.sorted-order",
+    "bb.concept.foundations.complexity-model",
+    "bb.concept.foundations.halving-and-growth",
+    "bb.concept.foundations.tree-structure",
+    "bb.concept.foundations.graph-structure",
+    "bb.concept.foundations.map-set-operations",
+    "bb.concept.foundations.loop-invariant"
+  ],
+  "worked_activity_drafts": [
+    {
+      "id": "bb.activity.algorithms.binary-search-recall",
+      "version": 1,
+      "label": "Explain a safe discard",
+      "status": "authored_example_not_implemented_not_subject_approved",
+      "concept_ids": [
+        "bb.concept.algorithms.binary-search-interval-invariant"
+      ],
+      "source_activity_ids": [
+        "binary-search-code-read",
+        "binary-search-code-trace",
+        "binary-search-read"
+      ],
+      "prompt_id": "bb.prompt.algorithms.binary-search-recall",
+      "prompt_version": 1,
+      "rubric_id": "bb.rubric.algorithms.binary-search-recall",
+      "rubric_version": 1,
+      "mode": "private_or_typed",
+      "prompt": "In [3, 7, 11, 15, 19], the target is 19 and the midpoint value is 11. Which indices remain possible after comparison, and why can the others be discarded?",
+      "draft_rubric_criteria": [
+        "Uses the stated zero-based inclusive convention: indices 3 through 4 remain.",
+        "Connects the discard to ordered values at or below 11, rather than simply saying move right.",
+        "Preserves the if-present candidate claim; does not claim the target has been found by this step."
+      ],
+      "subject_review_status": "pending",
+      "evidence_rule": "Private thinking remains unscored. A submitted answer requires an actual reviewed assessment outcome and an assistance record; this fixture creates no learner evidence."
+    },
+    {
+      "id": "bb.activity.algorithms.search-strategy-application",
+      "version": 1,
+      "label": "Choose a search approach for a changing directory",
+      "status": "authored_example_not_implemented_not_subject_approved",
+      "concept_ids": [
+        "bb.concept.algorithms.search-strategy-choice",
+        "bb.concept.algorithms.binary-search-interval-invariant"
+      ],
+      "source_activity_ids": [
+        "linear-search-read",
+        "binary-search-code-read",
+        "complexity-tradeoffs-read"
+      ],
+      "prompt_id": "bb.prompt.algorithms.search-strategy-application",
+      "prompt_version": 1,
+      "rubric_id": "bb.rubric.algorithms.search-strategy-application",
+      "rubric_version": 1,
+      "mode": "typed_or_private_then_reveal",
+      "prompt": "A directory receives frequent additions and is queried both once during import and repeatedly during the day. What would you ask before choosing a linear scan or binary search, and under what conditions would each be reasonable?",
+      "draft_rubric_criteria": [
+        "Asks whether a maintained order/comparator and the required access model exist.",
+        "Distinguishes one-off lookup from repeated queries and includes preprocessing or update-maintenance cost.",
+        "Gives a conditional choice and names missing facts instead of asserting that binary search is always faster."
+      ],
+      "subject_review_status": "pending",
+      "evidence_rule": "Private thinking remains unscored. A submitted answer requires an actual reviewed assessment outcome and an assistance record; this fixture creates no learner evidence."
+    },
+    {
+      "id": "bb.activity.algorithms.merge-prefix-recall",
+      "version": 1,
+      "label": "Explain the next merged value",
+      "status": "authored_example_not_implemented_not_subject_approved",
+      "concept_ids": [
+        "bb.concept.algorithms.merge-sorted-sequences"
+      ],
+      "source_activity_ids": [
+        "challenge-merge-arrays-read",
+        "challenge-merge-arrays-trace",
+        "merge-sort-trace"
+      ],
+      "prompt_id": "bb.prompt.algorithms.merge-prefix-recall",
+      "prompt_version": 1,
+      "rubric_id": "bb.rubric.algorithms.merge-prefix-recall",
+      "rubric_version": 1,
+      "mode": "private_or_typed",
+      "prompt": "Merge [1, 4, 4] and [2, 4, 7] in nondecreasing order. After output [1, 2], what value can be emitted next, which cursor moves, and why is the remaining output still constructible?",
+      "draft_rubric_criteria": [
+        "Chooses a smallest remaining front value 4 under a stated tie policy.",
+        "Advances only the consumed cursor and leaves the other candidates available.",
+        "Explains that each input remainder is already ordered and includes a plan to drain leftovers."
+      ],
+      "subject_review_status": "pending",
+      "evidence_rule": "Private thinking remains unscored. A submitted answer requires an actual reviewed assessment outcome and an assistance record; this fixture creates no learner evidence."
+    },
+    {
+      "id": "bb.activity.algorithms.merge-records-application",
+      "version": 1,
+      "label": "Merge two timestamped batches",
+      "status": "authored_example_not_implemented_not_subject_approved",
+      "concept_ids": [
+        "bb.concept.algorithms.merge-sorted-sequences",
+        "bb.concept.foundations.sort-stability"
+      ],
+      "source_activity_ids": [
+        "challenge-merge-arrays-trace",
+        "merge-sort-trace",
+        "choose-sort-read"
+      ],
+      "prompt_id": "bb.prompt.algorithms.merge-records-application",
+      "prompt_version": 1,
+      "rubric_id": "bb.rubric.algorithms.merge-records-application",
+      "rubric_version": 1,
+      "mode": "typed_or_private_then_reveal",
+      "prompt": "Two event batches are individually ordered by timestamp. Equal timestamps must preserve their agreed original sequence across batches. State the extra ordering/tie information you need, then explain how a merge can preserve it.",
+      "draft_rubric_criteria": [
+        "Requests a cross-batch original-order or tie-break contract; equal timestamps alone do not specify it.",
+        "Maintains the ordered output-prefix invariant and consumes one input record at a time.",
+        "Explains that left-first on equal keys is stable only when the input ordering and agreed tie contract support it."
+      ],
+      "subject_review_status": "pending",
+      "evidence_rule": "Private thinking remains unscored. A submitted answer requires an actual reviewed assessment outcome and an assistance record; this fixture creates no learner evidence."
+    }
+  ],
+  "counts": {
+    "concepts": 56,
+    "foundations": 12,
+    "algorithm_concepts": 44,
+    "prerequisite_edges": 126,
+    "coverage_status": {
+      "existing_material": 42,
+      "missing": 4,
+      "partial": 10
+    }
+  },
+  "limits": [
+    "Every intended outcome, prerequisite edge and activity alignment is an assistant-authored candidate pending subject review; none is human educational approval.",
+    "All 41 source lessons and 205 source blocks are inventoried. This is coverage of the reviewed repository, not a claim to cover all algorithms or to offer a validated beginner curriculum.",
+    "Current multiple-choice checks test selected options. Existing lab/project declarations do not establish valid reasoning assessment, delayed recall or transfer.",
+    "Private recall stays unscored; audio/read completion is exposure. New prompt/rubric examples are drafts and create no learner observations.",
+    "Existing nine-minute lesson estimates and the source validator twelve-minute limit are authoring choices, not measured timing or universal microlearning optima.",
+    "This task does not select a cohort or expand the catalogue. BB-GTM-001 and BB-LRN-003 own cohort selection and the bounded reviewed pilot path."
+  ]
+}

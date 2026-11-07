@@ -1,0 +1,154 @@
+{
+  "schema_version": 1,
+  "snapshot_date": "2026-11-07",
+  "repository": "castlemilk/brainbuilder",
+  "source_baseline": "abf70fa012356038ffa5a2c4092584d452724e5e",
+  "canonical_status": "GitHub issues; this file is a dated delivery record, not an automatic live export.",
+  "planning_snapshot": {
+    "tasks": 67,
+    "acceptance_criteria": 300,
+    "pr": "https://github.com/castlemilk/brainbuilder/pull/70"
+  },
+  "tracked_totals_after_findings": {
+    "tasks": 70,
+    "acceptance_criteria": 312
+  },
+  "batch": [
+    {
+      "id": "BB-ENG-001",
+      "issue": 5,
+      "state": "in_review",
+      "pr": 71,
+      "implementation_commit": "259985dbf37b82cc30a6193315454a91561b8ec5",
+      "first_passed_ci": {
+        "commit": "6236af90d36ade151142ffbef660244c1a8bed2f",
+        "url": "https://github.com/castlemilk/brainbuilder/actions/runs/42351083352",
+        "tests": {
+          "native": 16,
+          "web": 25,
+          "courseware": 29,
+          "learning_model": 4
+        }
+      },
+      "latest_validation": "Use latest PR71 check; review follow-up adds the completed-migration-notice regression.",
+      "merged": false,
+      "released": false
+    },
+    {
+      "id": "BB-LRN-001",
+      "issue": 9,
+      "state": "in_review",
+      "path": "docs/learning/concept-map",
+      "counts": {
+        "concepts": 56,
+        "units": 13,
+        "lessons": 41,
+        "blocks": 205,
+        "edges": 126,
+        "source_spans": 201
+      },
+      "validation": "Strict pinned baseline passed; working checkout passes with reported unrelated source-file divergence.",
+      "subject_approved": false
+    },
+    {
+      "id": "BB-LRN-004",
+      "issue": 10,
+      "state": "in_review",
+      "path": "docs/learning/evidence-contract",
+      "contract_version": "1.0.0",
+      "synthetic_observations": 50,
+      "traces": 6,
+      "expected_reports": 10,
+      "tests_passed": 27,
+      "runtime_implemented": false
+    },
+    {
+      "id": "BB-RES-003",
+      "issue": 13,
+      "state": "in_review",
+      "path": "research/discovery",
+      "synthetic_cases": 11,
+      "real_participants": 0,
+      "invitations_sent": 0,
+      "launch_decisions_unresolved": 11
+    }
+  ],
+  "new_tasks": [
+    {
+      "id": "BB-LRN-011",
+      "issue": 72,
+      "url": "https://github.com/castlemilk/brainbuilder/issues/72",
+      "priority": "P0",
+      "state": "ready",
+      "phase": "foundation",
+      "relative_effort": "S",
+      "title": "Correct the Big O check so its answer matches the learning outcome",
+      "problem": "The Big-O lesson asks what Big-O helps compare, but its correct option is “Name the invariant and preserve it.” Its feedback instead explains growth as input size changes. A learner can be rewarded for an answer that does not answer the question.",
+      "scope": [
+        "Align the question, correct option, distractors, explanation and observable growth-comparison outcome.",
+        "Preserve stable lesson/block identity while versioning the revised assessment appropriately.",
+        "Update affected client journeys and review the resulting question on web and native."
+      ],
+      "acceptance_criteria": [
+        "The correct option answers the stated growth-comparison question directly.",
+        "Distractors represent meaningful misconceptions and feedback explains why growth differs from exact runtime.",
+        "The revised check renders and scores consistently on web and native without relying on the old unrelated option label.",
+        "A content review records agreement between outcome, prompt, option and explanation before pilot use."
+      ],
+      "source": "https://github.com/castlemilk/brainbuilder/blob/abf70fa012356038ffa5a2c4092584d452724e5e/packages/courseware/src/index.ts#L380-L406"
+    },
+    {
+      "id": "BB-LRN-012",
+      "issue": 73,
+      "url": "https://github.com/castlemilk/brainbuilder/issues/73",
+      "priority": "P0",
+      "state": "ready",
+      "phase": "foundation",
+      "relative_effort": "S",
+      "title": "Align the bubble sort challenge memory claim with its nonmutating implementation",
+      "problem": "The challenge explicitly copies the input with const a = [...arr] and requires a new array, but its quiz scores “O(1) in place” as correct and says it sorts in place. The explanation conflicts with the supplied implementation and mutation contract.",
+      "scope": [
+        "Choose and state an explicit memory-accounting convention for the shown nonmutating implementation.",
+        "Align the quiz, feedback, trace, lab instructions and source-copy explanation.",
+        "Distinguish the shown implementation from a separate in-place bubble-sort variant."
+      ],
+      "acceptance_criteria": [
+        "The copy allocation and its scaling with input size are stated explicitly.",
+        "The quiz question names the shown implementation and memory-accounting convention; the scored answer and feedback agree with it.",
+        "The lab continues to return the expected sorted array and honors the documented input-mutation contract.",
+        "Review and regression evidence cover the return value, input preservation and explanation without implying that every bubble-sort implementation has the same space cost."
+      ],
+      "source": "https://github.com/castlemilk/brainbuilder/blob/abf70fa012356038ffa5a2c4092584d452724e5e/packages/courseware/src/content/challenges.ts#L123-L177"
+    },
+    {
+      "id": "BB-LRN-013",
+      "issue": 74,
+      "url": "https://github.com/castlemilk/brainbuilder/issues/74",
+      "priority": "P1",
+      "state": "ready",
+      "phase": "foundation",
+      "relative_effort": "S",
+      "title": "Make jump search prose and its forward block scan agree",
+      "problem": "The jump-search explanation says it scans backward to the previous jump point, while the supplied code starts at prev and increments prev through the candidate block. The two descriptions teach different traces.",
+      "scope": [
+        "Align the explanation, trace steps and visual/audio descriptions with the implemented forward scan.",
+        "Make sorted-input and candidate-block boundaries explicit.",
+        "Retain a single coherent worked example across representations."
+      ],
+      "acceptance_criteria": [
+        "The prose accurately describes the direction and starting boundary of the supplied code's final scan.",
+        "A worked sorted-array trace identifies the candidate block and each visited index consistently across text and visualization.",
+        "Found and absent-target cases use the same boundary convention and produce the documented result.",
+        "A content review checks the explanation, code, trace and any related audio before pilot use."
+      ],
+      "source": "https://github.com/castlemilk/brainbuilder/blob/abf70fa012356038ffa5a2c4092584d452724e5e/packages/courseware/src/content/searching.ts#L91-L134"
+    }
+  ],
+  "boundaries": [
+    "No merge or deployment",
+    "No participant contact, study execution or spending",
+    "Synthetic fixtures are not learner evidence",
+    "Course completion is not mastery",
+    "Native persistence and device/browser execution remain separate tasks"
+  ]
+}

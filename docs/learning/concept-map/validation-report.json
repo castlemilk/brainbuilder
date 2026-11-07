@@ -1,0 +1,106 @@
+{
+  "validation_date": "2026-11-07",
+  "baseline_validation": {
+    "result": "pass",
+    "remote_baseline": "abf70fa012356038ffa5a2c4092584d452724e5e",
+    "current_checkout_is_identical_to_baseline": true,
+    "changed_source_files": [],
+    "unchanged_content_refs_relocated": 0,
+    "coverage": {
+      "course_count": 1,
+      "unit_count": 13,
+      "lesson_count": 41,
+      "activity_count": 205,
+      "block_kind_counts": {
+        "audio": 18,
+        "code-trace": 19,
+        "diagram": 23,
+        "lab": 11,
+        "project": 1,
+        "quiz": 40,
+        "reflection": 35,
+        "simulation": 17,
+        "text": 41
+      },
+      "declared_assessment_block_count": 52,
+      "generated_concept_lesson_count": 17,
+      "guide_origin_counts": {
+        "generic_fallback": 17,
+        "override": 7,
+        "profile": 17
+      }
+    },
+    "concepts": 56,
+    "prerequisite_edges": 126,
+    "dag": "acyclic",
+    "source_refs_verified": 201,
+    "missing_dedicated_prerequisites": 4,
+    "partial_foundations": 8,
+    "worked_activity_drafts": 4,
+    "limits": "Structural and source-reference validation only. No human subject review, runtime behavior audit or learning efficacy claim."
+  },
+  "working_checkout_validation": {
+    "result": "pass_with_checkout_divergence",
+    "remote_baseline": "abf70fa012356038ffa5a2c4092584d452724e5e",
+    "current_checkout_is_identical_to_baseline": false,
+    "changed_source_files": [
+      "packages/courseware/src/index.ts"
+    ],
+    "unchanged_content_refs_relocated": 100,
+    "coverage": {
+      "course_count": 1,
+      "unit_count": 13,
+      "lesson_count": 41,
+      "activity_count": 205,
+      "block_kind_counts": {
+        "audio": 18,
+        "code-trace": 19,
+        "diagram": 23,
+        "lab": 11,
+        "project": 1,
+        "quiz": 40,
+        "reflection": 35,
+        "simulation": 17,
+        "text": 41
+      },
+      "declared_assessment_block_count": 52,
+      "generated_concept_lesson_count": 17,
+      "guide_origin_counts": {
+        "generic_fallback": 17,
+        "override": 7,
+        "profile": 17
+      }
+    },
+    "concepts": 56,
+    "prerequisite_edges": 126,
+    "dag": "acyclic",
+    "source_refs_verified": 201,
+    "missing_dedicated_prerequisites": 4,
+    "partial_foundations": 8,
+    "worked_activity_drafts": 4,
+    "limits": "Structural and source-reference validation only. No human subject review, runtime behavior audit or learning efficacy claim."
+  },
+  "negative_probes": [
+    {
+      "probe": "duplicate concept ID",
+      "rejected": true,
+      "reason": "Duplicate concept ID: bb.concept.foundations.program-state"
+    },
+    {
+      "probe": "prerequisite cycle",
+      "rejected": true,
+      "reason": "Prerequisite cycle at bb.concept.foundations.program-state"
+    },
+    {
+      "probe": "broken source span",
+      "rejected": true,
+      "reason": "source.lesson.big-o-as-shape: referenced source content changed, disappeared or became ambiguous"
+    },
+    {
+      "probe": "missing source file",
+      "rejected": true,
+      "reason": "Missing or out-of-tree source file: packages/courseware/src/does-not-exist.ts"
+    }
+  ],
+  "approval_limit": "These checks establish inventory and reference consistency only, not human educational accuracy approval."
+}
