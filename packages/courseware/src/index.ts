@@ -124,6 +124,8 @@ export type CourseUnit = {
 
 export type Course = {
   id: string;
+  /** Bump when required lessons or their completion conditions change. */
+  version: string;
   title: string;
   subtitle: string;
   audience: string;
@@ -970,6 +972,7 @@ function conceptLesson(id: string, title: string, summary: string, correctOption
 export function buildAlgorithmsDataStructuresCourse(): Course {
   return {
     id: "algorithms-data-structures",
+    version: "1",
     title: "Algorithms & Data Structures",
     subtitle: "A complete path from mental models to tactile interview practice.",
     audience: "Learners who want durable algorithm intuition through micro lessons, visualizations, checks, and games.",
@@ -1302,3 +1305,5 @@ export {
   conceptLesson
 };
 export type { ConceptLessonProfile };
+export { createCourseEnrollment, restoreCourseEnrollment, completeEnrollmentLesson, getCourseProgressNotice } from "./course-progress";
+export type { CourseEnrollment, CourseProgressHistory } from "./course-progress";

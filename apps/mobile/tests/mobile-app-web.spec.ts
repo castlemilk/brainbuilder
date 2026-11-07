@@ -31,7 +31,7 @@ async function tapTab(page: Page, label: "Home" | "Browse" | "Feed" | "Play" | "
   await page.getByRole("button", { name: `${label} tab` }).click();
 }
 
-test("Expo mobile app completes the new learner course journey on phone and tablet", async ({ page }) => {
+test("Expo mobile app tracks a new learner journey without completing skipped lessons", async ({ page }) => {
   await expectNoConsoleErrors(page, async () => {
     await page.goto("/");
     await expect(page.getByText(/build your learning plan/i)).toBeVisible();
@@ -47,17 +47,17 @@ test("Expo mobile app completes the new learner course journey on phone and tabl
 
   await tapTab(page, "Browse");
   await expect(page.getByText(/course framework/i)).toBeVisible();
-  await expect(page.getByText(/24 micro lessons/i)).toBeVisible();
+  await expect(page.getByText(/41 micro lessons/i)).toBeVisible();
   await expect(page.getByText(/^skia$/i)).toBeVisible();
   await page.getByRole("button", { name: /enroll in course/i }).click();
   await expect(page.getByText(/enrolled/i)).toBeVisible();
-  await expect(page.getByText(/0\/24 lessons complete/i)).toBeVisible();
+  await expect(page.getByText(/0\/41 lessons complete/i)).toBeVisible();
 
   await page.getByRole("button", { name: /name the invariant and preserve it/i }).first().click();
   await expect(page.getByText(/right.*operation works because the invariant survives/i)).toBeVisible();
   await page.getByRole("button", { name: /complete lesson/i }).click();
   await expect(page.getByText(/lesson complete/i)).toBeVisible();
-  await expect(page.getByText(/1\/24 lessons complete/i)).toBeVisible();
+  await expect(page.getByText(/1\/41 lessons complete/i)).toBeVisible();
 
   await page.getByRole("button", { name: /binary search invariants/i }).click();
   await expect(page.getByLabel(/native binary search window/i)).toBeVisible();
@@ -78,12 +78,13 @@ test("Expo mobile app completes the new learner course journey on phone and tabl
   await page.getByRole("button", { name: /capstone arcade/i }).click();
   await expect(page.getByText(/sorting arcade/i)).toBeVisible();
   await expect(page.getByText(/graph route arcade/i)).toBeVisible();
-  await page.getByRole("button", { name: /complete course/i }).click();
-  await expect(page.getByText(/course complete/i)).toBeVisible();
+  await page.getByRole("button", { name: /complete lesson/i }).click();
+  await expect(page.getByText(/^course complete$/i)).toHaveCount(0);
 
   await tapTab(page, "You");
-  await expect(page.getByText(/24\/24 lessons complete/i)).toBeVisible();
-  await expect(page.getByText(/certificate ready/i)).toBeVisible();
+  await expect(page.getByText(/2\/41 lessons complete/i)).toBeVisible();
+  await expect(page.getByText(/course in progress/i)).toBeVisible();
+  await expect(page.getByText(/certificate ready/i)).toHaveCount(0);
   await expectNoHorizontalOverflow(page);
 });
 

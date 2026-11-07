@@ -19,7 +19,7 @@ async function expectNoHorizontalOverflow(page: Page) {
   expect(overflow).toEqual({ html: false, main: false });
 }
 
-test("new learner completes the algorithms learning program lifecycle", async ({ page }, testInfo) => {
+test("new learner progress counts completed lessons and preserves skipped requirements", async ({ page }, testInfo) => {
   await page.goto("/signin");
 
   await expect(page.getByRole("heading", { name: /build your learning plan/i })).toBeVisible();
@@ -67,12 +67,14 @@ test("new learner completes the algorithms learning program lifecycle", async ({
   await expect(page.locator("[data-animated-stage='capstone-sort-lab']")).toBeVisible();
   await page.locator("[data-animated-stage='capstone-sort-lab']").locator("xpath=ancestor::article[1]").getByRole("button", { name: /next stage/i }).click();
   await expect(page.locator("[data-animated-stage='capstone-sort-lab']")).toHaveAttribute("data-stage-step", "1");
-  await page.getByRole("button", { name: /complete course/i }).click();
-  await expect(page.getByText(/course complete/i)).toBeVisible();
+  await page.getByRole("button", { name: /complete lesson/i }).click();
+  await expect(page.getByText(/2\/41 lessons complete/i)).toBeVisible();
+  await expect(page.getByText(/^course complete$/i)).toHaveCount(0);
 
   await goToMain(page, testInfo, "You");
   await expect(page.getByRole("heading", { name: /your learning momentum/i })).toBeVisible();
-  await expect(page.getByText(/course complete/i)).toBeVisible();
-  await expect(page.getByText(/certificate ready/i)).toBeVisible();
+  await expect(page.getByText(/course in progress/i)).toBeVisible();
+  await expect(page.getByText(/2\/41 lessons complete/i)).toBeVisible();
+  await expect(page.getByText(/certificate ready/i)).toHaveCount(0);
   await expectNoHorizontalOverflow(page);
 });
