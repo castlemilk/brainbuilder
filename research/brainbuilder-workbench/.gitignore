@@ -1,0 +1,66 @@
+# Python and notebook runtime artifacts
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# SQLite transaction sidecars and local temporary files
+*-wal
+*-shm
+*-journal
+*.tmp
+*.log
+.DS_Store
+
+# Local configuration and credentials
+.env
+.env.*
+
+# Private study material belongs outside the public research snapshot.
+private/
+interviews/
+participants/
+recruitment/
+consents/
+recordings/
+transcripts/
+raw-interviews/
+
+# New datasets are ignored by default. Only the reviewed public seed is allowed.
+/data/*
+!/data/evidence_seed.json
+!/data/hypotheses.json
+!/data/hypothesis_links.json
+!/data/query_log.json
+!/data/initial_scan_manifest.json
+!/data/research.sqlite
+!/data/raw/
+/data/raw/*
+!/data/raw/competitors.json
+!/data/raw/competitor_query_log.json
+!/data/raw/learner_needs.json
+!/data/raw/learner_needs_coverage.json
+
+# New exports may contain private evidence; review them before allowlisting.
+/reports/*
+!/reports/search_queue.csv
+!/reports/2026-11-07/
+/reports/2026-11-07/*
+!/reports/2026-11-07/evidence.csv
+!/reports/2026-11-07/evidence.json
+!/reports/2026-11-07/evidence_revisions.json
+!/reports/2026-11-07/hypotheses.csv
+!/reports/2026-11-07/hypotheses.json
+!/reports/2026-11-07/hypothesis_links.csv
+!/reports/2026-11-07/hypothesis_links.json
+!/reports/2026-11-07/problem_counts.csv
+!/reports/2026-11-07/query_log.csv
+!/reports/2026-11-07/query_log.json
+!/reports/2026-11-07/report.html
+!/reports/2026-11-07/summary.json

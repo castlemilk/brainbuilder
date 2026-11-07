@@ -1,0 +1,21 @@
+{
+  "prepared_at": "2026-11-07",
+  "evidence_records": 21,
+  "learner_records": 12,
+  "source_checked_learner_threads": 10,
+  "excerpt_only_learner_leads": 2,
+  "competitor_records": 6,
+  "learning_abstract_records": 3,
+  "hypotheses": 6,
+  "hypothesis_links": 33,
+  "performed_search_queries": 27,
+  "search_result_universe": null,
+  "human_reviewed_records": 0,
+  "limits": [
+    "Exploratory convenience sample; no prevalence or market-size inference.",
+    "Source-checked means matching source content, not verifying identity, payment or outcomes.",
+    "Evidence links and theme coding are analyst interpretations; all product hypotheses remain proposed.",
+    "The three learning-study records are explicitly classified as abstract access; full papers were not read.",
+    "No automated collection, outreach or scheduled research was started."
+  ]
+}

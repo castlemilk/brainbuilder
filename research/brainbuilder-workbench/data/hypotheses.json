@@ -1,0 +1,68 @@
+[
+  {
+    "hypothesis_id": "H01",
+    "statement": "A preselected finite session helps the chosen cohort start useful learning with little planning.",
+    "segment": "Technical-learning pilot cohort to be selected",
+    "job_to_be_done": "Use a short available break to make progress toward one learning goal",
+    "riskiest_assumption": "Starting friction is a material reason for not learning",
+    "status": "proposed",
+    "decision_rule": "Chosen usability gate: 6 of 8 participants start and resume without moderator help; investigate consistent misunderstandings.",
+    "next_test": "Observed prototype tasks comparing current navigation with a default next session",
+    "notes": "2/5/10 minutes are design options, not evidence-based optimal durations."
+  },
+  {
+    "hypothesis_id": "H02",
+    "statement": "Saved checkpoints and a bounded restart session help learners return after interruptions and missed days.",
+    "segment": "Adults with interrupted learning routines",
+    "job_to_be_done": "Continue a useful goal without reconstructing context or clearing a large backlog",
+    "riskiest_assumption": "Reduced restart effort changes actual return behavior",
+    "status": "proposed",
+    "decision_rule": "Observe successful resume in usability tasks and self-initiated return during the pilot; keep non-return reasons.",
+    "next_test": "Interruption and missed-day prototype tasks, followed by natural-use pilot",
+    "notes": "Reminders, streak preference and review load must be measured separately."
+  },
+  {
+    "hypothesis_id": "H03",
+    "statement": "Recall and a fresh application prompt make short sessions more valuable than completion alone for the chosen goal.",
+    "segment": "Chosen technical-learning cohort",
+    "job_to_be_done": "Recall and use an idea after the original lesson",
+    "riskiest_assumption": "The questions and feedback measure useful understanding without excessive effort",
+    "status": "proposed",
+    "decision_rule": "Exploratory equal-time matched-topic comparison; positive delayed-recall direction without worse fresh application, with missing follow-up reported.",
+    "next_test": "Small pilot with baseline checks, delayed follow-up and rubric audit",
+    "notes": "Learning studies support mechanisms in their tasks, not this product. Private recall is self-reported, not scored evidence."
+  },
+  {
+    "hypothesis_id": "H04",
+    "statement": "A simple audio mode is sufficiently useful in the selected routine to justify early mobile playback work.",
+    "segment": "Learners who choose listening during travel or other suitable moments",
+    "job_to_be_done": "Continue the same learning goal when reading or tapping is inconvenient",
+    "riskiest_assumption": "Audio is wanted often enough and suits the selected concepts",
+    "status": "proposed",
+    "decision_rule": "Observe real mode choice and completion/return, and compare to screen-based use; do not count listening as correctness.",
+    "next_test": "First-use audio, pause, transcript and resume tasks on a phone; natural-use mode diary",
+    "notes": "Some people prefer rest. Technical visual tasks may need the screen. No claim that multitasking improves learning."
+  },
+  {
+    "hypothesis_id": "H05",
+    "statement": "One concrete technical-learning outcome can justify an additional paid Brainbuilder subscription.",
+    "segment": "Work fluency or interview cohort, selected after discovery",
+    "job_to_be_done": "Make useful progress toward an outcome worth paying to achieve",
+    "riskiest_assumption": "The outcome and routine justify paying alongside established or free alternatives",
+    "status": "proposed",
+    "decision_rule": "Chosen directional gate: around 6 of 24 pilot participants choose a disclosed paid continuation; record actual commitments separately from stated intent.",
+    "next_test": "Recent-purchase interviews followed by a clearly priced continuation offer after actual use",
+    "notes": "No price was validated. Pilot conversion is not a market estimate. No offer or outreach has been sent."
+  },
+  {
+    "hypothesis_id": "H06",
+    "statement": "Learning from selected saved sources adds enough repeat-use value to justify scope after the core routine works.",
+    "segment": "Learners with relevant articles or notes they want to revisit",
+    "job_to_be_done": "Turn personally relevant material into useful practice without assembling a workflow",
+    "riskiest_assumption": "Users value this over existing source-to-study products",
+    "status": "proposed",
+    "decision_rule": "Observe source selection and repeat use separately from interest; only prioritize after the core routine is usable.",
+    "next_test": "Optional source-preview prototype and comparison with current workarounds",
+    "notes": "Competitors already offer source import, quizzes, citations and tracking. This is not a novelty claim."
+  }
+]
