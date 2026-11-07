@@ -41,6 +41,8 @@ import {
 import { buildLearningHome, quizForBite, scoreLearningQuiz, type LearningHome, type LearningMode, type QuizResult } from "@brainbuilder/learning-model";
 import { answerQuiz as submitQuizAnswer, fetchLearningHome } from "./lib/api";
 
+const ScrollingLearningPage = lazy(() => import("./scroll-learning/ScrollingLearningPage"));
+
 const navItems = [
   { id: "home", label: "Home", path: "/", icon: Home },
   { id: "browse", label: "Browse", path: "/browse", icon: Compass },
@@ -121,6 +123,7 @@ type AppRoute =
   | { name: "browse" }
   | { name: "topic"; topicId: string }
   | { name: "course"; courseId: string; lessonId?: string }
+  | { name: "learn" }
   | { name: "feed"; biteId?: string }
   | { name: "play"; labId?: string }
   | { name: "library" }
@@ -149,6 +152,9 @@ function readRoute(): AppRoute {
       lessonId: parts[2] === "lessons" && parts[3] ? decodeURIComponent(parts[3]) : undefined
     };
   }
+  if (pathname === "/learn") {
+    return { name: "learn" };
+  }
   if (pathname === "/feed") {
     return { name: "feed", biteId: params.get("bite") ?? undefined };
   }
@@ -165,6 +171,9 @@ function readRoute(): AppRoute {
 }
 
 function navIdForRoute(route: AppRoute): NavId {
+  if (route.name === "learn") {
+    return "feed";
+  }
   if (route.name === "signin") {
     return "home";
   }
@@ -414,6 +423,14 @@ function App() {
         quests: current.quests.map((quest) => (quest.id === "daily-lessons" ? { ...quest, completed: Math.min(quest.target, quest.completed + 1) } : quest))
       }));
     }
+  }
+
+  if (route.name === "learn") {
+    return (
+      <Suspense fallback={<main className="grid min-h-dvh place-items-center bg-paper p-6" aria-label="Scrolling lessons"><p role="status">Opening your next useful idea…</p></main>}>
+        <ScrollingLearningPage onExit={() => navigate("/")} onOpenCourse={() => navigate(`/courses/${course.id}`)} />
+      </Suspense>
+    );
   }
 
   const routeContent = renderRoute({
@@ -737,6 +754,16 @@ function HomePage({ home, session, onNavigate }: { home: LearningHome; session: 
   return (
     <>
       <Header home={home} session={session} onNavigate={onNavigate} />
+      <section className="flex flex-wrap items-center justify-between gap-4 rounded-[24px] border-2 border-teal bg-teal px-5 py-4 text-white" aria-label="Scrolling lessons">
+        <div>
+          <p className="text-sm font-bold uppercase tracking-wide text-white/80">A little room to learn</p>
+          <h2 className="mt-1 font-display text-2xl font-bold">Your next useful idea.</h2>
+          <p className="mt-1 text-sm text-white/85">Three ideas to explore. A short path to try. A good place to stop.</p>
+        </div>
+        <RouteLink to="/learn" onNavigate={onNavigate} className="inline-flex min-h-12 items-center gap-2 rounded-full border-2 border-white bg-paper px-5 py-2 text-sm font-bold text-teal hover:bg-white">
+          Open scrolling lessons <ChevronRight aria-hidden="true" size={16} />
+        </RouteLink>
+      </section>
       <section className="grid gap-5 xl:grid-cols-2">
         <div className="rounded-[26px] border-2 border-violet bg-paper/95 p-4 shadow-sketch md:p-5">
           <div className="flex items-start justify-between gap-4">
@@ -2755,6 +2782,9 @@ function FeedPage({
   return (
     <section className="grid gap-5">
       <PageIntro eyebrow="Feed" title="Learning feed" copy="A focused stream for one lesson at a time, with audio, save state, and quick checks staying in context." />
+      <RouteLink to="/learn" onNavigate={onNavigate} className="inline-flex min-h-12 w-fit items-center gap-2 rounded-full border-2 border-teal bg-teal px-5 py-2 text-sm font-bold text-white hover:bg-ink">
+        Open scrolling lessons <ChevronRight aria-hidden="true" size={16} />
+      </RouteLink>
       <div className="grid gap-5 xl:grid-cols-[230px_minmax(0,1fr)]">
         <aside className="soft-panel rounded-[24px] p-4">
           <h2 className="font-bold">Bite queue</h2>
