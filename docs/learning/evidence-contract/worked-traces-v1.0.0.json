@@ -1,0 +1,2053 @@
+{
+  "contract_version": "1.0.0",
+  "fixture_only": true,
+  "source_baseline": "abf70fa012356038ffa5a2c4092584d452724e5e",
+  "notice": "Every learner, response, time, judgment and result is synthetic. origin=learner models a learner-record branch for the checker; it does not identify real data. These fixtures must never be imported as learner history. Draft prompts/rubrics illustrate semantics and have not been approved or calibrated.",
+  "catalog": {
+    "sources": {
+      "binary-search@baseline": {
+        "id": "bb.source.courseware.binary-search",
+        "version": "abf70fa012356038ffa5a2c4092584d452724e5e",
+        "url": "https://github.com/castlemilk/brainbuilder/blob/abf70fa012356038ffa5a2c4092584d452724e5e/packages/courseware/src/index.ts#L1065-L1073",
+        "course_id": "algorithms-data-structures",
+        "unit_id": "sorting-searching-selection",
+        "lesson_id": "binary-search-invariants",
+        "block_ids": [
+          "binary-search-read",
+          "binary-search-audio",
+          "binary-search-window",
+          "binary-search-trace",
+          "binary-search-check",
+          "binary-search-lab"
+        ],
+        "status": "reviewed_code_reference_not_subject_matter_approval"
+      }
+    },
+    "prompts": {
+      "recall@draft-1": {
+        "id": "bb.prompt.algorithms.binary-search-recall",
+        "version": "draft-1",
+        "family_id": "bb.prompt.algorithms.binary-search-recall",
+        "kind": "recall",
+        "format": "free_text",
+        "source_ref": "binary-search@baseline",
+        "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+        "author_context_relation": "same_learning_target",
+        "text": "Explain the promise preserved when binary search discards part of a sorted search window.",
+        "status": "synthetic_unapproved_authoring_example"
+      },
+      "recall@draft-2": {
+        "id": "bb.prompt.algorithms.binary-search-recall",
+        "version": "draft-2",
+        "family_id": "bb.prompt.algorithms.binary-search-recall",
+        "kind": "recall",
+        "format": "free_text",
+        "source_ref": "binary-search@baseline",
+        "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+        "author_context_relation": "same_learning_target",
+        "text": "Explain why discarding a region cannot discard a still-possible target in a sorted search window.",
+        "status": "synthetic_unapproved_authoring_example"
+      },
+      "recognition@draft-1": {
+        "id": "bb.prompt.algorithms.binary-search-recognition",
+        "version": "draft-1",
+        "family_id": "bb.prompt.algorithms.binary-search-recognition",
+        "kind": "recognition",
+        "format": "choice",
+        "source_ref": "binary-search@baseline",
+        "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+        "author_context_relation": "same_learning_target",
+        "text": "Choose the statement that identifies the active sorted-window invariant.",
+        "status": "synthetic_unapproved_authoring_example"
+      },
+      "application@draft-1": {
+        "id": "bb.prompt.algorithms.search-strategy-application",
+        "version": "draft-1",
+        "family_id": "bb.prompt.algorithms.search-strategy-application",
+        "kind": "application",
+        "format": "free_text",
+        "source_ref": "binary-search@baseline",
+        "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+        "author_context_relation": "new_context",
+        "text": "A catalogue receives frequent inserts and occasional searches. What must remain true before using binary search, and which update/search tradeoff would you investigate?",
+        "status": "synthetic_unapproved_authoring_example"
+      },
+      "application@draft-2": {
+        "id": "bb.prompt.algorithms.search-strategy-application",
+        "version": "draft-2",
+        "family_id": "bb.prompt.algorithms.search-strategy-application",
+        "kind": "application",
+        "format": "free_text",
+        "source_ref": "binary-search@baseline",
+        "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+        "author_context_relation": "new_context",
+        "text": "For a catalogue with frequent inserts and occasional searches, explain the order requirement and the update/search tradeoff.",
+        "status": "synthetic_unapproved_authoring_example"
+      }
+    },
+    "rubrics": {
+      "recall-rubric@draft-1": {
+        "id": "bb.rubric.algorithms.binary-search-recall",
+        "version": "draft-1",
+        "prompt_families": [
+          "bb.prompt.algorithms.binary-search-recall"
+        ],
+        "source_ref": "binary-search@baseline",
+        "criteria": [
+          "State that any still-possible target remains in the active interval.",
+          "Explain why the comparison and ordering justify discarding a region."
+        ],
+        "status": "synthetic_unapproved_calibration_example"
+      },
+      "recall-rubric@draft-2": {
+        "id": "bb.rubric.algorithms.binary-search-recall",
+        "version": "draft-2",
+        "prompt_families": [
+          "bb.prompt.algorithms.binary-search-recall"
+        ],
+        "source_ref": "binary-search@baseline",
+        "criteria": [
+          "Accept equivalent boundary reasoning when it preserves every still-possible target.",
+          "Explain the ordering assumption and justified discard."
+        ],
+        "status": "synthetic_unapproved_calibration_example"
+      },
+      "recognition-rubric@draft-1": {
+        "id": "bb.rubric.algorithms.binary-search-recognition",
+        "version": "draft-1",
+        "prompt_families": [
+          "bb.prompt.algorithms.binary-search-recognition"
+        ],
+        "source_ref": "binary-search@baseline",
+        "criteria": [
+          "Recognize the keyed option; do not treat choosing it as produced recall."
+        ],
+        "status": "synthetic_unapproved_calibration_example"
+      },
+      "application-rubric@draft-1": {
+        "id": "bb.rubric.algorithms.search-strategy-application",
+        "version": "draft-1",
+        "prompt_families": [
+          "bb.prompt.algorithms.search-strategy-application"
+        ],
+        "source_ref": "binary-search@baseline",
+        "criteria": [
+          "Identify the maintained-order requirement.",
+          "Explain a relevant update/search tradeoff and a limitation of the chosen strategy."
+        ],
+        "status": "synthetic_unapproved_calibration_example"
+      }
+    }
+  },
+  "observations": [
+    {
+      "id": "fixture-b-read",
+      "learner_id": "fixture-basic",
+      "opportunity_id": null,
+      "kind": "exposure",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:00:00Z",
+      "occurred_at": "2026-10-01T08:01:00Z",
+      "clock_status": "comparable",
+      "mode": "read",
+      "coverage": "completed"
+    },
+    {
+      "id": "fixture-b-listened",
+      "learner_id": "fixture-basic",
+      "opportunity_id": null,
+      "kind": "exposure",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:02:00Z",
+      "occurred_at": "2026-10-01T08:03:04Z",
+      "clock_status": "comparable",
+      "mode": "listened",
+      "coverage": "completed"
+    },
+    {
+      "id": "fixture-b-private-had-it",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-private-had-it",
+      "kind": "private_practice",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:04:00Z",
+      "occurred_at": "2026-10-01T08:04:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "private_rating": "had_it",
+      "assistance": {
+        "status": "known",
+        "events": [
+          {
+            "kind": "answer_reveal",
+            "at": "2026-10-01T08:04:20Z",
+            "source_ref": "binary-search@baseline"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fixture-b-private-partly",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-private-partly",
+      "kind": "private_practice",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:05:00Z",
+      "occurred_at": "2026-10-01T08:05:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "private_rating": "partly",
+      "assistance": {
+        "status": "known",
+        "events": [
+          {
+            "kind": "answer_reveal",
+            "at": "2026-10-01T08:05:20Z",
+            "source_ref": "binary-search@baseline"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fixture-b-private-needs-pass",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-private-needs-pass",
+      "kind": "private_practice",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:06:00Z",
+      "occurred_at": "2026-10-01T08:06:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "private_rating": "need_another_pass",
+      "assistance": {
+        "status": "known",
+        "events": [
+          {
+            "kind": "answer_reveal",
+            "at": "2026-10-01T08:06:20Z",
+            "source_ref": "binary-search@baseline"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fixture-b-correct",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-correct",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:10:00Z",
+      "occurred_at": "2026-10-01T08:10:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": [
+          {
+            "kind": "answer_reveal",
+            "at": "2026-10-01T08:10:40Z",
+            "source_ref": "binary-search@baseline"
+          }
+        ]
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-b-correct",
+          "at": "2026-10-01T08:11:00Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region."
+    },
+    {
+      "id": "fixture-b-partial",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-partial",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:12:00Z",
+      "occurred_at": "2026-10-01T08:12:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-b-partial",
+          "at": "2026-10-01T08:13:00Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "partial"
+        }
+      ],
+      "response_text": "It repeatedly chooses the middle, but I have not explained which values can safely be discarded."
+    },
+    {
+      "id": "fixture-b-incorrect",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "basic-retry-opportunity",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:14:00Z",
+      "occurred_at": "2026-10-01T08:14:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": [
+          {
+            "kind": "answer_reveal",
+            "at": "2026-10-01T08:14:40Z",
+            "source_ref": "binary-search@baseline"
+          }
+        ]
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-b-incorrect",
+          "at": "2026-10-01T08:15:00Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "incorrect"
+        }
+      ],
+      "response_text": "Discard whichever half is larger, regardless of the comparison."
+    },
+    {
+      "id": "fixture-b-retry-correct",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "basic-retry-opportunity",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:15:00Z",
+      "occurred_at": "2026-10-01T08:15:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-b-retry-correct",
+          "at": "2026-10-01T08:16:00Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region."
+    },
+    {
+      "id": "fixture-b-hint",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-hint",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:16:00Z",
+      "occurred_at": "2026-10-01T08:16:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": [
+          {
+            "kind": "hint",
+            "at": "2026-10-01T08:16:20Z",
+            "source_ref": "binary-search@baseline"
+          }
+        ]
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-b-hint",
+          "at": "2026-10-01T08:17:00Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region."
+    },
+    {
+      "id": "fixture-b-reveal",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-reveal",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:18:00Z",
+      "occurred_at": "2026-10-01T08:18:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": [
+          {
+            "kind": "answer_reveal",
+            "at": "2026-10-01T08:18:20Z",
+            "source_ref": "binary-search@baseline"
+          }
+        ]
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-b-reveal",
+          "at": "2026-10-01T08:19:00Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region."
+    },
+    {
+      "id": "fixture-b-worked-example",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-worked-example",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:20:00Z",
+      "occurred_at": "2026-10-01T08:20:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": [
+          {
+            "kind": "worked_example",
+            "at": "2026-10-01T08:20:20Z",
+            "source_ref": "binary-search@baseline"
+          }
+        ]
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-b-worked-example",
+          "at": "2026-10-01T08:21:00Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region."
+    },
+    {
+      "id": "fixture-b-skipped",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-skipped",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:22:00Z",
+      "occurred_at": "2026-10-01T08:22:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "skipped",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [],
+      "skip_reason": "not_sure_yet"
+    },
+    {
+      "id": "fixture-b-uncertain",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-uncertain",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:24:00Z",
+      "occurred_at": "2026-10-01T08:24:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-b-uncertain",
+          "at": "2026-10-01T08:25:00Z",
+          "status": "uncertain",
+          "method": "none",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region."
+    },
+    {
+      "id": "fixture-b-manual-pending",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-manual-pending",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:26:00Z",
+      "occurred_at": "2026-10-01T08:26:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-b-manual-pending",
+          "at": "2026-10-01T08:27:00Z",
+          "status": "manual_review",
+          "method": "none",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region."
+    },
+    {
+      "id": "fixture-b-pending",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-pending",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:28:00Z",
+      "occurred_at": "2026-10-01T08:28:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-b-pending",
+          "at": "2026-10-01T08:29:00Z",
+          "status": "pending",
+          "method": "none",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region."
+    },
+    {
+      "id": "fixture-b-assistance-unknown",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-assistance-unknown",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:30:00Z",
+      "occurred_at": "2026-10-01T08:30:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "unknown",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-b-assistance-unknown",
+          "at": "2026-10-01T08:31:00Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region."
+    },
+    {
+      "id": "fixture-b-recognition",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-recognition",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:32:00Z",
+      "occurred_at": "2026-10-01T08:32:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recognition@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-b-recognition",
+          "at": "2026-10-01T08:33:00Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recognition-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region."
+    },
+    {
+      "id": "fixture-b-demo",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-demo",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "demo",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:34:00Z",
+      "occurred_at": "2026-10-01T08:34:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-b-demo",
+          "at": "2026-10-01T08:35:00Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region."
+    },
+    {
+      "id": "fixture-b-private-switch",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "basic-mode-switch",
+      "kind": "private_practice",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:36:00Z",
+      "occurred_at": "2026-10-01T08:36:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "private_rating": "had_it",
+      "assistance": {
+        "status": "known",
+        "events": [
+          {
+            "kind": "answer_reveal",
+            "at": "2026-10-01T08:36:20Z",
+            "source_ref": "binary-search@baseline"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fixture-b-after-private",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "basic-mode-switch",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:37:00Z",
+      "occurred_at": "2026-10-01T08:37:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-b-after-private",
+          "at": "2026-10-01T08:38:00Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region."
+    },
+    {
+      "id": "fixture-b-disputed",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-disputed",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:38:00Z",
+      "occurred_at": "2026-10-01T08:38:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-b-disputed",
+          "at": "2026-10-01T08:39:00Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        },
+        {
+          "id": "fixture-assessment-b-disputed-reopened",
+          "at": "2026-10-01T09:00:00Z",
+          "status": "disputed",
+          "method": "none",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": "fixture-assessment-b-disputed",
+          "reason": "The synthetic assessor judgment is contested; it is excluded until resolved."
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region."
+    },
+    {
+      "id": "fixture-b-no-response",
+      "learner_id": "fixture-basic",
+      "opportunity_id": "b-no-response",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T08:40:00Z",
+      "occurred_at": "2026-10-01T08:40:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "no_response",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [],
+      "skip_reason": "left_before_submission"
+    },
+    {
+      "id": "fixture-m-anchor",
+      "learner_id": "fixture-manual",
+      "opportunity_id": null,
+      "kind": "exposure",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T10:00:00Z",
+      "occurred_at": "2026-10-01T10:01:00Z",
+      "clock_status": "comparable",
+      "mode": "read",
+      "coverage": "completed"
+    },
+    {
+      "id": "fixture-m-response",
+      "learner_id": "fixture-manual",
+      "opportunity_id": "m-response",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T10:05:00Z",
+      "occurred_at": "2026-10-01T10:05:30Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-m-response",
+          "at": "2026-10-01T10:06:00Z",
+          "status": "pending",
+          "method": "none",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null
+        },
+        {
+          "id": "fixture-assessment-m-review",
+          "at": "2026-10-01T10:06:30Z",
+          "status": "manual_review",
+          "method": "none",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": "fixture-assessment-m-response",
+          "reason": "An ambiguous synthetic response needs human review."
+        },
+        {
+          "id": "fixture-assessment-m-partial",
+          "at": "2026-10-09T10:00:00Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": "fixture-assessment-m-review",
+          "outcome": "partial",
+          "reason": "Human review identifies an omitted boundary explanation."
+        },
+        {
+          "id": "fixture-assessment-m-revised",
+          "at": "2026-10-10T10:00:00Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-2",
+          "supersedes": "fixture-assessment-m-partial",
+          "outcome": "correct",
+          "reason": "A documented rubric revision accepts an equivalent formulation; preserve both prior judgments."
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region.",
+      "delay": {
+        "anchor_id": "fixture-m-anchor",
+        "history_status": "complete_recorded_app_history",
+        "outside_practice": "unknown",
+        "relevance_concepts": [
+          "bb.concept.algorithms.binary-search-interval-invariant"
+        ],
+        "declared_elapsed_seconds": 270,
+        "declared_intervening_ids": []
+      }
+    },
+    {
+      "id": "fixture-d-clean-anchor",
+      "learner_id": "fixture-delay-clean",
+      "opportunity_id": null,
+      "kind": "exposure",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T09:00:00Z",
+      "occurred_at": "2026-10-01T09:01:00Z",
+      "clock_status": "comparable",
+      "mode": "read",
+      "coverage": "completed"
+    },
+    {
+      "id": "fixture-d-clean",
+      "learner_id": "fixture-delay-clean",
+      "opportunity_id": "d-clean",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-08T12:30:00Z",
+      "occurred_at": "2026-10-08T12:31:00Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-2",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "delayed",
+      "assessments": [
+        {
+          "id": "fixture-assessment-d-clean",
+          "at": "2026-10-08T12:31:30Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region.",
+      "delay": {
+        "anchor_id": "fixture-d-clean-anchor",
+        "history_status": "complete_recorded_app_history",
+        "outside_practice": "unknown",
+        "relevance_concepts": [
+          "bb.concept.algorithms.binary-search-interval-invariant"
+        ],
+        "declared_elapsed_seconds": 617400,
+        "declared_intervening_ids": []
+      }
+    },
+    {
+      "id": "fixture-d-practiced-anchor",
+      "learner_id": "fixture-delay-practiced",
+      "opportunity_id": null,
+      "kind": "exposure",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T09:00:00Z",
+      "occurred_at": "2026-10-01T09:01:00Z",
+      "clock_status": "comparable",
+      "mode": "read",
+      "coverage": "completed"
+    },
+    {
+      "id": "fixture-d-practiced-review",
+      "learner_id": "fixture-delay-practiced",
+      "opportunity_id": null,
+      "kind": "exposure",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-07T10:00:00Z",
+      "occurred_at": "2026-10-07T10:01:00Z",
+      "clock_status": "comparable",
+      "mode": "read",
+      "coverage": "completed"
+    },
+    {
+      "id": "fixture-d-practiced",
+      "learner_id": "fixture-delay-practiced",
+      "opportunity_id": "d-practiced",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-08T12:30:00Z",
+      "occurred_at": "2026-10-08T12:31:00Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-2",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "delayed",
+      "assessments": [
+        {
+          "id": "fixture-assessment-d-practiced",
+          "at": "2026-10-08T12:31:30Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region.",
+      "delay": {
+        "anchor_id": "fixture-d-practiced-anchor",
+        "history_status": "complete_recorded_app_history",
+        "outside_practice": "unknown",
+        "relevance_concepts": [
+          "bb.concept.algorithms.binary-search-interval-invariant"
+        ],
+        "declared_elapsed_seconds": 617400,
+        "declared_intervening_ids": [
+          "fixture-d-practiced-review"
+        ]
+      }
+    },
+    {
+      "id": "fixture-d-unknown-history-anchor",
+      "learner_id": "fixture-delay-unknown-history",
+      "opportunity_id": null,
+      "kind": "exposure",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T09:00:00Z",
+      "occurred_at": "2026-10-01T09:01:00Z",
+      "clock_status": "comparable",
+      "mode": "read",
+      "coverage": "completed"
+    },
+    {
+      "id": "fixture-d-unknown-history",
+      "learner_id": "fixture-delay-unknown-history",
+      "opportunity_id": "d-unknown-history",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-08T12:30:00Z",
+      "occurred_at": "2026-10-08T12:31:00Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-2",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "delayed",
+      "assessments": [
+        {
+          "id": "fixture-assessment-d-unknown-history",
+          "at": "2026-10-08T12:31:30Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region.",
+      "delay": {
+        "anchor_id": "fixture-d-unknown-history-anchor",
+        "history_status": "unknown",
+        "outside_practice": "unknown",
+        "relevance_concepts": [
+          "bb.concept.algorithms.binary-search-interval-invariant"
+        ],
+        "declared_elapsed_seconds": 617400,
+        "declared_intervening_ids": []
+      }
+    },
+    {
+      "id": "fixture-d-clock-uncertain-anchor",
+      "learner_id": "fixture-delay-clock-uncertain",
+      "opportunity_id": null,
+      "kind": "exposure",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T09:00:00Z",
+      "occurred_at": "2026-10-01T09:01:00Z",
+      "clock_status": "comparable",
+      "mode": "read",
+      "coverage": "completed"
+    },
+    {
+      "id": "fixture-d-clock-uncertain",
+      "learner_id": "fixture-delay-clock-uncertain",
+      "opportunity_id": "d-clock-uncertain",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-08T12:30:00Z",
+      "occurred_at": "2026-10-08T12:31:00Z",
+      "clock_status": "uncertain",
+      "prompt_ref": "recall@draft-2",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "delayed",
+      "assessments": [
+        {
+          "id": "fixture-assessment-d-clock-uncertain",
+          "at": "2026-10-08T12:31:30Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region.",
+      "delay": {
+        "anchor_id": "fixture-d-clock-uncertain-anchor",
+        "history_status": "complete_recorded_app_history",
+        "outside_practice": "unknown",
+        "relevance_concepts": [
+          "bb.concept.algorithms.binary-search-interval-invariant"
+        ],
+        "declared_elapsed_seconds": null,
+        "declared_intervening_ids": []
+      }
+    },
+    {
+      "id": "fixture-d-partial-anchor",
+      "learner_id": "fixture-delay-partial",
+      "opportunity_id": null,
+      "kind": "exposure",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T09:00:00Z",
+      "occurred_at": "2026-10-01T09:01:00Z",
+      "clock_status": "comparable",
+      "mode": "read",
+      "coverage": "completed"
+    },
+    {
+      "id": "fixture-d-partial",
+      "learner_id": "fixture-delay-partial",
+      "opportunity_id": "d-partial",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-09T10:00:00Z",
+      "occurred_at": "2026-10-09T10:01:00Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-2",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "delayed",
+      "assessments": [
+        {
+          "id": "fixture-assessment-d-partial",
+          "at": "2026-10-09T10:01:30Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "partial"
+        }
+      ],
+      "response_text": "It repeatedly chooses the middle, but I have not explained which values can safely be discarded.",
+      "delay": {
+        "anchor_id": "fixture-d-partial-anchor",
+        "history_status": "complete_recorded_app_history",
+        "outside_practice": "unknown",
+        "relevance_concepts": [
+          "bb.concept.algorithms.binary-search-interval-invariant"
+        ],
+        "declared_elapsed_seconds": 694800,
+        "declared_intervening_ids": []
+      }
+    },
+    {
+      "id": "fixture-d-hint-anchor",
+      "learner_id": "fixture-delay-hint",
+      "opportunity_id": null,
+      "kind": "exposure",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T09:00:00Z",
+      "occurred_at": "2026-10-01T09:01:00Z",
+      "clock_status": "comparable",
+      "mode": "read",
+      "coverage": "completed"
+    },
+    {
+      "id": "fixture-d-hint",
+      "learner_id": "fixture-delay-hint",
+      "opportunity_id": "d-hint",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-08T12:30:00Z",
+      "occurred_at": "2026-10-08T12:31:00Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-2",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": [
+          {
+            "kind": "hint",
+            "at": "2026-10-08T12:30:30Z",
+            "source_ref": "binary-search@baseline"
+          }
+        ]
+      },
+      "check_timing": "delayed",
+      "assessments": [
+        {
+          "id": "fixture-assessment-d-hint",
+          "at": "2026-10-08T12:31:30Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region.",
+      "delay": {
+        "anchor_id": "fixture-d-hint-anchor",
+        "history_status": "complete_recorded_app_history",
+        "outside_practice": "unknown",
+        "relevance_concepts": [
+          "bb.concept.algorithms.binary-search-interval-invariant"
+        ],
+        "declared_elapsed_seconds": 617400,
+        "declared_intervening_ids": []
+      }
+    },
+    {
+      "id": "fixture-d-early-anchor",
+      "learner_id": "fixture-delay-early",
+      "opportunity_id": null,
+      "kind": "exposure",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T09:00:00Z",
+      "occurred_at": "2026-10-01T09:01:00Z",
+      "clock_status": "comparable",
+      "mode": "read",
+      "coverage": "completed"
+    },
+    {
+      "id": "fixture-d-early",
+      "learner_id": "fixture-delay-early",
+      "opportunity_id": "d-early",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-02T09:00:00Z",
+      "occurred_at": "2026-10-02T09:01:00Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-2",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "delayed",
+      "assessments": [
+        {
+          "id": "fixture-assessment-d-early",
+          "at": "2026-10-02T09:01:30Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region.",
+      "delay": {
+        "anchor_id": "fixture-d-early-anchor",
+        "history_status": "complete_recorded_app_history",
+        "outside_practice": "unknown",
+        "relevance_concepts": [
+          "bb.concept.algorithms.binary-search-interval-invariant"
+        ],
+        "declared_elapsed_seconds": 86400,
+        "declared_intervening_ids": []
+      }
+    },
+    {
+      "id": "fixture-d-pending-anchor",
+      "learner_id": "fixture-delay-pending",
+      "opportunity_id": null,
+      "kind": "exposure",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-01T09:00:00Z",
+      "occurred_at": "2026-10-01T09:01:00Z",
+      "clock_status": "comparable",
+      "mode": "read",
+      "coverage": "completed"
+    },
+    {
+      "id": "fixture-d-pending",
+      "learner_id": "fixture-delay-pending",
+      "opportunity_id": "d-pending",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-08T12:30:00Z",
+      "occurred_at": "2026-10-08T12:31:00Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-2",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "delayed",
+      "assessments": [
+        {
+          "id": "fixture-assessment-d-pending",
+          "at": "2026-10-08T12:31:30Z",
+          "status": "pending",
+          "method": "none",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region.",
+      "delay": {
+        "anchor_id": "fixture-d-pending-anchor",
+        "history_status": "complete_recorded_app_history",
+        "outside_practice": "unknown",
+        "relevance_concepts": [
+          "bb.concept.algorithms.binary-search-interval-invariant"
+        ],
+        "declared_elapsed_seconds": 617400,
+        "declared_intervening_ids": []
+      }
+    },
+    {
+      "id": "fixture-d-missing-anchor",
+      "learner_id": "fixture-delay-missing",
+      "opportunity_id": "d-missing-anchor",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-08T12:30:00Z",
+      "occurred_at": "2026-10-08T12:31:00Z",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-2",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "delayed",
+      "assessments": [
+        {
+          "id": "fixture-assessment-d-missing-anchor",
+          "at": "2026-10-08T12:31:30Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region.",
+      "delay": {
+        "anchor_id": null,
+        "history_status": "unknown",
+        "outside_practice": "unknown",
+        "relevance_concepts": [
+          "bb.concept.algorithms.binary-search-interval-invariant"
+        ],
+        "declared_elapsed_seconds": null,
+        "declared_intervening_ids": []
+      }
+    },
+    {
+      "id": "fixture-tz-anchor",
+      "learner_id": "fixture-offset",
+      "opportunity_id": null,
+      "kind": "exposure",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-31T11:59:00-04:00",
+      "occurred_at": "2026-10-31T12:00:00-04:00",
+      "clock_status": "comparable",
+      "mode": "read",
+      "coverage": "completed"
+    },
+    {
+      "id": "fixture-tz-response",
+      "learner_id": "fixture-offset",
+      "opportunity_id": "tz-response",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-11-01T11:59:00-05:00",
+      "occurred_at": "2026-11-01T12:00:00-05:00",
+      "clock_status": "comparable",
+      "prompt_ref": "recall@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "delayed",
+      "assessments": [
+        {
+          "id": "fixture-assessment-tz-response",
+          "at": "2026-11-01T12:00:30-05:00",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "recall-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "The remaining interval still contains every possible target; ordering and the comparison justify the discarded region.",
+      "delay": {
+        "anchor_id": "fixture-tz-anchor",
+        "history_status": "complete_recorded_app_history",
+        "outside_practice": "unknown",
+        "relevance_concepts": [
+          "bb.concept.algorithms.binary-search-interval-invariant"
+        ],
+        "declared_elapsed_seconds": 90000,
+        "declared_intervening_ids": []
+      }
+    },
+    {
+      "id": "fixture-app-fresh",
+      "learner_id": "fixture-app-a",
+      "opportunity_id": "app-fresh",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-03T12:00:00Z",
+      "occurred_at": "2026-10-03T12:01:00Z",
+      "clock_status": "comparable",
+      "prompt_ref": "application@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-app-fresh",
+          "at": "2026-10-03T12:01:30Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "application-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "Synthetic application response; the fixed judgment illustrates semantics and is not an executable or approved grading rubric.",
+      "freshness": {
+        "history_status": "complete_recorded_app_history",
+        "declared_prior_family_ids": [],
+        "outside_scenario_exposure": "unknown"
+      }
+    },
+    {
+      "id": "fixture-app-repeat",
+      "learner_id": "fixture-app-a",
+      "opportunity_id": "app-repeat",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-04T12:00:00Z",
+      "occurred_at": "2026-10-04T12:01:00Z",
+      "clock_status": "comparable",
+      "prompt_ref": "application@draft-2",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-app-repeat",
+          "at": "2026-10-04T12:01:30Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "application-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "Synthetic application response; the fixed judgment illustrates semantics and is not an executable or approved grading rubric.",
+      "freshness": {
+        "history_status": "complete_recorded_app_history",
+        "declared_prior_family_ids": [
+          "fixture-app-fresh"
+        ],
+        "outside_scenario_exposure": "unknown"
+      }
+    },
+    {
+      "id": "fixture-app-unknown",
+      "learner_id": "fixture-app-b",
+      "opportunity_id": "app-unknown",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-03T12:00:00Z",
+      "occurred_at": "2026-10-03T12:01:00Z",
+      "clock_status": "comparable",
+      "prompt_ref": "application@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-app-unknown",
+          "at": "2026-10-03T12:01:30Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "application-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "Synthetic application response; the fixed judgment illustrates semantics and is not an executable or approved grading rubric.",
+      "freshness": {
+        "history_status": "unknown",
+        "declared_prior_family_ids": [],
+        "outside_scenario_exposure": "unknown"
+      }
+    },
+    {
+      "id": "fixture-app-worked",
+      "learner_id": "fixture-app-c",
+      "opportunity_id": "app-worked",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-03T12:00:00Z",
+      "occurred_at": "2026-10-03T12:01:00Z",
+      "clock_status": "comparable",
+      "prompt_ref": "application@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": [
+          {
+            "kind": "worked_example",
+            "at": "2026-10-03T12:00:30Z",
+            "source_ref": "binary-search@baseline"
+          }
+        ]
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-app-worked",
+          "at": "2026-10-03T12:01:30Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "application-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "correct"
+        }
+      ],
+      "response_text": "Synthetic application response; the fixed judgment illustrates semantics and is not an executable or approved grading rubric.",
+      "freshness": {
+        "history_status": "complete_recorded_app_history",
+        "declared_prior_family_ids": [],
+        "outside_scenario_exposure": "unknown"
+      }
+    },
+    {
+      "id": "fixture-app-partial",
+      "learner_id": "fixture-app-d",
+      "opportunity_id": "app-partial",
+      "kind": "response",
+      "concept_id": "bb.concept.algorithms.binary-search-interval-invariant",
+      "origin": "learner",
+      "source_ref": "binary-search@baseline",
+      "started_at": "2026-10-03T12:00:00Z",
+      "occurred_at": "2026-10-03T12:01:00Z",
+      "clock_status": "comparable",
+      "prompt_ref": "application@draft-1",
+      "response_state": "submitted",
+      "assistance": {
+        "status": "known",
+        "events": []
+      },
+      "check_timing": "immediate",
+      "assessments": [
+        {
+          "id": "fixture-assessment-app-partial",
+          "at": "2026-10-03T12:01:30Z",
+          "status": "final",
+          "method": "human",
+          "rubric_ref": "application-rubric@draft-1",
+          "supersedes": null,
+          "outcome": "partial"
+        }
+      ],
+      "response_text": "Synthetic application response; the fixed judgment illustrates semantics and is not an executable or approved grading rubric.",
+      "freshness": {
+        "history_status": "complete_recorded_app_history",
+        "declared_prior_family_ids": [],
+        "outside_scenario_exposure": "unknown"
+      }
+    }
+  ],
+  "traces": [
+    {
+      "id": "T01",
+      "title": "Read/listen and three private self-reports",
+      "observation_ids": [
+        "fixture-b-read",
+        "fixture-b-listened",
+        "fixture-b-private-had-it",
+        "fixture-b-private-partly",
+        "fixture-b-private-needs-pass"
+      ],
+      "explanation": "No observed submitted answer exists; no correctness or checked credit can be produced."
+    },
+    {
+      "id": "T02",
+      "title": "Primary responses, assistance, retries and unresolved states",
+      "observation_ids": [
+        "fixture-b-read",
+        "fixture-b-listened",
+        "fixture-b-private-had-it",
+        "fixture-b-private-partly",
+        "fixture-b-private-needs-pass",
+        "fixture-b-correct",
+        "fixture-b-partial",
+        "fixture-b-incorrect",
+        "fixture-b-retry-correct",
+        "fixture-b-hint",
+        "fixture-b-reveal",
+        "fixture-b-worked-example",
+        "fixture-b-skipped",
+        "fixture-b-uncertain",
+        "fixture-b-manual-pending",
+        "fixture-b-pending",
+        "fixture-b-assistance-unknown",
+        "fixture-b-recognition",
+        "fixture-b-demo",
+        "fixture-b-private-switch",
+        "fixture-b-after-private",
+        "fixture-b-disputed",
+        "fixture-b-no-response",
+        "fixture-b-correct"
+      ],
+      "explanation": "Only the first final unassisted produced response per opportunity is eligible. The first incorrect answer remains in the denominator despite a correct retry. Mode switching retains the private reveal."
+    },
+    {
+      "id": "T03",
+      "title": "Manual review and rubric revision at successive as-of cutoffs",
+      "observation_ids": [
+        "fixture-m-anchor",
+        "fixture-m-response"
+      ],
+      "explanation": "The same answer is submitted once; late grading and a later rubric correction do not create new responses or change its 270-second interval."
+    },
+    {
+      "id": "T04",
+      "title": "Delayed checks with real elapsed time and intervening history",
+      "observation_ids": [
+        "fixture-d-clean",
+        "fixture-d-practiced",
+        "fixture-d-unknown-history",
+        "fixture-d-clock-uncertain",
+        "fixture-d-partial",
+        "fixture-d-hint",
+        "fixture-d-early",
+        "fixture-d-pending",
+        "fixture-d-missing-anchor",
+        "fixture-d-clean"
+      ],
+      "explanation": "The 7–9 day reporting window is an example chosen for this fixture, not an optimal review interval. Recorded review and unknown histories remain visible."
+    },
+    {
+      "id": "T05",
+      "title": "Offset-aware timestamps",
+      "observation_ids": [
+        "fixture-tz-response"
+      ],
+      "explanation": "Explicit UTC offsets yield 90,000 seconds, not a calendar-day assumption of 86,400."
+    },
+    {
+      "id": "T06",
+      "title": "Application with new, repeated, unknown and assisted context",
+      "observation_ids": [
+        "fixture-app-fresh",
+        "fixture-app-repeat",
+        "fixture-app-unknown",
+        "fixture-app-worked",
+        "fixture-app-partial",
+        "fixture-app-fresh"
+      ],
+      "explanation": "Freshness is scoped to known recorded app history and a proposed new context. A new prompt version in the same family is still previously encountered."
+    }
+  ],
+  "reports": [
+    {
+      "id": "R01-exposure-private",
+      "trace_id": "T01",
+      "measure": "unassisted_recall",
+      "as_of": "2026-10-01T10:00:00Z",
+      "population_note": "Fictional check opportunities in this named trace; never real learner or concept counts.",
+      "expected": {
+        "numerator": 0,
+        "denominator": 0,
+        "eligible_ids": [],
+        "correct_ids": [],
+        "outcomes": {
+          "correct": 0,
+          "partial": 0,
+          "incorrect": 0
+        },
+        "excluded": {
+          "fixture-b-read": "exposure_only",
+          "fixture-b-listened": "exposure_only",
+          "fixture-b-private-had-it": "private_self_report",
+          "fixture-b-private-partly": "private_self_report",
+          "fixture-b-private-needs-pass": "private_self_report"
+        },
+        "duplicate_deliveries": 0,
+        "ratio": null
+      }
+    },
+    {
+      "id": "R02-first-responses",
+      "trace_id": "T02",
+      "measure": "unassisted_recall",
+      "as_of": "2026-10-01T10:00:00Z",
+      "population_note": "Fictional check opportunities in this named trace; never real learner or concept counts.",
+      "expected": {
+        "numerator": 1,
+        "denominator": 3,
+        "eligible_ids": [
+          "fixture-b-correct",
+          "fixture-b-incorrect",
+          "fixture-b-partial"
+        ],
+        "correct_ids": [
+          "fixture-b-correct"
+        ],
+        "outcomes": {
+          "correct": 1,
+          "partial": 1,
+          "incorrect": 1
+        },
+        "excluded": {
+          "fixture-b-read": "exposure_only",
+          "fixture-b-listened": "exposure_only",
+          "fixture-b-private-had-it": "private_self_report",
+          "fixture-b-private-partly": "private_self_report",
+          "fixture-b-private-needs-pass": "private_self_report",
+          "fixture-b-retry-correct": "retry_same_opportunity",
+          "fixture-b-hint": "assisted",
+          "fixture-b-reveal": "assisted",
+          "fixture-b-worked-example": "assisted",
+          "fixture-b-skipped": "skipped",
+          "fixture-b-uncertain": "assessment_uncertain",
+          "fixture-b-manual-pending": "assessment_manual_review",
+          "fixture-b-pending": "assessment_pending",
+          "fixture-b-assistance-unknown": "assistance_unknown",
+          "fixture-b-recognition": "recognition_not_produced_recall",
+          "fixture-b-demo": "demo",
+          "fixture-b-private-switch": "private_self_report",
+          "fixture-b-after-private": "assisted",
+          "fixture-b-disputed": "assessment_disputed",
+          "fixture-b-no-response": "no_response"
+        },
+        "duplicate_deliveries": 1,
+        "ratio": "1/3"
+      }
+    },
+    {
+      "id": "R03-manual-pending",
+      "trace_id": "T03",
+      "measure": "unassisted_recall",
+      "as_of": "2026-10-02T12:00:00Z",
+      "population_note": "Fictional check opportunities in this named trace; never real learner or concept counts.",
+      "expected": {
+        "numerator": 0,
+        "denominator": 0,
+        "eligible_ids": [],
+        "correct_ids": [],
+        "outcomes": {
+          "correct": 0,
+          "partial": 0,
+          "incorrect": 0
+        },
+        "excluded": {
+          "fixture-m-anchor": "exposure_only",
+          "fixture-m-response": "assessment_manual_review"
+        },
+        "duplicate_deliveries": 0,
+        "ratio": null
+      }
+    },
+    {
+      "id": "R04-manual-partial",
+      "trace_id": "T03",
+      "measure": "unassisted_recall",
+      "as_of": "2026-10-09T12:00:00Z",
+      "population_note": "Fictional check opportunities in this named trace; never real learner or concept counts.",
+      "expected": {
+        "numerator": 0,
+        "denominator": 1,
+        "eligible_ids": [
+          "fixture-m-response"
+        ],
+        "correct_ids": [],
+        "outcomes": {
+          "correct": 0,
+          "partial": 1,
+          "incorrect": 0
+        },
+        "excluded": {
+          "fixture-m-anchor": "exposure_only"
+        },
+        "duplicate_deliveries": 0,
+        "ratio": "0/1"
+      }
+    },
+    {
+      "id": "R05-manual-revised",
+      "trace_id": "T03",
+      "measure": "unassisted_recall",
+      "as_of": "2026-10-10T12:00:00Z",
+      "population_note": "Fictional check opportunities in this named trace; never real learner or concept counts.",
+      "expected": {
+        "numerator": 1,
+        "denominator": 1,
+        "eligible_ids": [
+          "fixture-m-response"
+        ],
+        "correct_ids": [
+          "fixture-m-response"
+        ],
+        "outcomes": {
+          "correct": 1,
+          "partial": 0,
+          "incorrect": 0
+        },
+        "excluded": {
+          "fixture-m-anchor": "exposure_only"
+        },
+        "duplicate_deliveries": 0,
+        "ratio": "1/1"
+      }
+    },
+    {
+      "id": "R06-late-grade-is-not-delay",
+      "trace_id": "T03",
+      "measure": "delayed_unassisted_recall",
+      "as_of": "2026-10-10T12:00:00Z",
+      "population_note": "Fictional check opportunities in this named trace; never real learner or concept counts.",
+      "expected": {
+        "numerator": 0,
+        "denominator": 0,
+        "eligible_ids": [],
+        "correct_ids": [],
+        "outcomes": {
+          "correct": 0,
+          "partial": 0,
+          "incorrect": 0
+        },
+        "excluded": {
+          "fixture-m-anchor": "exposure_only",
+          "fixture-m-response": "not_a_delayed_opportunity"
+        },
+        "duplicate_deliveries": 0,
+        "ratio": null
+      },
+      "interval_window_seconds": {
+        "min": 604800,
+        "max": 777600
+      },
+      "require_no_recorded_intervening_practice": false
+    },
+    {
+      "id": "R07-delayed-contexts",
+      "trace_id": "T04",
+      "measure": "delayed_unassisted_recall",
+      "as_of": "2026-10-10T12:00:00Z",
+      "population_note": "Fictional check opportunities in this named trace; never real learner or concept counts.",
+      "expected": {
+        "numerator": 3,
+        "denominator": 4,
+        "eligible_ids": [
+          "fixture-d-clean",
+          "fixture-d-partial",
+          "fixture-d-practiced",
+          "fixture-d-unknown-history"
+        ],
+        "correct_ids": [
+          "fixture-d-clean",
+          "fixture-d-practiced",
+          "fixture-d-unknown-history"
+        ],
+        "outcomes": {
+          "correct": 3,
+          "partial": 1,
+          "incorrect": 0
+        },
+        "excluded": {
+          "fixture-d-clock-uncertain": "interval_unknown",
+          "fixture-d-hint": "assisted",
+          "fixture-d-early": "outside_declared_interval_window",
+          "fixture-d-pending": "assessment_pending",
+          "fixture-d-missing-anchor": "interval_unknown"
+        },
+        "duplicate_deliveries": 1,
+        "ratio": "3/4"
+      },
+      "interval_window_seconds": {
+        "min": 604800,
+        "max": 777600
+      },
+      "require_no_recorded_intervening_practice": false
+    },
+    {
+      "id": "R08-no-recorded-repractice",
+      "trace_id": "T04",
+      "measure": "delayed_unassisted_recall",
+      "as_of": "2026-10-10T12:00:00Z",
+      "population_note": "Fictional check opportunities in this named trace; never real learner or concept counts.",
+      "expected": {
+        "numerator": 1,
+        "denominator": 2,
+        "eligible_ids": [
+          "fixture-d-clean",
+          "fixture-d-partial"
+        ],
+        "correct_ids": [
+          "fixture-d-clean"
+        ],
+        "outcomes": {
+          "correct": 1,
+          "partial": 1,
+          "incorrect": 0
+        },
+        "excluded": {
+          "fixture-d-clock-uncertain": "interval_unknown",
+          "fixture-d-hint": "assisted",
+          "fixture-d-early": "outside_declared_interval_window",
+          "fixture-d-pending": "assessment_pending",
+          "fixture-d-missing-anchor": "interval_unknown",
+          "fixture-d-practiced": "recorded_intervening_practice",
+          "fixture-d-unknown-history": "intervening_history_unknown"
+        },
+        "duplicate_deliveries": 1,
+        "ratio": "1/2"
+      },
+      "interval_window_seconds": {
+        "min": 604800,
+        "max": 777600
+      },
+      "require_no_recorded_intervening_practice": true
+    },
+    {
+      "id": "R09-offsets",
+      "trace_id": "T05",
+      "measure": "delayed_unassisted_recall",
+      "as_of": "2026-11-02T12:00:00Z",
+      "population_note": "Fictional check opportunities in this named trace; never real learner or concept counts.",
+      "expected": {
+        "numerator": 1,
+        "denominator": 1,
+        "eligible_ids": [
+          "fixture-tz-response"
+        ],
+        "correct_ids": [
+          "fixture-tz-response"
+        ],
+        "outcomes": {
+          "correct": 1,
+          "partial": 0,
+          "incorrect": 0
+        },
+        "excluded": {},
+        "duplicate_deliveries": 0,
+        "ratio": "1/1"
+      },
+      "interval_window_seconds": {
+        "min": 86400,
+        "max": 172800
+      },
+      "require_no_recorded_intervening_practice": true
+    },
+    {
+      "id": "R10-fresh-application",
+      "trace_id": "T06",
+      "measure": "fresh_application",
+      "as_of": "2026-10-10T12:00:00Z",
+      "population_note": "Fictional check opportunities in this named trace; never real learner or concept counts.",
+      "expected": {
+        "numerator": 1,
+        "denominator": 2,
+        "eligible_ids": [
+          "fixture-app-fresh",
+          "fixture-app-partial"
+        ],
+        "correct_ids": [
+          "fixture-app-fresh"
+        ],
+        "outcomes": {
+          "correct": 1,
+          "partial": 1,
+          "incorrect": 0
+        },
+        "excluded": {
+          "fixture-app-repeat": "prior_scenario_exposure",
+          "fixture-app-unknown": "scenario_history_unknown",
+          "fixture-app-worked": "assisted"
+        },
+        "duplicate_deliveries": 1,
+        "ratio": "1/2"
+      }
+    }
+  ]
+}

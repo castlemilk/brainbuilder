@@ -1,0 +1,283 @@
+{
+  "kind": "synthetic_internal_protocol_rehearsal",
+  "version": "0.1",
+  "created_at": "2026-11-07",
+  "author_type": "assistant",
+  "real_participants": 0,
+  "exclude_from_evidence_import": true,
+  "notice": "Every scenario is invented. These cases exercise document decisions and are not interviews, customer evidence, findings, product validation or observed learning outcomes.",
+  "cases": [
+    {
+      "id": "SYN-01",
+      "scenario": "An employed adult's most recent eligible episode was preparing an algorithm explanation for a hiring interview. They used a 90-minute session and like their existing book. They decline audio and future contact.",
+      "inputs": {
+        "adult": "yes",
+        "recent_episode": true,
+        "primary_purpose": "interview",
+        "secondary_purpose": "work",
+        "power_relationship": false,
+        "notes_consent": "yes",
+        "audio_consent": "no",
+        "recontact": "no"
+      },
+      "expected": {
+        "route": "INT",
+        "substantive_interview": true,
+        "audio": false,
+        "recontact": false
+      },
+      "walkthrough": [
+        "Use M03 to reconstruct the actual episode, then M04 to confirm its primary reason.",
+        "Keep one INT participant, a WORK secondary tag and the satisfactory long-session alternative.",
+        "Use notes only; do not treat audio refusal or satisfaction as exclusion."
+      ]
+    },
+    {
+      "id": "SYN-02",
+      "scenario": "An adult recently learned a technical concept to resolve a work review. The material is confidential. They prefer typed answers, will describe the task generically and do not want to show an artifact.",
+      "inputs": {
+        "adult": "yes",
+        "recent_episode": true,
+        "primary_purpose": "work",
+        "power_relationship": false,
+        "notes_consent": "yes",
+        "audio_consent": "no",
+        "recontact": "no",
+        "artifact_sharing": false,
+        "format": "typed"
+      },
+      "expected": {
+        "route": "WORK",
+        "substantive_interview": true,
+        "audio": false,
+        "recontact": false
+      },
+      "walkthrough": [
+        "Confirm that the approved typed format is supported and log the format deviation.",
+        "Use M04/M05 with a generic description; do not ask for a client, employer, repository or screenshot.",
+        "A missing artifact does not turn a self-report into a failed interview or remove eligibility."
+      ]
+    },
+    {
+      "id": "SYN-03",
+      "scenario": "An adult explored a history concept for curiosity during a long book-reading session. They are content with books, use free resources and prefer entertainment on a commute.",
+      "inputs": {
+        "adult": "yes",
+        "recent_episode": true,
+        "primary_purpose": "curiosity",
+        "power_relationship": false,
+        "notes_consent": "yes",
+        "audio_consent": "no",
+        "recontact": "no"
+      },
+      "expected": {
+        "route": "CUR",
+        "substantive_interview": true,
+        "audio": false,
+        "recontact": false
+      },
+      "walkthrough": [
+        "Retain the nontechnical topic family and actual desired outcome rather than assuming algorithms fit.",
+        "Record the satisfactory alternative and preferred non-learning moment in M09/M10.",
+        "Do not invent dissatisfaction, a short-session need, paid intent or a conversion signal."
+      ]
+    },
+    {
+      "id": "SYN-04",
+      "scenario": "An employed adult's only recent episode was preparation for a mandatory certification examination. It was not for a hiring interview or a particular current work task.",
+      "inputs": {
+        "adult": "yes",
+        "recent_episode": true,
+        "primary_purpose": "certification_only",
+        "power_relationship": false,
+        "notes_consent": "not_asked",
+        "audio_consent": "not_asked",
+        "recontact": "no"
+      },
+      "expected": {
+        "route": "OUTSIDE_JOBS",
+        "substantive_interview": false,
+        "audio": false,
+        "recontact": false
+      },
+      "walkthrough": [
+        "Follow S04 and the cohort definitions; employment alone does not make the episode WORK.",
+        "Keep a minimal outside-scope screening disposition.",
+        "Do not bend the inclusion rule because prior VOC-010 describes a certification learner."
+      ]
+    },
+    {
+      "id": "SYN-05",
+      "scenario": "The respondent chooses not to disclose whether they are 18 or older.",
+      "inputs": {
+        "adult": "prefer_not_to_answer",
+        "recent_episode": null,
+        "primary_purpose": null,
+        "power_relationship": null,
+        "notes_consent": "not_asked",
+        "audio_consent": "not_asked",
+        "recontact": "no"
+      },
+      "expected": {
+        "route": "STOP_AGE_SCOPE",
+        "substantive_interview": false,
+        "audio": false,
+        "recontact": false
+      },
+      "walkthrough": [
+        "End screening after S01 with the neutral disposition.",
+        "Do not request a birth date, identity document, employer or learning story.",
+        "Retain no unnecessary screening background and follow the nonparticipant deletion rule."
+      ]
+    },
+    {
+      "id": "SYN-06",
+      "scenario": "An adult is enthusiastic about AI learning but cannot identify any learning attempt in the last eight weeks after a neutral clarification.",
+      "inputs": {
+        "adult": "yes",
+        "recent_episode": false,
+        "primary_purpose": "curiosity",
+        "power_relationship": false,
+        "notes_consent": "not_asked",
+        "audio_consent": "not_asked",
+        "recontact": "no"
+      },
+      "expected": {
+        "route": "OUT_RECENCY",
+        "substantive_interview": false,
+        "audio": false,
+        "recontact": false
+      },
+      "walkthrough": [
+        "Use the recent-episode criterion rather than enthusiasm.",
+        "Do not advance to a product pitch or hypothetical price question to create an interview.",
+        "Record that this wave's criterion was not met, not that the wider person has no learning need."
+      ]
+    },
+    {
+      "id": "SYN-07",
+      "scenario": "An adult describes a recent coding episode as equally for work and an interview and cannot identify the main reason it happened then.",
+      "inputs": {
+        "adult": "yes",
+        "recent_episode": true,
+        "primary_purpose": "unclear",
+        "power_relationship": false,
+        "notes_consent": "not_asked",
+        "audio_consent": "not_asked",
+        "recontact": "no"
+      },
+      "expected": {
+        "route": "PENDING_PRIMARY_JOB",
+        "substantive_interview": false,
+        "audio": false,
+        "recontact": false
+      },
+      "walkthrough": [
+        "Ask the same neutral primary-purpose clarification from file 01.",
+        "If it remains unclear, leave selection pending instead of filling the emptiest quota.",
+        "Do not add the same person to two primary-cohort counts."
+      ]
+    },
+    {
+      "id": "SYN-08",
+      "scenario": "A respondent has a qualifying recent work episode but reports being a direct report of the researcher.",
+      "inputs": {
+        "adult": "yes",
+        "recent_episode": true,
+        "primary_purpose": "work",
+        "power_relationship": true,
+        "notes_consent": "not_asked",
+        "audio_consent": "not_asked",
+        "recontact": "no"
+      },
+      "expected": {
+        "route": "STOP_POWER_RELATIONSHIP",
+        "substantive_interview": false,
+        "audio": false,
+        "recontact": false
+      },
+      "walkthrough": [
+        "Stop or resolve the conflict before proceeding; the default sample excludes this relationship.",
+        "Do not request the manager or employer's name to justify refusal.",
+        "A willing answer does not remove the potential pressure built into the relationship."
+      ]
+    },
+    {
+      "id": "SYN-09",
+      "scenario": "An otherwise eligible person agrees to a conversation and says audio is fine, but explicitly declines research note-taking.",
+      "inputs": {
+        "adult": "yes",
+        "recent_episode": true,
+        "primary_purpose": "curiosity",
+        "power_relationship": false,
+        "notes_consent": "no",
+        "audio_consent": "yes",
+        "recontact": "no"
+      },
+      "expected": {
+        "route": "STOP_NOTES_CONSENT",
+        "substantive_interview": false,
+        "audio": false,
+        "recontact": false
+      },
+      "walkthrough": [
+        "Do not start M03 or a recorder; optional audio does not substitute for C02.",
+        "Clarify questions without collecting the learning story, or close the session.",
+        "Keep only the minimal administration/disposition appropriate to the approved policy."
+      ]
+    },
+    {
+      "id": "SYN-10",
+      "scenario": "An eligible interview-preparation participant initially agrees to notes and audio, then asks at minute ten to stop and delete audio. Later they end the interview before the concept section. They have declined future contact.",
+      "inputs": {
+        "adult": "yes",
+        "recent_episode": true,
+        "primary_purpose": "interview",
+        "power_relationship": false,
+        "notes_consent": "yes",
+        "audio_consent": "yes",
+        "recontact": "no",
+        "audio_stop_at_minute": 10,
+        "delete_prior_audio": true,
+        "session_ended_before_concept": true
+      },
+      "expected": {
+        "route": "INT",
+        "substantive_interview": true,
+        "audio": false,
+        "recontact": false,
+        "final_disposition": "partial",
+        "concept_shown": false
+      },
+      "walkthrough": [
+        "Stop audio immediately and delete the applicable active recording/transcript copies under the approved process.",
+        "Confirm whether notes may continue; log the changed choice and actual start/stop without duplicating deleted content.",
+        "Record a partial session and concept not shown, retain agreed notes only, and do not send a future-study invitation."
+      ]
+    },
+    {
+      "id": "SYN-11",
+      "scenario": "A participant uses the private study code to withdraw on day 21 after the interview. Audio was deleted by day 14, but coded notes and an internal quote still exist.",
+      "inputs": {
+        "withdrawal_day": 21,
+        "audio_deleted_day": 14,
+        "contact_key_present": true,
+        "notes_present": true,
+        "internal_quote_present": true
+      },
+      "expected": {
+        "route": "WITHDRAWAL_PROCESS",
+        "active_removal_target_day": 28,
+        "key_retention_latest_day": 37,
+        "remove_notes": true,
+        "remove_internal_quote": true,
+        "stop_recontact": true
+      },
+      "walkthrough": [
+        "Use the existing private contact/key route rather than asking for an identity document.",
+        "Find and remove the notes and linked internal quote; audio deletion alone does not complete the request.",
+        "Record a minimal withdrawal disposition, stop further contact, and meet the proposed seven-calendar-day active-removal target."
+      ]
+    }
+  ]
+}
