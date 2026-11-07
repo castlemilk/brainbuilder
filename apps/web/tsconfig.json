@@ -4,5 +4,5 @@
     "types": ["node", "vite/client", "vitest/globals", "@testing-library/jest-dom"],
     "baseUrl": "."
   },
-  "include": ["src", "tests", "playwright.config.ts", "vite.config.ts"]
+  "include": ["src", "tests", "playwright.config.ts", "playwright.scroll.config.ts", "vite.config.ts"]
 }

@@ -8,7 +8,8 @@
     "build": "tsc -p tsconfig.json && vite build",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "e2e:scroll": "playwright test --config playwright.scroll.config.ts"
   },
   "dependencies": {
     "@brainbuilder/courseware": "^0.1.0",
