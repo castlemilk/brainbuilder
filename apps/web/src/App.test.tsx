@@ -1,7 +1,8 @@
-import { render, screen, within } from "@testing-library/react";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
+import { StrictMode } from "react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { buildAlgorithmsDataStructuresCourse } from "@brainbuilder/courseware";
+import { buildAlgorithmsDataStructuresCourse, createCourseEnrollment } from "@brainbuilder/courseware";
 import { buildLearningHome } from "@brainbuilder/learning-model";
 import App from "./App";
 
@@ -379,20 +380,66 @@ describe("Brainbuilder web app", () => {
     expect(screen.getByText(/1\/\d+ lessons complete/i)).toBeInTheDocument();
   });
 
-  it("marks the course complete from the capstone and reflects completion on progress", async () => {
+  it("counts a capstone completed first as one lesson and awards it once under repeated actions", async () => {
     const user = userEvent.setup();
     window.history.pushState({}, "", "/courses/algorithms-data-structures");
-    render(<App />);
+    render(<StrictMode><App /></StrictMode>);
 
     await user.click(screen.getByRole("button", { name: /enroll in course/i }));
     await user.click(screen.getByRole("link", { name: /capstone arcade/i }));
 
     expect(screen.getByRole("heading", { level: 1, name: /capstone arcade/i })).toBeInTheDocument();
-    await user.click(screen.getByRole("button", { name: /complete course/i }));
-
-    expect(screen.getByText(/course complete/i)).toBeInTheDocument();
+    const completeButton = screen.getByRole("button", { name: /complete lesson/i });
+    act(() => {
+      fireEvent.click(completeButton);
+      fireEvent.click(completeButton);
+    });
+    expect(screen.getByText(/1\/41 lessons complete/i)).toBeInTheDocument();
+    expect(screen.queryByText(/^course complete$/i)).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /continue course/i })).toHaveAttribute("href", "/courses/algorithms-data-structures/lessons/big-o-as-shape");
+    const saved = JSON.parse(window.localStorage.getItem("brainbuilder.course-enrollments")!)["algorithms-data-structures"];
+    expect(saved.completedLessons).toEqual({ "capstone-arcade": true });
+    expect(saved.status).toBe("active");
     await user.click(screen.getByRole("link", { name: /you/i }));
+    expect(screen.getByText(/1\/41 lessons complete/i)).toBeInTheDocument();
+    expect(screen.getByText("1,254")).toBeInTheDocument();
+    expect(screen.queryByText(/certificate ready/i)).not.toBeInTheDocument();
+  });
+
+  it("completes the course when the first lesson is the last remaining requirement", async () => {
+    const course = buildAlgorithmsDataStructuresCourse();
+    const ids = course.units.flatMap((unit) => unit.lessons.map((lesson) => lesson.id));
+    const stored = { ...createCourseEnrollment(course), status: "complete", completedLessons: { ...Object.fromEntries(ids.slice(1).map((id) => [id, true])), obsolete: true } };
+    window.localStorage.setItem("brainbuilder.course-enrollments", JSON.stringify({ [course.id]: stored }));
+    window.history.pushState({}, "", `/courses/${course.id}/lessons/${ids[0]}`);
+    const user = userEvent.setup();
+    render(<App />);
+    expect(screen.getByText(/40\/41 lessons complete/i)).toBeInTheDocument();
+    expect(screen.queryByText(/^course complete$/i)).not.toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: /name the invariant and preserve it/i }));
+    await user.click(screen.getByRole("button", { name: /complete lesson/i }));
+    expect(screen.getByText(/^course complete$/i)).toBeInTheDocument();
+    await user.click(screen.getByRole("link", { name: /you/i }));
+    expect(screen.getByText(/41\/41 lessons complete/i)).toBeInTheDocument();
+    expect(screen.getByText("1,298")).toBeInTheDocument();
     expect(screen.getByText(/course complete/i)).toBeInTheDocument();
     expect(screen.getByText(/certificate ready/i)).toBeInTheDocument();
+  });
+
+  it("explains uncertain legacy completion and preserves the old claims without awarding rewards", () => {
+    const course = buildAlgorithmsDataStructuresCourse();
+    const ids = course.units.flatMap((unit) => unit.lessons.map((lesson) => lesson.id));
+    window.localStorage.setItem("brainbuilder.course-enrollments", JSON.stringify({ [course.id]: { status: "complete", completedLessons: Object.fromEntries(ids.map((id) => [id, true])) } }));
+    window.history.pushState({}, "", "/progress");
+    render(<App />);
+    expect(screen.getByRole("status")).toHaveTextContent(/earlier course completion could include skipped lessons/i);
+    expect(screen.getByText(/0\/41 lessons complete/i)).toBeInTheDocument();
+    expect(screen.getByText(/course in progress/i)).toBeInTheDocument();
+    expect(screen.queryByText(/certificate ready/i)).not.toBeInTheDocument();
+    expect(screen.getByText("1,240")).toBeInTheDocument();
+    const saved = JSON.parse(window.localStorage.getItem("brainbuilder.course-enrollments")!)[course.id];
+    expect(saved.schemaVersion).toBe(1);
+    expect(saved.history[0].claimedLessonIds).toEqual(ids);
+    expect(saved.completedLessons).toEqual({});
   });
 });

@@ -377,7 +377,7 @@ describe("Brainbuilder mobile app", () => {
     expect(app.getByText(/that path has height 3/i)).toBeTruthy();
   });
 
-  it("supports the native new learner, enrollment, lesson progress, and completion flow", async () => {
+  it("supports native enrollment and keeps skipped lessons incomplete after the capstone", async () => {
     const lessonCount = buildAlgorithmsDataStructuresCourse().units.flatMap((unit) => unit.lessons).length;
     const app = await render(<MobileApp />);
 
@@ -405,11 +405,52 @@ describe("Brainbuilder mobile app", () => {
     await fireEvent.press(app.getByText("Capstone Arcade"));
     await fireEvent.press(app.getAllByText("Next native stage")[0]);
     expect(app.getByText(/Stage 2 of 4/i)).toBeTruthy();
-    await fireEvent.press(app.getByText("Complete course"));
-    await waitFor(() => expect(app.getByText(/course complete/i)).toBeTruthy());
+    await fireEvent.press(app.getByText("Complete lesson"));
+    expect(app.getByText(`2/${lessonCount} lessons complete`)).toBeTruthy();
+    expect(app.queryByText(/^course complete$/i)).toBeNull();
 
     await fireEvent.press(app.getByLabelText("You tab"));
-    expect(app.getByText(`${lessonCount}/${lessonCount} lessons complete`)).toBeTruthy();
-    expect(app.getByText(/certificate ready/i)).toBeTruthy();
+    expect(app.getByText(`2/${lessonCount} lessons complete`)).toBeTruthy();
+    expect(app.getByText(/course in progress/i)).toBeTruthy();
+    expect(app.queryByText(/certificate ready/i)).toBeNull();
   });
+
+  it("records only one native lesson when the capstone is completed first", async () => {
+    const app = await render(<MobileApp />);
+    await fireEvent.press(app.getByLabelText("Browse tab"));
+    await fireEvent.press(app.getByText("Enroll in course"));
+    await fireEvent.press(app.getByText("Capstone Arcade"));
+    await fireEvent.press(app.getByText("Complete lesson"));
+    expect(app.getByText("1/41 lessons complete")).toBeTruthy();
+    expect(app.queryByText(/^course complete$/i)).toBeNull();
+    expect(app.queryByText(/next lesson 42/i)).toBeNull();
+    await fireEvent.press(app.getByText("Continue course"));
+    expect(app.getByText(/Compare growth by sketching how work changes when input doubles/i)).toBeTruthy();
+    await fireEvent.press(app.getByText("Capstone Arcade"));
+    expect(app.queryByText("Complete lesson")).toBeNull();
+    await fireEvent.press(app.getByLabelText("You tab"));
+    expect(app.getByText("1/41 lessons complete")).toBeTruthy();
+    expect(app.queryByText(/certificate ready/i)).toBeNull();
+  });
+
+  it("completes the native course after every lesson is completed in reverse order", async () => {
+    const app = await render(<MobileApp />);
+    const lessons = buildAlgorithmsDataStructuresCourse().units.flatMap((unit) => unit.lessons);
+    await fireEvent.press(app.getByLabelText("Browse tab"));
+    await fireEvent.press(app.getByText("Enroll in course"));
+    for (const [index, lesson] of [...lessons].reverse().entries()) {
+      await pressNativeText(app, lesson.title);
+      const check = lesson.blocks.find((block): block is QuizBlock => block.kind === "quiz");
+      if (check) await pressNativeText(app, check.options.find((option) => option.id === check.correctOptionId)!.label);
+      await fireEvent.press(app.getByText("Complete lesson"));
+      expect(app.getByText(`${index + 1}/${lessons.length} lessons complete`)).toBeTruthy();
+      if (index < lessons.length - 1) expect(app.queryByText(/^course complete$/i)).toBeNull();
+    }
+    expect(app.getByText(/^course complete$/i)).toBeTruthy();
+    await fireEvent.press(app.getByText("Capstone Arcade"));
+    expect(app.queryByText("Complete lesson")).toBeNull();
+    await fireEvent.press(app.getByLabelText("You tab"));
+    expect(app.getByText(`${lessons.length}/${lessons.length} lessons complete`)).toBeTruthy();
+    expect(app.getByText(/certificate ready/i)).toBeTruthy();
+  }, 60000);
 });

@@ -8,10 +8,14 @@ import {
   buildAlgorithmsDataStructuresCourse,
   buildRendererManifest,
   computeCourseCoverage,
+  completeEnrollmentLesson,
+  createCourseEnrollment,
   findLesson,
+  getCourseProgressNotice,
   getLessonLearningGuide,
   scoreCourseCheck,
   type Course,
+  type CourseEnrollment,
   type CourseBlock,
   type CourseCheckResult,
   type CourseLesson,
@@ -59,10 +63,6 @@ type LearnerSession = {
   email: string;
   objectiveIds: LearnerObjectiveId[];
 };
-type CourseEnrollment = {
-  status: "active" | "complete";
-  completedLessons: Record<string, true>;
-};
 
 const learningHomePath = "/brainbuilder.learning.v1.LearningService/GetLearningHome";
 
@@ -77,7 +77,6 @@ function MobileApp() {
   const [selectedFeedBiteId, setSelectedFeedBiteId] = useState("binary-search-bite");
   const [selectedPlaygroundId, setSelectedPlaygroundId] = useState("bubble-sort-lab");
   const course = useMemo(() => buildAlgorithmsDataStructuresCourse(), []);
-  const courseLessons = useMemo(() => course.units.flatMap((unit) => unit.lessons), [course]);
   const [session, setSession] = useState<LearnerSession | null>(null);
   const [courseEnrollment, setCourseEnrollment] = useState<CourseEnrollment | undefined>(undefined);
   const [selectedCourseLessonId, setSelectedCourseLessonId] = useState("big-o-as-shape");
@@ -164,22 +163,11 @@ function MobileApp() {
   }
 
   function enrollCourse() {
-    setCourseEnrollment((current) => current ?? { status: "active", completedLessons: {} });
+    setCourseEnrollment((current) => current ?? createCourseEnrollment(course));
   }
 
   function completeCourseLesson(lessonId: string) {
-    const lastLesson = courseLessons[courseLessons.length - 1];
-    const completesCourse = lessonId === lastLesson?.id;
-    setCourseEnrollment((current) => {
-      const enrollment = current ?? { status: "active" as const, completedLessons: {} };
-      const completedLessons = completesCourse
-        ? Object.fromEntries(courseLessons.map((lesson) => [lesson.id, true as const]))
-        : { ...enrollment.completedLessons, [lessonId]: true as const };
-      return {
-        status: completesCourse ? "complete" : "active",
-        completedLessons
-      };
-    });
+    setCourseEnrollment((current) => completeEnrollmentLesson(course, current, lessonId).enrollment);
   }
 
   return (
@@ -714,6 +702,7 @@ function ProgressSummary({
           <Text style={styles.panelTitle}>{course.title}</Text>
           <Text style={styles.mutedText}>{completedCount}/{lessonCount} lessons complete</Text>
           <Text style={courseComplete ? styles.syncText : styles.actionStatus}>{courseComplete ? "Course complete" : "Course in progress"}</Text>
+          {getCourseProgressNotice(enrollment) ? <Text style={styles.actionStatus}>{getCourseProgressNotice(enrollment)}</Text> : null}
           {courseComplete ? <Text style={styles.syncText}>Certificate ready</Text> : null}
         </View>
       ) : null}
@@ -752,14 +741,12 @@ function NativeCourse({
   const rendererManifest = buildRendererManifest(course);
   const courseLessons = course.units.flatMap((unit) => unit.lessons);
   const selectedLesson = findLesson(course, selectedLessonId) ?? courseLessons[0];
-  const lessonIndex = courseLessons.findIndex((lesson) => lesson.id === selectedLesson?.id);
-  const lastLesson = courseLessons[courseLessons.length - 1];
+  const nextOpenLesson = courseLessons.find((lesson) => !enrollment?.completedLessons[lesson.id]);
   const completedCount = enrollment ? Object.keys(enrollment.completedLessons).length : 0;
   const lessonComplete = Boolean(selectedLesson && enrollment?.completedLessons[selectedLesson.id]);
   const courseComplete = enrollment?.status === "complete";
   const quizBlocks = selectedLesson?.blocks.filter((block): block is QuizBlock => block.kind === "quiz") ?? [];
   const hasPassedCheck = quizBlocks.length === 0 || quizBlocks.some((block) => results[block.id]?.correct);
-  const isLastLesson = selectedLesson?.id === lastLesson?.id;
 
   return (
     <View style={[styles.card, styles.tealCard]}>
@@ -805,10 +792,18 @@ function NativeCourse({
             disabled={!hasPassedCheck}
             style={({ pressed }) => [styles.primaryAction, !hasPassedCheck && styles.disabledAction, pressed && styles.pressed]}
           >
-            <Text style={styles.primaryActionText}>{isLastLesson ? "Complete course" : "Complete lesson"}</Text>
+            <Text style={styles.primaryActionText}>Complete lesson</Text>
           </Pressable>
         ) : null}
-        {lessonComplete && !courseComplete ? <Text style={styles.syncText}>Lesson complete. Next lesson {lessonIndex + 2} is ready.</Text> : null}
+        {lessonComplete && !courseComplete && nextOpenLesson ? (
+          <>
+            <Text style={styles.syncText}>Lesson complete. Continue with {nextOpenLesson.title}.</Text>
+            <Pressable onPress={() => onSelectLesson(nextOpenLesson.id)} accessibilityRole="button" style={({ pressed }) => [styles.primaryAction, pressed && styles.pressed]}>
+              <Text style={styles.primaryActionText}>Continue course</Text>
+            </Pressable>
+          </>
+        ) : null}
+        {getCourseProgressNotice(enrollment) ? <Text style={styles.actionStatus}>{getCourseProgressNotice(enrollment)}</Text> : null}
         {courseComplete ? <Text style={styles.syncText}>Certificate ready</Text> : null}
       </View>
       {selectedLesson ? <NativeCourseLesson lesson={selectedLesson} results={results} onAnswer={onAnswer} /> : null}

@@ -25,10 +25,15 @@ import { Children, Suspense, lazy, useEffect, useMemo, useRef, useState, type CS
 import {
   buildAlgorithmsDataStructuresCourse,
   computeCourseCoverage,
+  completeEnrollmentLesson,
+  createCourseEnrollment,
   findLesson,
+  getCourseProgressNotice,
   getLessonLearningGuide,
+  restoreCourseEnrollment,
   scoreCourseCheck,
   type Course,
+  type CourseEnrollment,
   type CourseBlock,
   type CodingLabTestCase,
   type CourseCheckResult,
@@ -98,10 +103,6 @@ type LearnerSession = {
   name: string;
   email: string;
   objectiveIds: LearnerObjectiveId[];
-};
-type CourseEnrollment = {
-  status: "active" | "complete";
-  completedLessons: Record<string, true>;
 };
 type CustomLearningDraft = {
   title: string;
@@ -199,13 +200,29 @@ function courseLessons(course: Course) {
   return course.units.flatMap((unit) => unit.lessons);
 }
 
+function storedEnrollmentRecords(): Record<string, unknown> {
+  const stored = readStoredState<unknown>(courseEnrollmentStorageKey);
+  return typeof stored === "object" && stored !== null && !Array.isArray(stored) ? stored as Record<string, unknown> : {};
+}
+
+function CourseProgressNotice({ enrollment }: { enrollment: CourseEnrollment | undefined }) {
+  const notice = getCourseProgressNotice(enrollment);
+  return notice ? <p role="status" className="mt-3 rounded-2xl border border-ember bg-ember/10 px-3 py-2 text-sm text-ink">{notice}</p> : null;
+}
+
 function App() {
   const apiUrl = import.meta.env.VITE_API_URL as string | undefined;
   const [route, setRoute] = useState<AppRoute>(() => readRoute());
   const [home, setHome] = useState<LearningHome>(() => buildLearningHome("alex"));
   const course = useMemo(() => buildAlgorithmsDataStructuresCourse(), []);
   const [session, setSession] = useState<LearnerSession | null>(() => readStoredState<LearnerSession>(learnerSessionStorageKey));
-  const [enrollments, setEnrollments] = useState<Record<string, CourseEnrollment>>(() => readStoredState<Record<string, CourseEnrollment>>(courseEnrollmentStorageKey) ?? {});
+  const [enrollments, setEnrollments] = useState<Record<string, CourseEnrollment>>(() => {
+    const enrollment = restoreCourseEnrollment(course, storedEnrollmentRecords()[course.id]);
+    return enrollment ? { [course.id]: enrollment } : {};
+  });
+  // Event handlers share the latest committed claims, including repeated actions
+  // within one render. Rewards never run inside a replayable React updater.
+  const enrollmentsRef = useRef(enrollments);
   const [quizResults, setQuizResults] = useState<Record<string, QuizResult>>({});
   const [courseResults, setCourseResults] = useState<Record<string, CourseCheckResult>>({});
   const [quizStatus, setQuizStatus] = useState<"idle" | "checking">("idle");
@@ -231,7 +248,7 @@ function App() {
   }, [session]);
 
   useEffect(() => {
-    writeStoredState(courseEnrollmentStorageKey, enrollments);
+    writeStoredState(courseEnrollmentStorageKey, { ...storedEnrollmentRecords(), ...enrollments });
   }, [enrollments]);
 
   useEffect(() => {
@@ -316,53 +333,28 @@ function App() {
   }
 
   function enrollCourse(courseId: string) {
-    setEnrollments((current) => {
-      if (current[courseId]) {
-        return current;
-      }
-      return {
-        ...current,
-        [courseId]: {
-          status: "active",
-          completedLessons: {}
-        }
-      };
-    });
+    if (courseId !== course.id || enrollmentsRef.current[courseId]) return;
+    const next = { ...enrollmentsRef.current, [courseId]: createCourseEnrollment(course) };
+    enrollmentsRef.current = next;
+    setEnrollments(next);
   }
 
   function completeCourseLesson(courseId: string, lessonId: string) {
-    const lessons = courseLessons(course);
-    const lastLesson = lessons[lessons.length - 1];
-    const completesCourse = lessonId === lastLesson?.id;
-    const alreadyComplete = Boolean(enrollments[courseId]?.completedLessons[lessonId]);
-
-    setEnrollments((current) => {
-      const currentEnrollment = current[courseId] ?? { status: "active" as const, completedLessons: {} };
-      const completedLessons = completesCourse
-        ? Object.fromEntries(lessons.map((lesson) => [lesson.id, true as const]))
-        : { ...currentEnrollment.completedLessons, [lessonId]: true as const };
-      const status = completesCourse || Object.keys(completedLessons).length >= lessons.length ? "complete" : "active";
-
-      return {
-        ...current,
-        [courseId]: {
-          status,
-          completedLessons
-        }
-      };
-    });
-
-    if (!alreadyComplete) {
-      setHome((current) => ({
-        ...current,
-        stats: {
-          ...current.stats,
-          xp: current.stats.xp + (completesCourse ? 50 : 14),
-          dailyGoalCompleted: Math.min(current.stats.dailyGoalTarget, current.stats.dailyGoalCompleted + 1)
-        },
-        quests: current.quests.map((quest) => (quest.id === "daily-lessons" ? { ...quest, completed: Math.min(quest.target, quest.completed + 1) } : quest))
-      }));
-    }
+    if (courseId !== course.id) return;
+    const transition = completeEnrollmentLesson(course, enrollmentsRef.current[courseId], lessonId);
+    if (!transition.lessonCompleted || !transition.enrollment) return;
+    const next = { ...enrollmentsRef.current, [courseId]: transition.enrollment };
+    enrollmentsRef.current = next;
+    setEnrollments(next);
+    setHome((current) => ({
+      ...current,
+      stats: {
+        ...current.stats,
+        xp: current.stats.xp + (transition.courseCompleted ? 50 : 14),
+        dailyGoalCompleted: Math.min(current.stats.dailyGoalTarget, current.stats.dailyGoalCompleted + 1)
+      },
+      quests: current.quests.map((quest) => (quest.id === "daily-lessons" ? { ...quest, completed: Math.min(quest.target, quest.completed + 1) } : quest))
+    }));
   }
 
   async function answerQuiz(optionId: string) {
@@ -1062,11 +1054,12 @@ function CoursePage({
             ) : null}
             {enrollment && firstOpenLesson ? (
               <RouteLink to={`/courses/${course.id}/lessons/${firstOpenLesson.id}`} onNavigate={onNavigate} className="inline-flex min-h-12 items-center rounded-full border-2 border-ink bg-paper px-5 text-sm font-bold hover:bg-teal hover:text-white">
-                Start first lesson
+                {completedCount > 0 ? "Continue course" : "Start first lesson"}
               </RouteLink>
             ) : null}
           </div>
         </div>
+        <CourseProgressNotice enrollment={enrollment} />
         {complete ? <p className="celebrate mt-3 rounded-2xl border border-violet bg-violet/10 px-3 py-2 text-sm font-bold text-violet">Certificate ready — nice work. 🎉</p> : null}
       </section>
       <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(290px,360px)]">
@@ -1158,7 +1151,8 @@ function CourseLessonPage({
   }
 
   const lessonIndex = lessons.findIndex((lessonItem) => lessonItem.id === selectedLesson.id);
-  const nextLesson = lessons[lessonIndex + 1];
+  const nextLesson = lessons.slice(lessonIndex + 1).find((item) => !enrollment?.completedLessons[item.id])
+    ?? lessons.find((item) => !enrollment?.completedLessons[item.id]);
   const isLastLesson = lessonIndex === lessons.length - 1;
   const quizBlocks = selectedLesson.blocks.filter((block): block is QuizBlock => block.kind === "quiz");
   const hasPassedCheck = quizBlocks.length === 0 || quizBlocks.some((block) => results[block.id]?.correct);
@@ -1228,12 +1222,12 @@ function CourseLessonPage({
                 disabled={!hasPassedCheck}
                 className="min-h-12 rounded-full border-2 border-ink bg-teal px-5 text-sm font-bold text-white transition-transform active:scale-[0.96] disabled:cursor-not-allowed disabled:opacity-50"
               >
-                {isLastLesson ? "Complete course" : "Complete lesson"}
+                Complete lesson
               </button>
             ) : null}
             {enrollment && lessonComplete && nextLesson && !courseComplete ? (
               <RouteLink to={`/courses/${course.id}/lessons/${nextLesson.id}`} onNavigate={onNavigate} className="inline-flex min-h-12 items-center rounded-full border-2 border-ink bg-paper px-5 text-sm font-bold hover:bg-teal hover:text-white">
-                Next lesson
+                {isLastLesson ? "Continue course" : "Next lesson"}
               </RouteLink>
             ) : null}
             {courseComplete ? (
@@ -1243,6 +1237,7 @@ function CourseLessonPage({
             ) : null}
           </div>
         </div>
+        <CourseProgressNotice enrollment={enrollment} />
         {courseComplete ? <p className="mt-3 rounded-2xl border border-violet bg-violet/10 px-3 py-2 text-sm font-bold text-violet">Certificate ready</p> : null}
       </section>
       <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] gap-4">
@@ -3033,6 +3028,7 @@ function ProgressPage({
               {complete ? "Course complete" : enrollment ? "Course in progress" : "Plan ready"}
             </span>
           </div>
+          <CourseProgressNotice enrollment={enrollment} />
           {selectedObjectiveLabels.length ? (
             <div className="mt-4 flex flex-wrap gap-2">
               {selectedObjectiveLabels.map((label) => (
