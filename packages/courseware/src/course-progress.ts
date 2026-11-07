@@ -117,6 +117,9 @@ export function completeEnrollmentLesson(course: ProgressCourse, stored: CourseE
 export function getCourseProgressNotice(enrollment: CourseEnrollment | undefined): string | undefined {
   const latest = enrollment?.history.at(-1);
   if (!latest) return undefined;
+  if (enrollment.status === "complete") {
+    return "All required lessons in this version are complete. Earlier progress remains in history.";
+  }
   if (latest.reason === "legacy-partial") {
     return "Earlier partial progress was kept as lesson activity. It has no saved assessment evidence.";
   }

@@ -86,6 +86,16 @@ describe("versioned course activity completion", () => {
     expect(completeEnrollmentLesson(course, restored, ids[0]).lessonCompleted).toBe(false);
   });
 
+  it("resolves the migration prompt once all current requirements are completed", () => {
+    let enrollment = restoreCourseEnrollment(course, { status: "complete", completedLessons: allClaims })!;
+    const history = enrollment.history;
+    for (const id of [...ids].reverse()) enrollment = completeEnrollmentLesson(course, enrollment, id).enrollment!;
+    expect(enrollment.status).toBe("complete");
+    expect(enrollment.history).toEqual(history);
+    expect(getCourseProgressNotice(enrollment)).toBe("All required lessons in this version are complete. Earlier progress remains in history.");
+    expect(getCourseProgressNotice(enrollment)).not.toMatch(/complete each lesson/);
+  });
+
   it("archives explicit legacy complete claims even when their lesson map is partial", () => {
     const restored = restoreCourseEnrollment(course, { status: "complete", completedLessons: { [ids[0]]: true } })!;
     expect(restored.completedLessons).toEqual({});
