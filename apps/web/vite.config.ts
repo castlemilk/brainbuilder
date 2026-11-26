@@ -22,6 +22,10 @@ export default defineConfig({
   },
   test: {
     environment: "jsdom",
+    // Let jsdom provide browser storage in the test worker.
+    execArgv: process.allowedNodeEnvironmentFlags.has("--no-experimental-webstorage")
+      ? ["--no-experimental-webstorage"]
+      : [],
     setupFiles: "./src/vitest.setup.ts",
     css: true,
     exclude: ["tests/**", "node_modules/**", "dist/**"]
